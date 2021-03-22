@@ -1,5 +1,5 @@
-#Aluno
-*André
-#Curso
-*Engenharia da Computação
->aaza
+ # Aluno
+ * André Silva Telles
+
+ # Curso
+ * Engenharia da Computação
