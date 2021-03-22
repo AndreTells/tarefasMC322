@@ -1,1 +1,5 @@
-(---escrever mais tarde---)
+#Aluno
+*André
+#Curso
+*Engenharia da Computação
+>aaza
