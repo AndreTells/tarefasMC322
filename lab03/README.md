@@ -1,3 +1,3 @@
- # Lab02
+ # Lab03
  
-[notebook da tarefa](lab02-java-estruturas-ra165263.ipynb)
+ Versao no eclipse do notebeook enviado no classroom
