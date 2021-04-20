@@ -1,9 +1,8 @@
 package mc322.lab04;
 
 public class AppRestaUm {
-	static Board board;
 	
-	static int[] translate_pos(String pos_s) {
+	private static int[] translate_pos(String pos_s) {
 		int [] pos = new int[2];
 		pos[0] = 6 - ( ((int) pos_s.charAt(1)) - ((int)'1') );
 		pos[1] = ( ((int) pos_s.charAt(0)) - ((int)'a') );
@@ -27,10 +26,10 @@ public class AppRestaUm {
 		
 		//imprime o tabuleiro inicial no formato requisitado
 		System.out.println("Tabuleiro inicial:");
-		board.print_board();
+		board.printBoard();
 		System.out.print("\n");
 		//adiciona o tabuleiro inicial ao array de estados do tabuleiro
-		board_states[0] = board.to_string();
+		board_states[0] = board.toString();
 		
 		for(int i=0;i<commands.length;i++) {
 			//separa o comando em duas strings
@@ -43,16 +42,16 @@ public class AppRestaUm {
 			//que indicam a posicao
 			int [] pos_init = translate_pos(init_s);
 			int [] pos_end = translate_pos(end_s);
-			board.move_piece(pos_init, pos_end);
+			board.movePiece(pos_init, pos_end);
 			
 			//imprime o tabuleiro no formato requisitado
 			System.out.println("Source: "+init_s);
 			System.out.println("Target: "+end_s);
-			board.print_board();
+			board.printBoard();
 			System.out.print("\n");
 			
 			//adiciona o estado atual do tabuleiro ao vetor de estados
-			board_states[i+1] = board.to_string();
+			board_states[i+1] = board.toString();
 		}
 		
 		return board_states;
