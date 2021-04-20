@@ -57,4 +57,7 @@ public class AppRestaUm {
 		return board_states;
 	}
 
+ 	public static void main(String args[]) {
+ 		String boards []= AppRestaUm.executaJogo("D:/eclipse-workplace/Lab04/src/db/tab_1.csv");
+ 	}
 }
