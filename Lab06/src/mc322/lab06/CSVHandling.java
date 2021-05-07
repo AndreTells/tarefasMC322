@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 public class CSVHandling {
 	private String dataSource;
 	private String dataExport;
-	private String[] commands;
+	private String[][] commands;
 	private String[] state;
 
 	public CSVHandling() {
@@ -39,7 +39,7 @@ public class CSVHandling {
          this.dataExport = dataExport;
    }
 
-	public String[] requestCommands() {
+	public String[][] requestCommands() {
 		return commands;
 	}
 
@@ -53,9 +53,12 @@ public class CSVHandling {
 			BufferedReader file = new BufferedReader(new FileReader(dataSource));
 
 			String line = file.readLine();
-			if (line != null) {
-				commands = line.split(",");
+			int i = 0;
+			commands = new String[16][];
+			while (line != null) {
+				commands[i] = line.split(",");
 				line = file.readLine();
+				i++;
 			}
 			file.close();
 		} catch (IOException erro) {
