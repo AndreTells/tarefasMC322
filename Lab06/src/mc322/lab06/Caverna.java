@@ -10,7 +10,7 @@ public class Caverna {
 		salas = new Sala[4][4];
 		for(int i =0;i<4;i++) {
 			for(int j=0;j<4;j++) {
-				salas[i][j] = new Sala(i,j,i-1 < 0 ? null:salas[i-1][j],j-1 < 0 ? null:salas[i][j-1]);
+				salas[i][j] = new Sala(i,j,j-1 < 0 ? null:salas[i][j-1],i-1 < 0 ? null:salas[i-1][j]);
 			}
 		}
 	}
@@ -32,7 +32,8 @@ public class Caverna {
 			}
 			System.out.print("\n");
 		}
-		System.out.println("  1 2 3 4");
+		System.out.println("  1 2 3 4\n");
+		Controle.printInfo();
 	}
 	
 	public static void printrevelado() {
@@ -44,7 +45,8 @@ public class Caverna {
 			}
 			System.out.print("\n");
 		}
-		System.out.println("  1 2 3 4");
+		System.out.println("  1 2 3 4\n");
+		Controle.printInfo();
 	}
 
 	

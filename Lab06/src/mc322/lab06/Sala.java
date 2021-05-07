@@ -73,13 +73,13 @@ public class Sala {
 	
 	public boolean addComponente(Componente comp) {
 		componentes.add(comp);
-		if(comp  instanceof Wumpus && (this.hasComponente(Buraco.class) || this.hasComponente(Ouro.class)) ) {
+		if(comp  instanceof Wumpus && (this.getComponente(Buraco.class)!=null || this.getComponente(Ouro.class)!=null) ) {
 			return false;
 		}
-		if(comp  instanceof Buraco && (this.hasComponente(Wumpus.class) || this.hasComponente(Ouro.class))) {
+		else if(comp  instanceof Buraco && (this.getComponente(Wumpus.class)!=null || this.getComponente(Ouro.class)!=null)) {
 			return false;
 		}
-		if(comp  instanceof Ouro && (this.hasComponente(Buraco.class) || this.hasComponente(Wumpus.class))) {
+		else if(comp  instanceof Ouro && (this.getComponente(Buraco.class)!=null || this.getComponente(Wumpus.class)!=null)) {
 			return false;
 		}
 		
@@ -96,15 +96,6 @@ public class Sala {
 				componentes.remove(i);
 			}
 		}
-	}
-
-	public boolean hasComponente(Class<?> cls) {
-		for(Componente comp: componentes) {
-			if(comp.getClass().equals(cls)) {
-				return true;
-			}	
-		}
-		return false;
 	}
 
 	public Componente  getComponente(Class<?> cls) {

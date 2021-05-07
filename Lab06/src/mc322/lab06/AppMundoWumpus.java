@@ -1,7 +1,4 @@
-package mc322.lab06;
-
-import mc322.lab06.componentes.Wumpus;
-import mc322.lab06.componentes.Componente;
+package mc322.lab06;	
 
 public class AppMundoWumpus {
 
@@ -9,9 +6,15 @@ public class AppMundoWumpus {
 		if(!Montador.iniciaJogo(Args[0])) {
 			return;
 		}
-		Caverna.printrevelado();
-		Componente buraco = Caverna.getComponente(2, 3, Wumpus.class);
-		buraco.unsetSala();
-		Caverna.printrevelado();
+		Controle.requestName();
+		Caverna.print();
+		while(Controle.requestCommand()) {
+			if(Controle.heroiMoved()) {
+				Controle.checkWumpus();
+				Controle.checkVictory();
+				Controle.checkDefeat();
+			}
+			Caverna.print();
+		}
 	}
 }

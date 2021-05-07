@@ -16,7 +16,7 @@ public class Buraco extends Componente{
 		Sala up = this.sala.getUp();
 		Sala down = this.sala.getDown();
 		
-		Sala adjacent[] = {left,right,up,down};
+		Sala adjacent[] = {up,down,left,right};
 		int delta_x []= {-1,1,0,0};
 		int delta_y []= {0,0,-1,1};
 		
@@ -36,7 +36,7 @@ public class Buraco extends Componente{
 		Sala down = this.sala.getDown();
 		
 		
-		Sala adjacent[] = {left,right,up,down};
+		Sala adjacent[] = {up,down,left,right};
 		int delta_x []= {-1,1,0,0};
 		int delta_y []= {0,0,-1,1};
 		
