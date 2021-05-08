@@ -26,7 +26,8 @@ encerre imediatamente.Abaixo estão os casos que podem causar tal:
 * tentar pegar ouro quando não há nenhum na sala
 
 <br/>
-[pasta com arquivos .java](src/mc322/lab06)
+
+[pasta com arquivos java](src/mc322/lab06)
 
 ## Destaques de Arquitetura
 
