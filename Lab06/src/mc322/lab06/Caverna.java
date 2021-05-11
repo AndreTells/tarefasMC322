@@ -24,6 +24,12 @@ public class Caverna {
 		return salas[x][y].getComponente(cls);
 	}
 	
+	public static void move(Componente comp,int xf,int yf) {
+		comp.unsetSala();
+		comp.setSala(salas[xf][yf]);
+		comp.setPosition(new int [] {xf,yf});
+	}
+	
 	public static void print() {
 		for(int i=0;i<salas.length;i++) {
 			System.out.print(i+1);

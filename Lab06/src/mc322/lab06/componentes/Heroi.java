@@ -1,5 +1,6 @@
 package mc322.lab06.componentes;
 
+import mc322.lab06.Caverna;
 import mc322.lab06.Controle;
 import mc322.lab06.Sala;
 
@@ -67,34 +68,27 @@ public class Heroi extends Componente{
 		return alive;
 	}
 	
-	private boolean move(Sala sala,int delta_x,int delta_y) {
-		if(sala == null) {
-			return false;
-		}
-		this.unsetSala();
-		this.x +=delta_x;
-		this.y +=delta_y;
-		this.setSala(sala);
-		
+	private boolean move(int delta_x,int delta_y) {
+		Caverna.move(this,this.x+delta_x, this.y+delta_y);
 		this.score -=15;
 		return true;
 	}
-
+	
 	public boolean moveUp() {
-		return move(this.sala.getUp(),-1,0);
+		return move(-1,0);
 	}
 	
 	public boolean moveDown() {
-		return move(this.sala.getDown(),1,0);
+		return move(1,0);
 		
 	}
 	
 	public boolean moveLeft() {
-		return move(this.sala.getLeft(),0,-1);
+		return move(0,-1);
 	}
 	
 	public boolean moveRight() {
-		return move(this.sala.getRight(),0,1);
+		return move(0,1);
 	}
 	
 	public boolean isAtStart() {

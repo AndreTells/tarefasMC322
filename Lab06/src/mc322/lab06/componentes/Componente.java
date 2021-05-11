@@ -36,6 +36,11 @@ public class Componente {
 		this.sala = null;
 	}
 	
+	public void setPosition(int new_pos[]) {
+		this.x = new_pos[0];
+		this.y = new_pos[1];
+	}
+	
 	public boolean equals(Componente comp) {
 		if(this.getClass().equals(comp.getClass()) && this.x == comp.x && this.y == comp.y) {
 			return true;
