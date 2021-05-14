@@ -6,6 +6,7 @@ public class AppMundoWumpus {
 		if(!Montador.iniciaJogo(Args[0])) {
 			return;
 		}
+		
 		Controle.requestName();
 		Caverna.print();
 		while(Controle.requestCommand()) {

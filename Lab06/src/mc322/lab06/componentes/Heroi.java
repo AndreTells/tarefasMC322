@@ -4,7 +4,7 @@ import mc322.lab06.Caverna;
 import mc322.lab06.Controle;
 import mc322.lab06.Sala;
 
-public class Heroi extends Componente{
+public class Heroi extends ComponenteSemEfeito{
 	private String name;
 	private int score;
 	private int num_arrows;

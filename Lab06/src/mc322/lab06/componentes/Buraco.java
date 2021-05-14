@@ -9,7 +9,6 @@ public class Buraco extends Componente{
 		this.icon = 'B';
 	}
 	
-	@Override
 	public void addEffects() {
 		Sala left = this.sala.getLeft();
 		Sala right = this.sala.getRight();
@@ -28,7 +27,6 @@ public class Buraco extends Componente{
 		}
 	}
 
-	@Override
 	public void removeEffects() {
 		Sala left = this.sala.getLeft();
 		Sala right = this.sala.getRight();

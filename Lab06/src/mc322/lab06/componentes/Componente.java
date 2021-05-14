@@ -2,7 +2,7 @@ package mc322.lab06.componentes;
 
 import mc322.lab06.Sala;
 
-public class Componente {
+public abstract class Componente {
 	protected char icon;
 	protected Sala sala;
 	protected int x;
@@ -65,9 +65,8 @@ public class Componente {
 		}
 	}
 	
-	public void addEffects() {}
-	public void removeEffects() {}
-	
+	abstract public void addEffects();
+	abstract public void removeEffects();	
 	
 }
  

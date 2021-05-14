@@ -9,7 +9,6 @@ public class Wumpus extends Componente{
 		this.icon = 'W';
 	}
 	
-	@Override
 	public void addEffects() {
 		Sala left = this.sala.getLeft();
 		Sala right = this.sala.getRight();
@@ -29,7 +28,6 @@ public class Wumpus extends Componente{
 		}
 	}
 	
-	@Override
 	public void removeEffects() {
 		Sala left = this.sala.getLeft();
 		Sala right = this.sala.getRight();
