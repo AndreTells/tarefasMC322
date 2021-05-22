@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class Cell extends JButton implements ActionListener{
+public class CellView extends JButton implements ActionListener{
 
 	private int i_colour;
 	private Color colour_list[];
-	public Cell(String string) {
+	public CellView(String string) {
 		super(string);
 		this.addActionListener(this);
 		this.i_colour = 0;
