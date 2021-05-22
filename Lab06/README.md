@@ -40,7 +40,7 @@ public boolean setSala(Sala sala) {
    ...
 }
 ~~~
- perimitndo que cada componente novo que seja adicionado possa dar @Override do metodo addEffects() e adicionar seus respectivos efeitos. Dessa forma, o código não só preserva generalidade da classe Componente como também permite a facil expansão do projeto através da adiçao de novos componentes.
+ perimitndo que cada componente novo que seja adicionado possa ter seu próprio metodo addEffects() e adicionar seus respectivos efeitos. Dessa forma, o código não só preserva generalidade da classe Componente como também permite a facil expansão do projeto através da adiçao de novos componentes.
 
 ### `Polimorfismo quando guardando Compnentes de uma sala`
 ~~~java
