@@ -1,10 +1,9 @@
 package mc322.jogo;
 
-import mc322.jogo.View.BoardView;
+import mc322.jogo.controller.Builder;
 
 public class Aplicativo {
 	public static void main(String Args[]) {
-		BoardView.initBoardView();
-		
+		Builder.buildGame();
 	}
 }
