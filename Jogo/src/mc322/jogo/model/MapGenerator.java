@@ -1,6 +1,7 @@
 package mc322.jogo.model;
 
 import mc322.jogo.model.components.Component;
+import mc322.jogo.model.components.Forest;
 import mc322.jogo.model.components.Grass;
 import mc322.jogo.model.components.Mountain;
 import mc322.jogo.model.components.Water;
@@ -8,20 +9,20 @@ import mc322.jogo.model.components.Water;
 public class MapGenerator {
 	
 	public static void generateRandomMap() {
-		generateMapBase();
+		generateMapBase(0.2);
 		generateMapRiver();
 		generateMapRiver();
+		generateMapForest(0.05);
 	}
 	
-	private static void generateMapBase(){
+	private static void generateMapBase(double limit){
 		int map_height = BoardModel.getMapHeight();
 		int map_length = BoardModel.getMapLength();
-		Component[][] map_base = new Component[map_height][map_length];
 		for(int i=0; i < map_height;i++) {
 			for(int j=0; j < map_length;j++) {
 				double value = ImprovedNoise.noise(i, j, Math.random()+1);
 				//System.out.println(value);
-				if(value<0.2) {
+				if(value<limit) {
 					BoardModel.addComponent(new Grass(), j, i);
 				}
 				else {
@@ -60,6 +61,25 @@ public class MapGenerator {
 				else {
 					j--;
 				}
+			}
+		}
+	}
+	
+	private static void generateMapForest(double limit) {
+		int map_height = BoardModel.getMapHeight();
+		int map_length = BoardModel.getMapLength();
+		for(int i=0; i < map_height;i++) {
+			for(int j=0; j < map_length;j++) {
+				if(BoardModel.hasComponent(Mountain.class, j, i) || BoardModel.hasComponent(Water.class, j, i)){
+					continue;
+				}
+				double value = ImprovedNoise.noise(i, j, Math.random()+1);
+				//System.out.println(value);
+				if(value>limit) {
+					BoardModel.addComponent(new Forest(), j, i);
+					System.out.println("yay");
+				}
+					
 			}
 		}
 	}
