@@ -8,6 +8,15 @@ public abstract class Component {
 	protected CellModel cell;
 	protected Color color;
 	protected int rank;
+	protected int modifier[];
+	/*
+	 * modifier index
+	0 ->population
+	1 ->food 
+	2 ->production
+	3 ->happiness
+	4 ->wet
+	*/
 	
 	public Color getColor() {
 		return this.color;
@@ -26,9 +35,19 @@ public abstract class Component {
 
 	public void setCell(CellModel cell) {
 		this.cell = cell;
+		cell.addModifiers(modifier);
 	}
 	
 	public static boolean isConstructalbe(CellModel cell) {
 		return false;
 	}
+	
+	protected void setModifier(int population, int food,int production, int happiness, int wet) {
+		modifier[0] = population;
+		modifier[1] = food;
+		modifier[2] = production;
+		modifier[3] = happiness;
+		modifier[4] = wet;
+	}
+
 }

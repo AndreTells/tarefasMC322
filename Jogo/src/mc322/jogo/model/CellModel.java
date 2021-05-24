@@ -13,6 +13,14 @@ public class CellModel {
 	private List<Component> components;
 	private int x;
 	private int y;
+	private int cell_stats[];
+	/*
+	 * cell_stats index
+	0 ->population
+	1 ->food 
+	2 ->happiness
+	3 ->wet
+	*/
 	
 	private CellModel up;
 	private CellModel down;
@@ -23,6 +31,10 @@ public class CellModel {
 		this.x = x;
 		this.y = y;
 		this.components = new LinkedList<Component>();
+		this.cell_stats = new int[4];
+		for(int i=0;i<cell_stats.length;i++) {
+			cell_stats[i] = 0;
+		}
 		
 		this.up = null;
 		this.down = null;
@@ -58,6 +70,18 @@ public class CellModel {
 
 	public void addComponent(Component comp) {
 		components.add(comp);
+	}
+	
+	public void addModifiers(int modifier[]) {
+		for(int i=0;i<cell_stats.length;i++) {
+			cell_stats[i] += modifier[i];
+		}
+	}
+	
+	public void removeModifiers(int modifier[]) {
+		for(int i=0;i<cell_stats.length;i++) {
+			cell_stats[i] -= modifier[i];
+		}
 	}
 	
 	private Component getHighestComponent() {
@@ -100,4 +124,5 @@ public class CellModel {
 		
 		return result;
 	}
+
 }

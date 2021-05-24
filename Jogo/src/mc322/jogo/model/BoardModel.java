@@ -8,6 +8,14 @@ import mc322.jogo.model.components.Component;
 public class BoardModel {
 	private static CellModel map[][];
 	private static int num_city_cells;
+	private static int stats[];
+	/*
+	0 ->population
+	1 ->production
+	2 ->food 
+	3 ->happiness
+	4 ->num_city_cells
+	*/
 	private static int population;
 	private static int production;
 	private static int food;
@@ -28,11 +36,11 @@ public class BoardModel {
 				map[i][j] = new CellModel(j,i,i-1 < 0 ? null:map[j][i-1],j-1 < 0 ? null:map[j-1][i]);
 			}
 		}
-		num_city_cells = 0;
-		population = 0;
-		production = 50;
-		food = 0;
-		happiness = 0;
+		stats = new int[5];
+		for(int i=0; i < stats.length;i++) {
+			stats[i] = 0;
+		}
+		stats[1] = 50;
 	}
 	
 	public static void addComponent(Component comp,int x,int y) {
@@ -43,6 +51,7 @@ public class BoardModel {
 	public static boolean hasComponent(Class cls, int x, int y) {
 		return map[y][x].hasComponent(cls);
 	}
+	
 	//---- get methods 
 	public static Color getCellColor(int x, int y) {
 		return map[y][x].getColor();
@@ -53,19 +62,19 @@ public class BoardModel {
 	}
 
 	public static int getPopulation() {
-		return population;
+		return stats[0];
 	}
 	
 	public static int getProduction() {
-		return production;
+		return stats[1];
 	}
 
 	public static int getFood() {
-		return food;
+		return stats[2];
 	}
 
 	public static int getHappiness() {
-		return happiness;
+		return stats[3];
 	}
 
 	public static int getMapHeight() {

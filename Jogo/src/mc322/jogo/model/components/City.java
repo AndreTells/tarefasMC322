@@ -7,6 +7,7 @@ public class City extends Component {
 	public City () {
 		this.rank = 3;
 		this.setColor(ColorEnum.CITY.getColor());
+		this.setModifier(1, 0,1, -2, 0);
 	}
 	
 	
@@ -17,4 +18,5 @@ public class City extends Component {
 		
 		return true;
 	}
+
 }
