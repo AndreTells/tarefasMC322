@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+import mc322.jogo.model.components.City;
 import mc322.jogo.model.components.Component;
 import mc322.jogo.model.components.Grass;
+import mc322.jogo.model.components.Water;
 
 public class CellModel {
 	private List<Component> components;
@@ -45,7 +47,13 @@ public class CellModel {
 	}
 
 	public String getInfo() {
-		return "("+x+","+y+")";
+		String info = new String();
+		info+="Position: ("+x+","+y+")";
+		info+="\nComponentes:";
+		for(Component comp:components) {
+			info+="\n-"+comp.getClass().getSimpleName();
+		}
+		return info;
 	}
 
 	public void addComponent(Component comp) {
@@ -83,4 +91,13 @@ public class CellModel {
 		return top_comp.getColor();
 	}
 
+	public List<Component> getPossibleActions(){
+		List<Component> result = new LinkedList<Component>();
+		
+		if(City.isConstructalbe(this)) {
+			result.add(new City());
+		}
+		
+		return result;
+	}
 }

@@ -23,6 +23,7 @@ import mc322.jogo.controller.BoardController;
 //add(new JLabel("<html>Text color: <font color='red'>red</font></html>"));
 public class BoardView {
 	private static JFrame frame;
+	private static JPanel game_panel;
 	private static CellView [][] map;
 	private static JLabel population;
 	private static JLabel production;
@@ -31,20 +32,20 @@ public class BoardView {
 	private static JTextArea  info;
 	
 	public static void init(int map_height,int map_length,int font_size){
-		create(map_height,map_length,font_size);
+		createGamePanel(map_height,map_length,font_size);
 	}	
 	public static void init() {
-		create(10,10,15);
+		createGamePanel(10,10,15);
 	}
 	
-	private static void create(int map_height,int map_length,int font_size) {
+	private static void createGamePanel(int map_height,int map_length,int font_size) {
 		frame = new JFrame();
 		
 		frame.setTitle("jogo");
 		frame.setSize(1000,600);
 		
-		JPanel panel = new JPanel(new GridBagLayout());
-		frame.setContentPane(panel);
+		game_panel = new JPanel(new GridBagLayout());
+		frame.setContentPane(game_panel);
 		
 		GridBagConstraints panel_c = new GridBagConstraints();
 		
@@ -56,7 +57,7 @@ public class BoardView {
 		panel_c.gridheight = 6;
 		panel_c.weightx = 0.7;
 		panel_c.weighty = 1;
-		panel.add(map_panel,panel_c);
+		game_panel.add(map_panel,panel_c);
 		
 		GridBagConstraints borad_c = new GridBagConstraints();
 		borad_c.weightx=1;
@@ -70,8 +71,8 @@ public class BoardView {
 						
 				borad_c.gridx = i;
 				borad_c.gridy = j;
-						
-				CellView btn = new CellView(i+","+j,i,j);
+				//i+","+j
+				CellView btn = new CellView("",i,j);
 				map[j][i] = btn;
 				btn.setRolloverEnabled(false);
 				btn.setFocusable(false);
@@ -88,25 +89,25 @@ public class BoardView {
 		population = new JLabel("Populacao:----");
 		population.setFont(new Font("Calibri", Font.BOLD, font_size));
 		stats_c.gridy = 0;
-		panel.add(population,stats_c);
+		game_panel.add(population,stats_c);
 				
 		//producao
 		production = new JLabel("Producao:----");
 		production.setFont(new Font("Calibri", Font.BOLD, font_size));
 		stats_c.gridy = 1;
-		panel.add(production,stats_c);
+		game_panel.add(production,stats_c);
 				
 		//comida
 		food = new JLabel("Comida:----");
 		food.setFont(new Font("Calibri", Font.BOLD, font_size));
 		stats_c.gridy = 2;
-		panel.add(food,stats_c);
+		game_panel.add(food,stats_c);
 				
 		//felicidade
 		happiness = new JLabel("felicidade:----");
 		happiness.setFont(new Font("Calibri", Font.BOLD, font_size));
 		stats_c.gridy = 3;
-		panel.add(happiness,stats_c);
+		game_panel.add(happiness,stats_c);
 		
 		
 		info = new JTextArea ("info:(informacoes da celula selecionada) Lorem ipsum dolor sit amet, consectetur adi piscing elit. Phasellus varius, eros id vehicula porttito.");
@@ -117,7 +118,7 @@ public class BoardView {
 		info.setBackground(new Color(255,255,255));
 		stats_c.weighty = 0.4;
 		stats_c.gridy = 4;
-		panel.add(info,stats_c);
+		game_panel.add(info,stats_c);
 		
 		//botao de próximo turno
 		Button next_turn = new Button("proximo turno");
@@ -125,7 +126,7 @@ public class BoardView {
 		stats_c.weighty = 0.2;
 		stats_c.gridy = 5;
 		next_turn.addActionListener(new BoardController());
-		panel.add(next_turn,stats_c);
+		game_panel.add(next_turn,stats_c);
 		
 		
 		frame.setResizable(true);

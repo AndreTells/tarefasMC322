@@ -77,7 +77,6 @@ public class MapGenerator {
 				//System.out.println(value);
 				if(value>limit) {
 					BoardModel.addComponent(new Forest(), j, i);
-					System.out.println("yay");
 				}
 					
 			}

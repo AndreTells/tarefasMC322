@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -12,6 +13,7 @@ import javax.swing.SwingUtilities;
 
 import mc322.jogo.model.BoardModel;
 import mc322.jogo.model.components.City;
+import mc322.jogo.model.components.Component;
 import mc322.jogo.view.BoardView;
 
 public class CellController implements MouseListener{
@@ -29,22 +31,24 @@ public class CellController implements MouseListener{
 		// TODO Auto-generated method stub
 		if(SwingUtilities.isRightMouseButton(e)) {	
 			JPopupMenu popup = new JPopupMenu();
-			JMenuItem menu_item_city = new JMenuItem("City");
-			menu_item_city.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e){ 
-					BoardModel.addComponent(new City(),x,y);
-					Color color = BoardModel.getCellColor(x, y);
-					BoardView.setCellColor(color, x, y);
-					System.out.println(x+","+y);
-				} 
-			});
-			popup.add(menu_item_city);
-		    /*popup.add(new JMenuItem("Copy"));
-		    popup.add(new JMenuItem("Paste"));
-		    popup.addSeparator();
-		    popup.add(new JMenuItem("SelectAll"));*/
+			List<Component> possible = BoardModel.getPossibleActions(x, y);
+			if(possible.size() == 0) {
+				JMenuItem menu_item = new JMenuItem("None");
+				popup.add(menu_item);
+			}
+			for(Component comp:possible) {
+				JMenuItem menu_item = new JMenuItem(comp.getClass().getSimpleName());
+				menu_item.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e){ 
+						BoardModel.addComponent(comp,x,y);
+						Color color = BoardModel.getCellColor(x, y);
+						BoardView.setCellColor(color, x, y);
+					} 
+				});
+				popup.add(menu_item);
+			}
+			
 		    popup.show(e.getComponent(),e.getX(),e.getY());
-		    //System.out.println(x+","+y);
 		    
 		}
 		else if(SwingUtilities.isLeftMouseButton(e)) {

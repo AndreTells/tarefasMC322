@@ -20,12 +20,15 @@ public abstract class Component {
 		return false;
 	}
 	
-	protected void setColor(Color color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 
 	public void setCell(CellModel cell) {
 		this.cell = cell;
 	}
-
+	
+	public static boolean isConstructalbe(CellModel cell) {
+		return false;
+	}
 }

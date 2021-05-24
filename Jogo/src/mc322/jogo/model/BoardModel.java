@@ -1,6 +1,7 @@
 package mc322.jogo.model;
 
 import java.awt.Color;
+import java.util.List;
 
 import mc322.jogo.model.components.Component;
 
@@ -75,5 +76,8 @@ public class BoardModel {
 		return map[0].length;
 	}
 
+	public static List<Component> getPossibleActions(int x,int y){
+		return map[y][x].getPossibleActions();
+	}
 	
 }
