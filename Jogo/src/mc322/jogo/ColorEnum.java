@@ -7,7 +7,9 @@ public enum ColorEnum {
 	CITY(139,69,19),
 	FOREST(0,100,0),
 	WATER(30,144,255),
-	MOUNTAIN(150,150,150);
+	MOUNTAIN(150,150,150),
+	LUMBERMILL(	235, 205, 128),
+	FARM(187,255,185);
 
     private int red;
     private int green;

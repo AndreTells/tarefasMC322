@@ -2,6 +2,7 @@ package mc322.jogo.model.components;
 
 import java.awt.Color;
 
+import mc322.jogo.model.BoardModel;
 import mc322.jogo.model.CellModel;
 
 public abstract class Component {
@@ -9,17 +10,21 @@ public abstract class Component {
 	protected Color color;
 	protected int rank;
 	protected int modifier[];
+	protected int cost;
 	/*
 	 * modifier index
-	0 ->population
-	1 ->food 
-	2 ->production
-	3 ->happiness
-	4 ->wet
+	 0-> food
+	 1->production
+	 2->population_limit 
 	*/
+	
 	
 	public Color getColor() {
 		return this.color;
+	}
+	
+	public int[] getModifier() {
+		return modifier;
 	}
 	
 	public boolean greaterThan(Component comp) {
@@ -33,21 +38,22 @@ public abstract class Component {
 		this.color = color;
 	}
 
-	public void setCell(CellModel cell) {
+	public boolean setCell(CellModel cell) {
 		this.cell = cell;
 		cell.addModifiers(modifier);
-	}
+		return true;
+	}	
+	
 	
 	public static boolean isConstructalbe(CellModel cell) {
 		return false;
 	}
 	
-	protected void setModifier(int population, int food,int production, int happiness, int wet) {
-		modifier[0] = population;
-		modifier[1] = food;
-		modifier[2] = production;
-		modifier[3] = happiness;
-		modifier[4] = wet;
+	protected void setModifier(int food,int production,int population) {
+		modifier = new int[3];
+		modifier[0] = food;
+		modifier[1] = production;
+		modifier[2] = population;
 	}
 
 }

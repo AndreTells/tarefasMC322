@@ -134,30 +134,28 @@ public class BoardView {
 		frame.setVisible(true); 
 	}
 
+	
 	//-------------set methods---------------
 	public static void setInfo(String info_s) {
 		info.setText(info_s);
 	}
-	public static void setPopulation(int population_i) {
+	public static void setPopulation(String population_i) {
 		population.setText("Populacao: "+population_i);
 	}
-	public static void setProduction(int production_i) {
+	public static void setProduction(String production_i) {
 		production.setText("Producao: "+production_i);
 	}
-	public static void setFood(int food_i) {
-		if(food_i >0) {
-			food.setText("Comida: +"+food_i);	
-		}
-		else {
-			food.setText("Comida: "+food_i);
-		}
-	}
-	public static void setHappiness(int happiness_i) {
-		happiness.setText("felicidade: "+happiness_i);
+	public static void setFood(String food_i) {
+		food.setText("Comida: "+food_i);	
 	}
 	
 	public static void setCellColor(Color color, int x,int y) {
 		map[y][x].setBackground(color);
+	}
+	
+	public static void setGameOver() {
+		setInfo("GAME OVER");
+		
 	}
 	
 }

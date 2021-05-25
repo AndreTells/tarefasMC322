@@ -6,20 +6,23 @@ import java.util.List;
 
 import mc322.jogo.model.components.City;
 import mc322.jogo.model.components.Component;
+import mc322.jogo.model.components.ConstructableComponent;
+import mc322.jogo.model.components.Farm;
 import mc322.jogo.model.components.Grass;
+import mc322.jogo.model.components.LumberMill;
 import mc322.jogo.model.components.Water;
 
 public class CellModel {
 	private List<Component> components;
 	private int x;
 	private int y;
-	private int cell_stats[];
+	private int modifier[];
+	private boolean claimed;
 	/*
-	 * cell_stats index
-	0 ->population
-	1 ->food 
-	2 ->happiness
-	3 ->wet
+	 * modifier index
+	 0-> food
+	 1->production
+	 2->population_limit
 	*/
 	
 	private CellModel up;
@@ -31,9 +34,11 @@ public class CellModel {
 		this.x = x;
 		this.y = y;
 		this.components = new LinkedList<Component>();
-		this.cell_stats = new int[4];
-		for(int i=0;i<cell_stats.length;i++) {
-			cell_stats[i] = 0;
+		this.claimed = false;
+		
+		this.modifier = new int[3];
+		for(int i=0;i<modifier.length;i++) {
+			modifier[i] = 0;
 		}
 		
 		this.up = null;
@@ -41,7 +46,7 @@ public class CellModel {
 		this.right = null;
 		this.left = null;
 		
-		this.setRelative(left, right, up, down);
+		this.setRelative(left, null, up, null);
 		
 		if(left!=null) {
 			left.setRelative(null, this, null, null);
@@ -62,25 +67,53 @@ public class CellModel {
 		String info = new String();
 		info+="Position: ("+x+","+y+")";
 		info+="\nComponentes:";
-		for(Component comp:components) {
+		for(Component comp:components) 	{
 			info+="\n-"+comp.getClass().getSimpleName();
 		}
+		info+="\nHousing:"+modifier[2];
+		info+="\nProduction:"+modifier[1];
+		info+="\nFood:"+modifier[0];
 		return info;
 	}
-
-	public void addComponent(Component comp) {
-		components.add(comp);
+	
+	public void addComponent	(Component comp) {
+		if(!this.hasComponent(comp.getClass())) {
+			components.add(comp);
+			if(this.claimed) {
+				BoardModel.removeModifiers(modifier);
+				comp.setCell(this);
+				BoardModel.addModifier(modifier);
+			}
+			else {
+				this.addModifiers(comp.getModifier());
+			}
+		}		
 	}
 	
-	public void addModifiers(int modifier[]) {
-		for(int i=0;i<cell_stats.length;i++) {
-			cell_stats[i] += modifier[i];
+	public void removeComponent(Class cls) {
+		for(int i =0; i < components.size();i++) {
+			Component comp = components.get(i);
+			if(cls.isInstance(comp)) {
+				this.removeModifiers(comp.getModifier());
+				if(this.claimed) {
+					BoardModel.removeModifiers(comp.getModifier());
+				}
+				components.remove(i);
+				break;
+			}
 		}
 	}
 	
-	public void removeModifiers(int modifier[]) {
-		for(int i=0;i<cell_stats.length;i++) {
-			cell_stats[i] -= modifier[i];
+	
+	public void addModifiers(int external_modifier[]) {
+		for(int i=0;i<modifier.length;i++) {
+			modifier[i] += external_modifier[i];
+		}
+	}
+	
+	public void removeModifiers(int external_modifier[]) {
+		for(int i=0;i<modifier.length;i++) {
+			modifier[i] -= external_modifier[i];
 		}
 	}
 	
@@ -107,6 +140,7 @@ public class CellModel {
 		return false;
 	}
 	
+	
 	public Color getColor() {
 		Component top_comp = getHighestComponent();
 		if(top_comp ==null) {
@@ -115,14 +149,51 @@ public class CellModel {
 		return top_comp.getColor();
 	}
 
-	public List<Component> getPossibleActions(){
-		List<Component> result = new LinkedList<Component>();
+	public List<ConstructableComponent> getPossibleActions(){
+		List<ConstructableComponent> result = new LinkedList<ConstructableComponent>();
 		
 		if(City.isConstructalbe(this)) {
 			result.add(new City());
 		}
+		if(LumberMill.isConstructalbe(this)) {
+			result.add(new LumberMill());
+		}
+		if(Farm.isConstructalbe(this)) {
+			result.add(new Farm());
+		}
 		
 		return result;
 	}
+
+	public boolean isClaimed() {
+		return claimed;
+	}
+
+	public void claim() {
+		this.claimed = true;
+		BoardModel.addModifier(modifier);
+	}
+	
+	public boolean isIrigated() {
+		if(up!=null && up.hasComponent(Water.class)) {
+			return true;
+		}
+		if(down!=null && down.hasComponent(Water.class)) {
+			return true;
+		}
+		if(left!=null && left.hasComponent(Water.class)) {
+			return true;
+		}
+		if(right!=null && right.hasComponent(Water.class)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public CellModel getUp() {return this.up;}
+	public CellModel getDown() {return this.down;}
+	public CellModel getLeft() {return this.left;}
+	public CellModel getRight() {return this.right;}
+	
 
 }

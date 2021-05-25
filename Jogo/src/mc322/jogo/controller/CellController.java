@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 import mc322.jogo.model.BoardModel;
 import mc322.jogo.model.components.City;
 import mc322.jogo.model.components.Component;
+import mc322.jogo.model.components.ConstructableComponent;
 import mc322.jogo.view.BoardView;
 
 public class CellController implements MouseListener{
@@ -31,21 +32,33 @@ public class CellController implements MouseListener{
 		// TODO Auto-generated method stub
 		if(SwingUtilities.isRightMouseButton(e)) {	
 			JPopupMenu popup = new JPopupMenu();
-			List<Component> possible = BoardModel.getPossibleActions(x, y);
-			if(possible.size() == 0) {
-				JMenuItem menu_item = new JMenuItem("None");
-				popup.add(menu_item);
-			}
-			for(Component comp:possible) {
-				JMenuItem menu_item = new JMenuItem(comp.getClass().getSimpleName());
+			if(!BoardModel.isClaimed(x, y)) {
+				JMenuItem menu_item = new JMenuItem("Adicionar");
 				menu_item.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e){ 
-						BoardModel.addComponent(comp,x,y);
-						Color color = BoardModel.getCellColor(x, y);
-						BoardView.setCellColor(color, x, y);
+						BoardModel.claim(x,y);
+						BoardController.updateStats();
 					} 
 				});
 				popup.add(menu_item);
+			}
+			else {
+				List<ConstructableComponent> possible = BoardModel.getPossibleActions(x, y);
+				if(possible.size() == 0){
+					JMenuItem menu_item = new JMenuItem("None");
+					popup.add(menu_item);
+				}
+				for(ConstructableComponent comp:possible) {
+					JMenuItem menu_item = new JMenuItem(comp.getClass().getSimpleName());
+					menu_item.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e){ 
+							BoardModel.constructComponent(comp,x,y);
+							BoardController.updateStats();
+							BoardController.updateCellColor(x,y);
+						} 
+					});
+					popup.add(menu_item);
+				}
 			}
 			
 		    popup.show(e.getComponent(),e.getX(),e.getY());

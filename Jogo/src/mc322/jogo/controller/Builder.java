@@ -13,23 +13,11 @@ public class Builder {
 		MapGenerator.generateRandomMap();
 		
 		//initializing the starting settings
-		int population_i = BoardModel.getPopulation();
-		int production_i = BoardModel.getProduction();
-		int food_i = BoardModel.getFood();
-		int happiness_i = BoardModel.getHappiness();
 		
-		BoardView.setPopulation(population_i);
-		BoardView.setProduction(production_i);
-		BoardView.setFood(food_i);
-		BoardView.setHappiness(happiness_i);
+		BoardController.updateStats();
 		
-		//getting the colours of every cell
-		for(int i=0;i < BoardModel.getMapHeight();i++) {
-			for(int j=0; j < BoardModel.getMapLength();j++) {
-				Color color = BoardModel.getCellColor(j, i);
-				BoardView.setCellColor(color, j, i);
-			}
-		}
+		//initializing the color of all cells
+		BoardController.updateColors();
 				
 	}
 }

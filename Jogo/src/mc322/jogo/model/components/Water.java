@@ -1,11 +1,12 @@
 package mc322.jogo.model.components;
 
 import mc322.jogo.ColorEnum;
+import mc322.jogo.model.CellModel;
 
 public class Water extends Component{
 	public Water() {
 		this.rank = 4;
 		this.setColor(ColorEnum.WATER.getColor());
-		this.setModifier(0, 0,0, 0, 100);
+		this.setModifier(0, 0,0);
 	}
 }
