@@ -1,4 +1,4 @@
-package mc322.jogo.model.components;
+package mc322.jogo.model.board.components;
 
 public enum ConstructCostEnum {
 	CLAIM(10),

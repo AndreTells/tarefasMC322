@@ -11,11 +11,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-import mc322.jogo.model.BoardModel;
-import mc322.jogo.model.components.City;
-import mc322.jogo.model.components.Component;
-import mc322.jogo.model.components.ConstructableComponent;
-import mc322.jogo.view.BoardView;
+import mc322.jogo.model.board.BoardModel;
+import mc322.jogo.model.board.components.City;
+import mc322.jogo.model.board.components.Component;
+import mc322.jogo.model.board.components.ConstructableComponent;
+import mc322.jogo.view.board.AppView;
 
 public class CellController implements MouseListener{
 
@@ -66,7 +66,7 @@ public class CellController implements MouseListener{
 		}
 		else if(SwingUtilities.isLeftMouseButton(e)) {
 			String info_s = BoardModel.getCellInfo(x, y);
-			BoardView.setInfo(info_s);
+			AppView.setInfo(info_s);
 		}
 		
 	}

@@ -1,6 +1,4 @@
-package mc322.jogo.model.components;
-
-import mc322.jogo.ColorEnum;
+package mc322.jogo.model.board.components;
 
 public class Grass extends Component{
 	public Grass() {

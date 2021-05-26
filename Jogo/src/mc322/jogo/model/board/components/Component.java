@@ -1,9 +1,9 @@
-package mc322.jogo.model.components;
+package mc322.jogo.model.board.components;
 
 import java.awt.Color;
 
-import mc322.jogo.model.BoardModel;
-import mc322.jogo.model.CellModel;
+import mc322.jogo.model.board.BoardModel;
+import mc322.jogo.model.board.CellModel;
 
 public abstract class Component {
 	protected CellModel cell;

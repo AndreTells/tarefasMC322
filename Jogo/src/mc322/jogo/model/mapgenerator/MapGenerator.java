@@ -1,10 +1,11 @@
-package mc322.jogo.model;
+package mc322.jogo.model.mapgenerator;
 
-import mc322.jogo.model.components.Component;
-import mc322.jogo.model.components.Forest;
-import mc322.jogo.model.components.Grass;
-import mc322.jogo.model.components.Mountain;
-import mc322.jogo.model.components.Water;
+import mc322.jogo.model.board.BoardModel;
+import mc322.jogo.model.board.components.Component;
+import mc322.jogo.model.board.components.Forest;
+import mc322.jogo.model.board.components.Grass;
+import mc322.jogo.model.board.components.Mountain;
+import mc322.jogo.model.board.components.Water;
 
 public class MapGenerator {
 	

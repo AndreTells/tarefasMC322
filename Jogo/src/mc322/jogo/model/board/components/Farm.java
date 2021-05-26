@@ -1,7 +1,6 @@
-package mc322.jogo.model.components;
+package mc322.jogo.model.board.components;
 
-import mc322.jogo.ColorEnum;
-import mc322.jogo.model.CellModel;
+import mc322.jogo.model.board.CellModel;
 
 public class Farm extends ConstructableComponent{
 	public Farm () {

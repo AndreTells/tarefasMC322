@@ -1,4 +1,4 @@
-package mc322.jogo;
+package mc322.jogo.model.board.components;
 
 import java.awt.Color;
 

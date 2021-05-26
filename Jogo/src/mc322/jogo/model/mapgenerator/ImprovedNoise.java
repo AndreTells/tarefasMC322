@@ -1,4 +1,4 @@
-package mc322.jogo.model;
+package mc322.jogo.model.mapgenerator;
 //https://rosettacode.org/wiki/Perlin_noise#Java
 
 public final class ImprovedNoise {

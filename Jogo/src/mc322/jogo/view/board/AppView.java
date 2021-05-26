@@ -1,4 +1,4 @@
-package mc322.jogo.view;
+package mc322.jogo.view.board;
 
 import java.awt.Button;
 import java.awt.Color;
@@ -21,7 +21,7 @@ import javax.swing.border.Border;
 import mc322.jogo.controller.BoardController;
 
 //add(new JLabel("<html>Text color: <font color='red'>red</font></html>"));
-public class BoardView {
+public class AppView {
 	private static JFrame frame;
 	private static JPanel game_panel;
 	private static CellView [][] map;
@@ -30,6 +30,21 @@ public class BoardView {
 	private static JLabel food;
 	private static JLabel happiness;
 	private static JTextArea  info;
+	
+	/*
+	private BoardPanel board_panel;
+	
+	AppView(){
+		frame = new JFrame();
+		frame.setTitle("jogo");
+		frame.setSize(1000,600);
+		this.board_panel = new BoardPanel(10,10,15);
+		frame.setContentPane(board_panel);
+		
+		frame.setResizable(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true); 
+	}*/
 	
 	public static void init(int map_height,int map_length,int font_size){
 		createGamePanel(map_height,map_length,font_size);
@@ -43,6 +58,7 @@ public class BoardView {
 		
 		frame.setTitle("jogo");
 		frame.setSize(1000,600);
+		
 		
 		game_panel = new JPanel(new GridBagLayout());
 		frame.setContentPane(game_panel);
@@ -103,12 +119,6 @@ public class BoardView {
 		stats_c.gridy = 2;
 		game_panel.add(food,stats_c);
 				
-		//felicidade
-		happiness = new JLabel("felicidade:----");
-		happiness.setFont(new Font("Calibri", Font.BOLD, font_size));
-		stats_c.gridy = 3;
-		game_panel.add(happiness,stats_c);
-		
 		
 		info = new JTextArea ("info:(informacoes da celula selecionada) Lorem ipsum dolor sit amet, consectetur adi piscing elit. Phasellus varius, eros id vehicula porttito.");
 		info.setPreferredSize(new Dimension(300,100));
@@ -116,7 +126,7 @@ public class BoardView {
 		info.setLineWrap(true);
 		info.setEditable(false);
 		info.setBackground(new Color(255,255,255));
-		stats_c.weighty = 0.4;
+		stats_c.weighty = 0.5;
 		stats_c.gridy = 4;
 		game_panel.add(info,stats_c);
 		

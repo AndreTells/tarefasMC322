@@ -1,11 +1,11 @@
-package mc322.jogo.model;
+package mc322.jogo.model.board;
 
 import java.awt.Color;
 import java.util.List;
 
-import mc322.jogo.model.components.Component;
-import mc322.jogo.model.components.ConstructCostEnum;
-import mc322.jogo.model.components.ConstructableComponent;
+import mc322.jogo.model.board.components.Component;
+import mc322.jogo.model.board.components.ConstructCostEnum;
+import mc322.jogo.model.board.components.ConstructableComponent;
 
 public class BoardModel {
 	private static CellModel map[][];

@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import mc322.jogo.model.BoardModel;
-import mc322.jogo.view.BoardView;
+import mc322.jogo.model.board.BoardModel;
+import mc322.jogo.view.board.AppView;
 
 public class BoardController implements ActionListener{
 
@@ -16,16 +16,16 @@ public class BoardController implements ActionListener{
 			BoardModel.calculateStats();
 			updateStats();
 			if(BoardModel.checkLoseConditions()) {
-				BoardView.setGameOver();
+				AppView.setGameOver();
 			}
 		}
 		
 	}
 	
 	public static void updateStats() {
-		BoardView.setPopulation(BoardModel.getPopulation());
-		BoardView.setProduction(BoardModel.getProduction());
-		BoardView.setFood(BoardModel.getFood());
+		AppView.setPopulation(BoardModel.getPopulation());
+		AppView.setProduction(BoardModel.getProduction());
+		AppView.setFood(BoardModel.getFood());
 	}
 	
 	public static void updateColors() {
@@ -38,7 +38,7 @@ public class BoardController implements ActionListener{
 	
 	public static void updateCellColor(int x , int y) {
 		Color color = BoardModel.getCellColor(x, y);
-		BoardView.setCellColor(color, x, y);
+		AppView.setCellColor(color, x, y);
 	}
 
 }

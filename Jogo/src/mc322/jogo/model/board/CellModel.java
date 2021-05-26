@@ -1,16 +1,16 @@
-package mc322.jogo.model;
+package mc322.jogo.model.board;
 
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
-import mc322.jogo.model.components.City;
-import mc322.jogo.model.components.Component;
-import mc322.jogo.model.components.ConstructableComponent;
-import mc322.jogo.model.components.Farm;
-import mc322.jogo.model.components.Grass;
-import mc322.jogo.model.components.LumberMill;
-import mc322.jogo.model.components.Water;
+import mc322.jogo.model.board.components.City;
+import mc322.jogo.model.board.components.Component;
+import mc322.jogo.model.board.components.ConstructableComponent;
+import mc322.jogo.model.board.components.Farm;
+import mc322.jogo.model.board.components.Grass;
+import mc322.jogo.model.board.components.LumberMill;
+import mc322.jogo.model.board.components.Water;
 
 public class CellModel {
 	private List<Component> components;

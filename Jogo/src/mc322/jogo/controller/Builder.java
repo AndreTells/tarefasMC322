@@ -2,14 +2,14 @@ package mc322.jogo.controller;
 
 import java.awt.Color;
 
-import mc322.jogo.model.BoardModel;
-import mc322.jogo.model.MapGenerator;
-import mc322.jogo.view.BoardView;
+import mc322.jogo.model.board.BoardModel;
+import mc322.jogo.model.mapgenerator.MapGenerator;
+import mc322.jogo.view.board.AppView;
 
 public class Builder {
 	public static void buildGame() {
 		BoardModel.init();
-		BoardView.init();
+		AppView.init();
 		MapGenerator.generateRandomMap();
 		
 		//initializing the starting settings
