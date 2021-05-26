@@ -13,6 +13,7 @@ import mc322.jogo.model.board.components.LumberMill;
 import mc322.jogo.model.board.components.Water;
 
 public class CellModel {
+	private BoardModel board;
 	private List<Component> components;
 	private int x;
 	private int y;
@@ -30,7 +31,8 @@ public class CellModel {
 	private CellModel left;
 	private CellModel right;
 	
-	public CellModel(int x,int y,CellModel left, CellModel up){
+	public CellModel(BoardModel board,int x,int y,CellModel left, CellModel up){
+		this.board = board;
 		this.x = x;
 		this.y = y;
 		this.components = new LinkedList<Component>();
@@ -80,9 +82,9 @@ public class CellModel {
 		if(!this.hasComponent(comp.getClass())) {
 			components.add(comp);
 			if(this.claimed) {
-				BoardModel.removeModifiers(modifier);
+				board.removeModifiers(modifier);
 				comp.setCell(this);
-				BoardModel.addModifier(modifier);
+				board.addModifier(modifier);
 			}
 			else {
 				this.addModifiers(comp.getModifier());
@@ -96,7 +98,7 @@ public class CellModel {
 			if(cls.isInstance(comp)) {
 				this.removeModifiers(comp.getModifier());
 				if(this.claimed) {
-					BoardModel.removeModifiers(comp.getModifier());
+					board.removeModifiers(comp.getModifier());
 				}
 				components.remove(i);
 				break;
@@ -171,7 +173,7 @@ public class CellModel {
 
 	public void claim() {
 		this.claimed = true;
-		BoardModel.addModifier(modifier);
+		board.addModifier(modifier);
 	}
 	
 	public boolean isIrigated() {
@@ -194,6 +196,7 @@ public class CellModel {
 	public CellModel getDown() {return this.down;}
 	public CellModel getLeft() {return this.left;}
 	public CellModel getRight() {return this.right;}
+	public BoardModel getBoard() {return this.board;}
 	
 
 }

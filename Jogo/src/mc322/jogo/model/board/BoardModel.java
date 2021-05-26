@@ -6,16 +6,17 @@ import java.util.List;
 import mc322.jogo.model.board.components.Component;
 import mc322.jogo.model.board.components.ConstructCostEnum;
 import mc322.jogo.model.board.components.ConstructableComponent;
+import mc322.jogo.model.board.mapgenerator.MapGenerator;
 
-public class BoardModel {
-	private static CellModel map[][];
-	private static int population;
-	private static int population_limit;
-	private static int production;
-	private static int food;
-	private static int food_target;
-	private static int modifier[];
-	private static boolean game_over;
+public class BoardModel implements IBoardModelBuilder{
+	private CellModel map[][];
+	private int population;
+	private int population_limit;
+	private int production;
+	private int food;
+	private int food_target;
+	private int modifier[];
+	private boolean game_over;
 	/*
 	 *modifier
 	 0-> food
@@ -23,18 +24,17 @@ public class BoardModel {
 	 2->population_limit 
 	*/
 	
-	public static void init(int map_height,int map_length){
-		create(map_height,map_length);
-	}	
-	public static void init() {
+	public BoardModel() {
 		create(10,10);
+		MapGenerator map_generator = new MapGenerator(this);
+		map_generator.generateRandomMap();
 	}
 	
-	private static void create(int map_height,int map_length) {
+	private void create(int map_height,int map_length) {
 		map = new CellModel[map_height][map_length];
 		for(int i =0;i< map_height;i++) {
 			for(int j=0; j<map_length;j++) {
-				map[i][j] = new CellModel(j,i,j-1 < 0 ? null:map[i][j-1],i-1 < 0 ? null:map[i-1][j]);
+				map[i][j] = new CellModel(this,j,i,j-1 < 0 ? null:map[i][j-1],i-1 < 0 ? null:map[i-1][j]);
 			}
 		}
 		population = 1;
@@ -51,35 +51,35 @@ public class BoardModel {
 		game_over = false;
 	}
 	
-	public static void addComponent(Component comp,int x,int y) {
+	public void addComponent(Component comp,int x,int y) {
 		map[y][x].addComponent(comp);
 		
 	}
 	
-	public static  void constructComponent(ConstructableComponent comp,int x, int y) {
+	public  void constructComponent(ConstructableComponent comp,int x, int y) {
 		if(comp.construct()) {
 			addComponent(comp,x,y);
 		}
 	}
 	
 
-	public static void addModifier(int external_modifier[]) {
+	public void addModifier(int external_modifier[]) {
 		for(int i=0;i<modifier.length;i++) {
 			modifier[i] += external_modifier[i];
 		}
 	}
 	
-	public static void removeModifiers(int external_modifier[]) {
+	public void removeModifiers(int external_modifier[]) {
 		for(int i=0;i<modifier.length;i++) {
 			modifier[i] -= external_modifier[i];
 		}
 	}
 	
-	public static boolean hasComponent(Class cls, int x, int y) {
+	public boolean hasComponent(Class<?> cls, int x, int y) {
 		return map[y][x].hasComponent(cls);
 	}
 	
-	public static void calculateStats() {
+	public void calculateStats() {
 		food += modifier[0];
 		production += modifier[1];
 		population_limit += modifier[2];
@@ -93,7 +93,7 @@ public class BoardModel {
 		
 	}
 	
-	public static boolean checkLoseConditions() {
+	public boolean checkLoseConditions() {
 		if(population > population_limit || population == 0) {
 			game_over = true;
 			return true;
@@ -105,11 +105,11 @@ public class BoardModel {
 		return false;
 	}
 	
-	public static boolean isClaimed(int x,int y) {
+	public boolean isClaimed(int x,int y) {
 		return map[y][x].isClaimed();
 	}
 	
-	public static void claim(int x,int y) {
+	public void claim(int x,int y) {
 		if(production >=ConstructCostEnum.CLAIM.getCost()) {
 			map[y][x].claim();
 			useProduction(ConstructCostEnum.CLAIM.getCost());	
@@ -117,48 +117,48 @@ public class BoardModel {
 		
 	}
 	
-	public static void useProduction(int value) {
+	public void useProduction(int value) {
 		production -=value;
 	}
 
 	//---- get methods 
-	public static boolean gameOver() {
+	public boolean gameOver() {
 		return game_over;
 	}
 	
-	public static Color getCellColor(int x, int y) {
+	public Color getCellColor(int x, int y) {
 		return map[y][x].getColor();
 	}
 	
-	public static String getCellInfo(int x, int y) {
+	public String getCellInfo(int x, int y) {
 		return map[y][x].getInfo();
 	}
 
-	public static String getPopulation() {
+	public String getPopulation() {
 		return ""+population+"/"+population_limit+" "+(modifier[2] >= 0? "+"+modifier[2]:modifier[2]);
 	}
 	
-	public static String getProduction() {
+	public String getProduction() {
 		return ""+production+" "+(modifier[1] >= 0? "+"+modifier[1]:modifier[1]);
 	}
 
-	public static int getProductionValue() {
+	public int getProductionValue() {
 		return production;
 	}
 	
-	public static String getFood() {
+	public String getFood() {
 		return ""+food+"/"+food_target +" "+(modifier[0] >= 0? "+"+modifier[0]:modifier[0]);
 	}
 
-	public static int getMapHeight() {
+	public int getMapHeight() {
 		return map.length;
 	}
 	
-	public static int getMapLength() {
+	public int getMapLength() {
 		return map[0].length;
 	}
 
-	public static List<ConstructableComponent> getPossibleActions(int x,int y){
+	public List<ConstructableComponent> getPossibleActions(int x,int y){
 		return map[y][x].getPossibleActions();
 	}
 	

@@ -12,38 +12,42 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 import mc322.jogo.model.board.BoardModel;
+import mc322.jogo.model.board.IBoardModelBuilder;
 import mc322.jogo.model.board.components.City;
 import mc322.jogo.model.board.components.Component;
 import mc322.jogo.model.board.components.ConstructableComponent;
 import mc322.jogo.view.board.AppView;
 
-public class CellController implements MouseListener{
+public class CellController implements IControllerCellView{
 
 	private int x;
 	private int y;
-	public CellController(int x, int y){
+	private BoardController controller;
+	public CellController(int x, int y,BoardController controller){
 		super();
 		this.x = x;
 		this.y = y;
+		this.controller = controller;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		IBoardModelBuilder board_model = controller.getBoardModel();
 		if(SwingUtilities.isRightMouseButton(e)) {	
 			JPopupMenu popup = new JPopupMenu();
-			if(!BoardModel.isClaimed(x, y)) {
+			if(!board_model.isClaimed(x, y)) {
 				JMenuItem menu_item = new JMenuItem("Adicionar");
 				menu_item.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e){ 
-						BoardModel.claim(x,y);
-						BoardController.updateStats();
+						board_model.claim(x,y);
+						controller.updateStats();
 					} 
 				});
 				popup.add(menu_item);
 			}
 			else {
-				List<ConstructableComponent> possible = BoardModel.getPossibleActions(x, y);
+				List<ConstructableComponent> possible = board_model.getPossibleActions(x, y);
 				if(possible.size() == 0){
 					JMenuItem menu_item = new JMenuItem("None");
 					popup.add(menu_item);
@@ -52,9 +56,9 @@ public class CellController implements MouseListener{
 					JMenuItem menu_item = new JMenuItem(comp.getClass().getSimpleName());
 					menu_item.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e){ 
-							BoardModel.constructComponent(comp,x,y);
-							BoardController.updateStats();
-							BoardController.updateCellColor(x,y);
+							board_model.constructComponent(comp,x,y);
+							controller.updateStats();
+							controller.updateCellColor(x,y);
 						} 
 					});
 					popup.add(menu_item);
@@ -65,8 +69,8 @@ public class CellController implements MouseListener{
 		    
 		}
 		else if(SwingUtilities.isLeftMouseButton(e)) {
-			String info_s = BoardModel.getCellInfo(x, y);
-			AppView.setInfo(info_s);
+			String info = board_model.getCellInfo(x, y);
+			controller.setInfo(info);
 		}
 		
 	}

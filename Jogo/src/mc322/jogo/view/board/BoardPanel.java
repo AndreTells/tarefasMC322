@@ -12,14 +12,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import mc322.jogo.controller.BoardController;
+import mc322.jogo.controller.IControllerBoardView;
+import mc322.jogo.controller.IControllerCellView;
 
-public class BoardPanel extends JPanel{
+public class BoardPanel extends JPanel implements IBoardViewController{
 	private static final long serialVersionUID = -7689849203267198502L;
 	private MapPanel map_panel;
-	private static JLabel population;
-	private static JLabel production;
-	private static JLabel food;
-	private static JTextArea  info;
+	private JLabel population;
+	private JLabel production;
+	private JLabel food;
+	private JTextArea  info;
+	private Button next_turn;
 	
 	public BoardPanel(int map_height, int map_length,int font_size){
 		super();
@@ -32,7 +35,9 @@ public class BoardPanel extends JPanel{
 		map_pane_c.gridheight = 5;
 		map_pane_c.weightx = 0.7;
 		map_pane_c.weighty = 1;
-		this.add(map_panel);
+		map_pane_c.fill = GridBagConstraints.BOTH;
+		
+		this.add(map_panel,map_pane_c);
 			
 		
 		GridBagConstraints stats_c = new GridBagConstraints();
@@ -70,32 +75,39 @@ public class BoardPanel extends JPanel{
 		this.add(info,stats_c);
 		
 		//botao de próximo turno
-		Button next_turn = new Button("proximo turno");
+		next_turn = new Button("proximo turno");
 		next_turn.setBackground(new Color(0,255,0));
 		stats_c.weighty = 0.2;
 		stats_c.gridy = 4;
-		next_turn.addActionListener(new BoardController());
 		this.add(next_turn,stats_c);
 	}
 
-	public static void setInfo(String info_s) {
+	
+	//set methods
+	public void setInfo(String info_s) {
 		info.setText(info_s);
 	}
-	public static void setPopulation(String population_i) {
+	public void setPopulation(String population_i) {
 		population.setText("Populacao: "+population_i);
 	}
-	public static void setProduction(String production_i) {
+	public void setProduction(String production_i) {
 		production.setText("Producao: "+production_i);
 	}
-	public static void setFood(String food_i) {
+	public void setFood(String food_i) {
 		food.setText("Comida: "+food_i);	
 	}
-	
 	public void setCellColor(Color color, int x,int y) {
 		this.map_panel.setCellColor(color,x,y);
-	}
-	
-	public static void setGameOver() {
+	}	
+	public void setGameOver() {
 		setInfo("GAME OVER");
+	}
+
+	public void setBoardController(IControllerBoardView controller) {
+		this.next_turn.addActionListener(controller);
+	}
+
+	public void setCellController(IControllerCellView controller,int x,int y) {
+		this.map_panel.setCellController(controller, x, y);
 	}
 }

@@ -6,10 +6,12 @@ import mc322.jogo.model.board.CellModel;
 public abstract class ConstructableComponent extends Component{
 	
 	public boolean construct() {
-		if(this.cost > BoardModel.getProductionValue()) {
+		BoardModel board = cell.getBoard();
+		if(this.cost > board.getProductionValue()) {
 			return false;
 		}
-		BoardModel.useProduction(cost);
+		board.useProduction(cost);
 		return true;
 	}
 }
+

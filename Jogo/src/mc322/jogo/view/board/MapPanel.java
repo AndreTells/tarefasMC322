@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
+import mc322.jogo.controller.IControllerCellView;
+
 public class MapPanel extends JPanel{
 	private static final long serialVersionUID = 3308892951178274255L;
 	private static CellView [][] map;
@@ -14,8 +16,8 @@ public class MapPanel extends JPanel{
 		super();
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		c.weightx=1;
-		c.weighty=1;
+		c.weightx = 1;
+		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
 		
 		map = new CellView[map_height][map_length];
@@ -35,5 +37,8 @@ public class MapPanel extends JPanel{
 
 	public void setCellColor(Color color, int x,int y) {
 		map[y][x].setBackground(color);
+	}
+	public void setCellController(IControllerCellView controller,int x,int y) {
+		map[y][x].addMouseListener(controller);
 	}
 }

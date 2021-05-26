@@ -9,7 +9,7 @@ public class CellView extends JButton{
 
 	public CellView(String string,int x, int y) {
 		super(string);
-		this.addMouseListener(new CellController(x,y));
+	//	this.addMouseListener(new CellController(x,y));
 		this.setBorderPainted(false);
 	}
 	
