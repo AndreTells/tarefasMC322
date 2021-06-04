@@ -17,6 +17,7 @@ public class BoardModel implements IBoardModelBuilder{
 	private int food_target;
 	private int modifier[];
 	private boolean game_over;
+	private int turn;
 	/*
 	 *modifier
 	 0-> food
@@ -26,6 +27,7 @@ public class BoardModel implements IBoardModelBuilder{
 	
 	public BoardModel() {
 		create(10,10);
+		turn = 0;
 		MapGenerator map_generator = new MapGenerator(this);
 		map_generator.generateRandomMap();
 	}
@@ -57,7 +59,7 @@ public class BoardModel implements IBoardModelBuilder{
 	}
 	
 	public  void constructComponent(ConstructableComponent comp,int x, int y) {
-		if(comp.construct()) {
+		if(comp.construct(this)) {
 			addComponent(comp,x,y);
 		}
 	}
@@ -90,7 +92,7 @@ public class BoardModel implements IBoardModelBuilder{
 			modifier[0] -=1;
 			food_target = (population*2) +3;
 		}
-		
+		turn+=1;
 	}
 	
 	public boolean checkLoseConditions() {

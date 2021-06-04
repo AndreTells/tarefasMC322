@@ -22,7 +22,7 @@ import mc322.jogo.controller.BoardController;
 
 //add(new JLabel("<html>Text color: <font color='red'>red</font></html>"));
 public class AppView implements IViewBuilder{
-	private static JFrame frame;
+	private JFrame frame;
 	private BoardPanel board_panel;
 	
 	public AppView(){

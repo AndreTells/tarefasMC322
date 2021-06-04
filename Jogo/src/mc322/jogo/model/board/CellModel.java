@@ -88,6 +88,7 @@ public class CellModel {
 			}
 			else {
 				this.addModifiers(comp.getModifier());
+				comp.setCell(this);
 			}
 		}		
 	}

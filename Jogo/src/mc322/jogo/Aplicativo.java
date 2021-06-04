@@ -2,6 +2,8 @@ package mc322.jogo;
 
 import mc322.jogo.controller.Builder;
 import mc322.jogo.model.board.BoardModel;
+import mc322.jogo.model.events.Event;
+import mc322.jogo.model.events.EventLoader;
 import mc322.jogo.view.board.AppView;
 
 public class Aplicativo {
@@ -10,5 +12,7 @@ public class Aplicativo {
 		BoardModel model = new BoardModel();
 		Builder builder = new Builder();
 		builder.buildGame(view, model, 10, 10);
+		
+
 	}
 }
