@@ -12,6 +12,7 @@ import jogo.view.glelements.ButtonListener;
 import jogo.view.glelements.IContainer;
 import jogo.view.glelements.Label;
 import jogo.view.glelements.RoundedRectangle;
+import jogo.view.glelements.SubMenu;
 
 public class UI implements KeyListener, IContainer{
 	
@@ -25,18 +26,26 @@ public class UI implements KeyListener, IContainer{
 	private Label food;
 	private Label info;
 	private Button next_turn;
+	private float transparency;
 
+	private SubMenu construct_menu;
 	
-	public UI(int font_size,float UI_size_x,float margin) {
+	public UI(int font_size,float UI_size_x,float margin,float transparency) {
 		this.active = true;
+		this.transparency = transparency;
 		
-		this.menu_backdrop = new RoundedRectangle(1f,UI_size_x,0.02f,1-(UI_size_x),0);
+		this.menu_backdrop = new RoundedRectangle(1f,UI_size_x,0.02f,1-(UI_size_x),0,new float[] {0.09f, 0.1f, 0.1f,transparency});
 		
-		this.population = new Label("population: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.05f),false);
-		this.production = new Label("production: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.18f),false);
-		this.food = new Label("food: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.31f),false);
-		this.info = new Label("info: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.44f),false);
-		this.next_turn = new Button("Next Turn",font_size,1-UI_size_x,-1+0.09f+margin,0.08f,UI_size_x-(margin),0.02f);
+		float[] white = new float[] {1,1,1,1};
+		
+		this.population = new Label("population: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.05f),white,false);
+		this.production = new Label("production: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.18f),white,false);
+		this.food = new Label("food: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.31f),white,false);
+		this.info = new Label("info: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.44f),white,false);
+		
+		this.next_turn = new Button("Next Turn",font_size,1-UI_size_x,-1+0.09f+margin,0.08f,UI_size_x-(margin),0.02f,new float[] {0.26f, 0.52f, 0.96f,transparency});
+	
+		this.construct_menu = null;
 	}
 	
 	public void setDims(int width,int height) {
@@ -56,12 +65,11 @@ public class UI implements KeyListener, IContainer{
 		return new int[] {width,height};
 	}
 	
-	public void draw(GL2 gl,float transparency) {
+	public void draw(GL2 gl) {
 		if(!active) {
 			return;
 		}
 		
-		gl.glColor4f(0.09f, 0.1f, 0.1f,transparency);
 		menu_backdrop.draw(gl);
 
 		
@@ -78,9 +86,14 @@ public class UI implements KeyListener, IContainer{
 		info.draw(gl);
 		
 		//button
-		gl.glColor4f(0.26f, 0.52f, 0.96f,transparency);
 		next_turn.setScreenDims(width, height);
 		next_turn.draw(gl);
+		
+		
+		if(construct_menu != null) {
+			construct_menu.setScreenDims(width, height);
+			construct_menu.draw(gl);
+		}
 		
 		
 	}
@@ -168,5 +181,15 @@ public class UI implements KeyListener, IContainer{
 	
 	public void setInfo(String info_text) {
 		this.info.setText(info_text);
+	}
+	
+	public SubMenu createSubMenu(float pos_x, float pos_y,String[] items) {
+		this.construct_menu = new SubMenu(pos_x,pos_y,new float[] {0.09f, 0.1f, 0.1f,transparency},this,items,transparency);
+		return construct_menu;
+	}
+	
+	
+	public void closeSubMenu() {
+		this.construct_menu = null;
 	}
 }

@@ -2,6 +2,7 @@ package jogo.view;
 
 import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
+import jogo.view.glelements.IActor;
 
 public interface IViewBuilder { 
 	public void setPopulation(String population_text);
@@ -19,4 +20,8 @@ public interface IViewBuilder {
 	public void updateDetectionBox(int i,int j);
 	
 	public void setInfo(String info_text);
+	
+	public void createSubMenu(int pos_x, int pos_y,String[] items,IActor actor,IActor[] menu_item_actors);
+
+	public void closeSubMenu();
 }

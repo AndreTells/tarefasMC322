@@ -5,6 +5,7 @@ import com.jogamp.opengl.GL2;
 public abstract class GLElement {
 	protected float pos_x;
 	protected float pos_y;
+	protected float[] color;
 	
 	protected GLElement(float pos_x,float pos_y) {
 		this.pos_x = pos_x;

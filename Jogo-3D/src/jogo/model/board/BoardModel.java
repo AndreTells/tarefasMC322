@@ -3,9 +3,12 @@ package jogo.model.board;
 import java.awt.Color;
 import java.util.List;
 
+import jogo.model.board.components.City;
 import jogo.model.board.components.Component;
 import jogo.model.board.components.ConstructCostEnum;
 import jogo.model.board.components.ConstructableComponent;
+import jogo.model.board.components.Farm;
+import jogo.model.board.components.LumberMill;
 import jogo.model.board.mapgenerator.MapGenerator;
 
 public class BoardModel implements IBoardModelBuilder{
@@ -58,7 +61,22 @@ public class BoardModel implements IBoardModelBuilder{
 		
 	}
 	
-	public  void constructComponent(ConstructableComponent comp,int x, int y) {
+	public  void constructComponent(String comp_name,int x, int y) {
+		//trhow exeption
+		ConstructableComponent comp = null;
+		if(comp_name.equals("City")) {
+			comp = new City();
+		}
+		else if(comp_name.equals("Farm")) {
+			comp = new Farm();
+		}
+		else if(comp_name.equals("LumberMill")) {
+			comp = new LumberMill();
+		}
+		else{
+			return;
+		}
+		
 		if(comp.construct(this)) {
 			addComponent(comp,x,y);
 		}
@@ -160,7 +178,7 @@ public class BoardModel implements IBoardModelBuilder{
 		return map[0].length;
 	}
 
-	public List<ConstructableComponent> getPossibleActions(int x,int y){
+	public List<String> getPossibleActions(int x,int y){
 		return map[y][x].getPossibleActions();
 	}
 	

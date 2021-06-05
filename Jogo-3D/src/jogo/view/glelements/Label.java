@@ -13,12 +13,14 @@ public class Label extends GLElement{
 	private int height;
 	private boolean center;
 	
-	public Label(String string,int font_size,float pos_x,float pos_y,boolean center) {
+	public Label(String string,int font_size,float pos_x,float pos_y,float[] color,boolean center) {
 		super(pos_x,pos_y);
 		this.string = string.split("\n");
 		this.center = center;
 		this.font_size = font_size;
+		this.color = color;
 		
+		System.out.println("font "+font_size);
 	}
 	
 	public void setText(String string) {
@@ -33,7 +35,7 @@ public class Label extends GLElement{
 	public void draw(GL2 gl) {
 		
 		TextRenderer renderer = new TextRenderer(new Font("Calibri", Font.BOLD, font_size));
-		renderer.setColor(1f,1f,1f,1f);
+		renderer.setColor(color[0],color[1],color[2],color[3]);
 		renderer.setSmoothing(true);
 		
 		//translating [-1,1] position to [0,width] and [0,height]

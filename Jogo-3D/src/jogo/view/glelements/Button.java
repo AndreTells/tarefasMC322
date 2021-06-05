@@ -8,10 +8,10 @@ public class Button extends GLElement{
 	private int container_width;
 	private int container_height;
 	
-	public Button(String text,int font_size,float pos_x,float pos_y,float height,float width,float radius) {
+	public Button(String text,int font_size,float pos_x,float pos_y,float height,float width,float radius,float[] color) {
 		super(pos_x,pos_y);
-		this.button_backdrop = new RoundedRectangle(height,width,radius,pos_x,pos_y);
-		this.button_text = new Label(text,font_size,pos_x,pos_y,true);
+		this.button_backdrop = new RoundedRectangle(height,width,radius,pos_x,pos_y,color);
+		this.button_text = new Label(text,font_size,pos_x,pos_y,new float[] {1f,1f,1f,1f},true);
 	}
 	
 	public void setScreenDims(int container_width,int container_height) {

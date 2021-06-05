@@ -16,7 +16,13 @@ public class NextTurnController implements IActor{
 	}
 	
 	public void act(MouseEvent e) {
-		System.out.println("next turn");	
+		if(!model.gameOver()) {
+			model.calculateStats();
+			updateStats();
+			if(model.checkLoseConditions()) {
+				view.setInfo("GAME OVER");
+			}
+		}
 	}
 	
 	protected void updataMap() {
@@ -35,6 +41,14 @@ public class NextTurnController implements IActor{
 		view.setPopulation(model.getPopulation());
 		view.setProduction(model.getProduction());
 		view.setFood(model.getFood());
+	}
+
+	@Override
+	public void act(MouseEvent e, boolean missed) {
+		if(!missed) {
+			act(e);
+		}
+		
 	}
 	
 }

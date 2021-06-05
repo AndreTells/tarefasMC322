@@ -7,16 +7,18 @@ public class RoundedRectangle extends GLElement{
 	private float width;
 	private float radius;
 	
-	public RoundedRectangle(float height,float width,float radius,float pos_x, float pos_y) {
+	public RoundedRectangle(float height,float width,float radius,float pos_x, float pos_y,float[] color) {
 		super(pos_x,pos_y);
 		this.height = height;
 		this.width = width;
 		this.radius = radius;
+		this.color = color;
 	}
 	
 	public void draw(GL2 gl) {
 		gl.glPushMatrix();
 		gl.glTranslatef(pos_x, pos_y, 0);
+		gl.glColor4f(color[0], color[1], color[2], color[3]);
 		
 		gl.glBegin(GL2.GL_TRIANGLE_FAN);
 		
@@ -43,8 +45,8 @@ public class RoundedRectangle extends GLElement{
 		gl.glEnd();
 		
 		
-		float start_angle = 0;
-		float end_angle = (float) Math.PI/2;
+		double start_angle = 0;
+		double end_angle = (float) Math.PI/2;
 		float[] side_x = new float[] {1,-1,-1, 1};
 		float[] side_y = new float[] {1, 1,-1,-1};
 		
@@ -52,7 +54,7 @@ public class RoundedRectangle extends GLElement{
 			gl.glBegin(GL2.GL_TRIANGLE_FAN);
 			
 			gl.glVertex2f(side_x[i]*(width-radius), side_y[i]*(height-radius));
-			for(float j=start_angle;j<=end_angle;j+=Math.PI/60) {
+			for(double j=start_angle;j<=end_angle;j+=Math.PI/60) {
 				gl.glVertex2f( side_x[i]*(width-radius)+(radius*((float)Math.cos(j))),side_y[i]*(height-radius)+(radius*((float)Math.sin(j))));
 			}
 			gl.glEnd();

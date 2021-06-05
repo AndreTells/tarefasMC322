@@ -17,6 +17,11 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
+import jogo.view.glelements.Button;
+import jogo.view.glelements.ButtonListener;
+import jogo.view.glelements.IActor;
+import jogo.view.glelements.SubMenu;
+import jogo.view.glelements.SubMenuListener;
 
 
 public class GameView implements GLEventListener,IViewBuilder {  
@@ -39,7 +44,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 		
 	   setUpCellMatrix();
 	   
-	   this.ui = new UI(14,0.2f,0.01f);
+	   this.ui = new UI(14,0.2f,0.01f,0.95f);
 	   	
 	   ui.setDims(gc.getWidth(), gc.getHeight());
 	   	
@@ -147,7 +152,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 
 	   //draw 2d objects
 	   
-	   ui.draw(gl, 0.95f);
+	   ui.draw(gl);
 
 	   // Making sure we can render 3d again
 	   gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -245,5 +250,19 @@ public class GameView implements GLEventListener,IViewBuilder {
 
 	public void setInfo(String info_text) {
 		ui.setInfo(info_text);
+	}
+
+	public void createSubMenu(int pos_x, int pos_y,String[] items,IActor actor,IActor[] menu_item_actors) {
+		SubMenu menu = ui.createSubMenu( (((float)pos_x*2.0f)/gc.getWidth()) -1.0f, (((float)pos_y*2.0f)/gc.getHeight()) -1.0f, items);
+		SubMenuListener menu_listener = new SubMenuListener(actor,menu,ui);
+		Button[] menu_item = menu.getMenuItems();
+		for(int i=0;i<menu_item.length;i++) {
+			gc.addMouseListener(new ButtonListener(menu_item[i],ui,menu_item_actors[i]));
+		}
+		gc.addMouseListener(menu_listener);
+	}
+
+	public void closeSubMenu() {
+		ui.closeSubMenu();
 	}
 }

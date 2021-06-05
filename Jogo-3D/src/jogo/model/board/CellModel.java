@@ -143,17 +143,17 @@ public class CellModel {
 		return false;
 	}
 
-	public List<ConstructableComponent> getPossibleActions(){
-		List<ConstructableComponent> result = new LinkedList<ConstructableComponent>();
+	public List<String> getPossibleActions(){
+		List<String> result = new LinkedList<String>();
 		
 		if(City.isConstructalbe(this)) {
-			result.add(new City());
+			result.add(City.class.getSimpleName());
 		}
 		if(LumberMill.isConstructalbe(this)) {
-			result.add(new LumberMill());
+			result.add(LumberMill.class.getSimpleName());
 		}
 		if(Farm.isConstructalbe(this)) {
-			result.add(new Farm());
+			result.add(Farm.class.getSimpleName());
 		}
 		
 		return result;
