@@ -12,4 +12,7 @@ public class GameFrame extends JFrame {
 	
 	   	game_view = new GameView(this);
 	}
+	public GameView getView() {
+		return game_view;
+	}
 }

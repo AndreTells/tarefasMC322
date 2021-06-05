@@ -44,8 +44,8 @@ public class UI implements KeyListener, IContainer{
 		this.height = height;
 	}
 	
-	public void setNextTurnListener(GLCanvas gc) {
-		gc.addMouseListener(new ButtonListener( next_turn,this,new NextTurnController() ));
+	public void setNextTurnListener(GLCanvas gc,NextTurnController controller) {
+		gc.addMouseListener(new ButtonListener( next_turn,this,controller ));
 	}
 	
 	public boolean isActive() {
@@ -152,4 +152,21 @@ public class UI implements KeyListener, IContainer{
 		
 	}
 
+	//----------- setter methods 
+	
+	public void setPopulation(String population_text) {
+		population.setText(population_text);
+	}
+	
+	public void setProduction(String production_text) {
+		production.setText(production_text);
+	}
+	
+	public void setFood(String food_text) {
+		food.setText(food_text);
+	}
+	
+	public void setInfo(String info_text) {
+		this.info.setText(info_text);
+	}
 }

@@ -21,6 +21,10 @@ public class Label extends GLElement{
 		
 	}
 	
+	public void setText(String string) {
+		this.string = string.split("\n");
+	}
+	
 	public void setScreenDims(int width,int height) {
 		this.width = width;
 		this.height = height;

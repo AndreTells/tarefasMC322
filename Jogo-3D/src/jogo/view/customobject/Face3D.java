@@ -6,12 +6,12 @@ import java.nio.FloatBuffer;
 import com.jogamp.opengl.GL2;
 
 public class Face3D {
-	private Vec3D vec_1;
-	private Vec3D vec_2;
-	private Vec3D vec_3;
+	private float[] vec_1;
+	private float[] vec_2;
+	private float[] vec_3;
 	private Color color;
-	private Vec3D normal;
-	public Face3D(Vec3D vec_1,Vec3D vec_2,Vec3D vec_3,Color color,Vec3D normal) {
+	private float[] normal;
+	public Face3D(float[] vec_1,float[] vec_2,float[] vec_3,Color color,float[] normal) {
 		this.vec_1 = vec_1;
 		this.vec_2 = vec_2;
 		this.vec_3 = vec_3;
@@ -20,12 +20,14 @@ public class Face3D {
 	}
 	public void addGL(GL2 gl) {
 		gl.glBegin(GL2.GL_TRIANGLES);
-	//	FloatBuffer buff_color = FloatBuffer.wrap(new float[] {color.getRed()/256f, color.getBlue()/256f, color.getBlue()/256f}); creates a float buffer
-		gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, FloatBuffer.wrap(new float[] {color.getRed()/256f, color.getBlue()/256f, color.getBlue()/256f,1f}) );
-		gl.glNormal3f(normal.x, normal.y, normal.z);
-		vec_1.addGL(gl);
-		vec_2.addGL(gl);
-		vec_3.addGL(gl);
+		gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, FloatBuffer.wrap(new float[] {color.getRed()/256f, color.getGreen()/256f, color.getBlue()/256f,1f}) );
+		gl.glNormal3f(normal[0], normal[1], normal[2]);
+		
+		gl.glVertex3f(vec_1[0], vec_1[1], vec_1[2]);
+		gl.glVertex3f(vec_2[0], vec_2[1], vec_2[2]);
+		gl.glVertex3f(vec_3[0], vec_3[1], vec_3[2]);
+		
+		gl.glEnd();
 	}
 	
 	public String toString() {

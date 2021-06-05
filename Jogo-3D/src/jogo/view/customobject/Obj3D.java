@@ -17,8 +17,8 @@ import com.jogamp.opengl.math.Matrix4;
 
 public class Obj3D {
 	private List<Face3D> faces;
-	private Vec3D aabb_min;
-	private Vec3D aabb_max;
+	private float[] aabb_min;
+	private float[] aabb_max;
 	private String name;
 	private String path;
 	
@@ -29,7 +29,7 @@ public class Obj3D {
 		getObj();
 	}
 	
-	private List<Vec3D> getVectors(BufferedReader file){
+	private List<float[]> getVectors(BufferedReader file){
 		try {
 			float x_min = Float.MAX_VALUE;
 			float y_min = Float.MAX_VALUE;
@@ -38,36 +38,57 @@ public class Obj3D {
 			float x_max = Float.MIN_VALUE;
 			float y_max = Float.MIN_VALUE;
 			float z_max = Float.MIN_VALUE;
-			List<Vec3D> vectors =  new LinkedList<Vec3D>();
+			List<float[]> vectors =  new LinkedList<float[]>();
 			String line = file.readLine();
 			while(!line.equals("")) {
 				String vertex_s[] = line.split(" ");
-				Vec3D vector =new Vec3D(Float.parseFloat(vertex_s[1]),Float.parseFloat(vertex_s[2]),Float.parseFloat(vertex_s[3])); 
+				float[] vector =new float[] {Float.parseFloat(vertex_s[1]),Float.parseFloat(vertex_s[2]),Float.parseFloat(vertex_s[3])}; 
 				vectors.add(vector);
-				if(vector.x < x_min) {
-					x_min = vector.x;
+				if(vector[0] < x_min) {
+					x_min = vector[0];
 				}
-				else if(vector.x >x_max) {
-					x_max = vector.x;
-				}
-				
-				if(vector.y < y_min) {
-					y_min = vector.y;
-				}
-				else if(vector.y >y_max) {
-					y_max = vector.y;
+				else if(vector[0] >x_max) {
+					x_max = vector[0];
 				}
 				
-				if(vector.z < z_min) {
-					z_min = vector.z;
+				if(vector[1] < y_min) {
+					y_min = vector[1];
 				}
-				else if(vector.z >z_max) {
-					z_max = vector.z;
+				else if(vector[1] >y_max) {
+					y_max = vector[1];
+				}
+				
+				if(vector[2] < z_min) {
+					z_min = vector[2];
+				}
+				else if(vector[2] >z_max) {
+					z_max = vector[2];
 				}
 				line = file.readLine();
 			}
-			this.aabb_max = new Vec3D(x_max,y_max,z_max);
-			this.aabb_min = new Vec3D(x_min,y_min,z_min);
+			this.aabb_max = new float[] {x_max,y_max,z_max};
+			this.aabb_min = new float[] {x_min,y_min,z_min};
+			
+			return vectors;
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	private List<float[]> getNormals(BufferedReader file){
+		try {
+			List<float[]> vectors =  new LinkedList<float[]>();
+			String line = file.readLine();
+			while(!line.equals("")) {
+				String vertex_s[] = line.split(" ");
+				float[] vector =new float[] {Float.parseFloat(vertex_s[1]),Float.parseFloat(vertex_s[2]),Float.parseFloat(vertex_s[3])}; 
+				vectors.add(vector);
+				line = file.readLine();
+			}
 			
 			return vectors;
 		} 
@@ -92,6 +113,7 @@ public class Obj3D {
 				int  red = (color_int & 0x00ff0000) >> 16;
 		   		int  green = (color_int & 0x0000ff00) >> 8;
 		   		int  blue = color_int & 0x000000ff;
+		   		
 		   		colors.add(new Color(red,green,blue));
 				line = file.readLine();
 			}
@@ -105,12 +127,12 @@ public class Obj3D {
 		
 	}
 	
-	private void getFaces(List<Vec3D> vertices,List<Vec3D> normals, List<Color> colors,BufferedReader file) {
+	private void getFaces(List<float[]> vertices,List<float[]> normals, List<Color> colors,BufferedReader file) {
 		try {
 			String line = file.readLine();
 			while(line!=null) {
 				String faces_s[] = line.split(" ");
-				Vec3D[] face_vertices = new Vec3D[3];
+				float[][] face_vertices = new float[3][3];
 				int color_index = 0;
 				int normal_index = 0;
 				for(int i=1;i<4;i++) {
@@ -121,7 +143,7 @@ public class Obj3D {
 					normal_index = Integer.parseInt(vertex_s[2]);
 				}
 				Color color = colors.get(color_index-1);
-				Vec3D normal = normals.get(normal_index-1);
+				float[] normal = normals.get(normal_index-1);
 				//System.out.println(color);
 				//System.out.println(color.getRed()/256f+" "+color.getGreen()/256f+" "+color.getBlue()/256f);
 				faces.add(new Face3D(face_vertices[0],face_vertices[1],face_vertices[2],color,normal));
@@ -143,14 +165,16 @@ public class Obj3D {
 			while(!line.equals("# normals")) {
 				line = file.readLine();
 			}
-			List<Vec3D> normals = getVectors(file);//#normals
+			List<float[]> normals = getNormals(file);//#normals
 			line = file.readLine();//skip an empty line
+			
 			List<Color> colors = getColors(file);//#texcoords
+			
 			line = file.readLine();//skip an empty line
-			List<Vec3D> vertices = getVectors(file);//#verts
+			List<float[]> vertices = getVectors(file);//#verts
+			
 			line = file.readLine();//skip an empty line
 			getFaces(vertices,normals,colors,file);//#faces;
-			
 			
 			file.close();
 		} catch (IOException erro) {
@@ -161,8 +185,7 @@ public class Obj3D {
 	private double roundToHalf(double d) {
 	    return Math.round(d * 2) / 2.0;
 	}
-      
-
+    
 	public void addGL(GL2 gl) {
 		for(Face3D face:faces) {
 			face.addGL(gl);
@@ -176,10 +199,10 @@ public class Obj3D {
 	}
 	
 	public float[] getAabbMin() {
-		return new float[] {aabb_min.x,aabb_min.y,aabb_min.z};
+		return new float[] {aabb_min[0],aabb_min[1],aabb_min[2]};
 	}
 	
 	public float[] getAabbMax() {
-		return new float[] {aabb_max.x,aabb_max.y,aabb_max.z};
+		return new float[] {aabb_max[0],aabb_max[1],aabb_max[2]};
 	}
 }

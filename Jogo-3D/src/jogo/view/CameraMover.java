@@ -17,7 +17,7 @@ public class CameraMover implements MouseMotionListener {
 		this.old_mouse_y = e.getY();
 	}
 	public void mouseDragged(MouseEvent e) {
-		camera.move( new float[] {(old_mouse_x-e.getX())/200 , 0,  (old_mouse_y-e.getY())/200});
+		camera.move( new float[] {(old_mouse_x-e.getX())/50 , 0,  (old_mouse_y-e.getY())/50});
 		this.old_mouse_x = e.getX();
 		this.old_mouse_y = e.getY();
 	}
