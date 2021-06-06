@@ -190,6 +190,7 @@ public class UI implements KeyListener, IContainer{
 	
 	
 	public void closeSubMenu() {
+		construct_menu.close();
 		this.construct_menu = null;
 	}
 }

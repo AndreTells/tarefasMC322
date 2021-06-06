@@ -21,7 +21,7 @@ public class SubMenu extends GLElement{
 		menu_items = new Button[button_texts.length];
 		
 		float btn_height = 0.04f;
-		float menu_height = ((btn_height*2 + 0.01f)*button_texts.length);
+		float menu_height = ((btn_height + 0.01f)*button_texts.length+ 0.035f);
 		float radius = 0.02f;
 		float menu_width = 0.12f;
 		
@@ -30,7 +30,7 @@ public class SubMenu extends GLElement{
 					button_texts[i]
 					,14
 					,pos_x
-					,pos_y+(menu_height/2.0f  +0.01f)-(btn_height*2 + 0.01f)*i - 0.02f
+					,pos_y+(menu_height/2.0f  +0.01f)-(btn_height*2 + 0.01f)*i - 0.035f
 					,btn_height
 					,menu_width-0.01f
 					,radius
@@ -62,12 +62,10 @@ public class SubMenu extends GLElement{
 	}
 	
 	public void close() {
-		ui.closeSubMenu();
 	}
 	
 	public int[] getDims(int container_width,int container_height) {
 		return backdrop.getDims(container_width, container_height);
 	}
 
-	
 }

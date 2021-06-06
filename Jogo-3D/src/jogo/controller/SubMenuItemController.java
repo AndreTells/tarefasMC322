@@ -21,6 +21,8 @@ public class SubMenuItemController implements IActor{
 	public void act(MouseEvent e) {
 		if(command.equals("Claim")) {
 			controller.model.claim(map_x, map_y);
+
+			controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
 			controller.updateStats();
 			return;
 		}
@@ -28,6 +30,7 @@ public class SubMenuItemController implements IActor{
 			return;
 		}
 		controller.model.constructComponent(command, map_x, map_y);
+		controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
 		controller.updateStats();
 		controller.updataMap();
 	}

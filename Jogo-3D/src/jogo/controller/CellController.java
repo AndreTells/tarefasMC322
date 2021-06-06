@@ -18,12 +18,8 @@ public class CellController implements IActor{
 	@Override
 	public void act(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(map_x+" "+map_y);
-		if(e.getButton() == e.BUTTON1) {
-			controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
-		}
-		
-		else if(e.getButton() == e.BUTTON3) {
+		controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
+		if(e.getButton() == MouseEvent.BUTTON3) {
 			if(!controller.model.isClaimed(map_x, map_y)) {
 				controller.view.createSubMenu(e.getX()+40,
 						e.getComponent().getHeight() -  e.getY()-20,

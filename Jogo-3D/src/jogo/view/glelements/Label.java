@@ -19,8 +19,6 @@ public class Label extends GLElement{
 		this.center = center;
 		this.font_size = font_size;
 		this.color = color;
-		
-		System.out.println("font "+font_size);
 	}
 	
 	public void setText(String string) {

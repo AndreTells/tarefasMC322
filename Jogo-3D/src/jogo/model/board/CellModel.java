@@ -75,6 +75,7 @@ public class CellModel {
 		info+="\nHousing:"+modifier[2];
 		info+="\nProduction:"+modifier[1];
 		info+="\nFood:"+modifier[0];
+		info+="\nClaimed:"+this.claimed;
 		return info;
 	}
 	

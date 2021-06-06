@@ -64,6 +64,7 @@ public class BoardModel implements IBoardModelBuilder{
 	public  void constructComponent(String comp_name,int x, int y) {
 		//trhow exeption
 		ConstructableComponent comp = null;
+		System.out.println(comp_name);
 		if(comp_name.equals("City")) {
 			comp = new City();
 		}
@@ -87,12 +88,16 @@ public class BoardModel implements IBoardModelBuilder{
 		for(int i=0;i<modifier.length;i++) {
 			modifier[i] += external_modifier[i];
 		}
+
+		System.out.println(modifier[0]+" "+modifier[1]+" "+modifier[2]);
 	}
 	
 	public void removeModifiers(int external_modifier[]) {
 		for(int i=0;i<modifier.length;i++) {
+			
 			modifier[i] -= external_modifier[i];
 		}
+		System.out.println(modifier[0]+" "+modifier[1]+" "+modifier[2]);
 	}
 	
 	public boolean hasComponent(Class<?> cls, int x, int y) {

@@ -219,15 +219,15 @@ public class GameView implements GLEventListener,IViewBuilder {
 	//----------- setter methods
 	
 	public void setPopulation(String population) {
-		ui.setPopulation(population);
+		ui.setPopulation("population: "+population);
 	}
 	
 	public void setProduction(String production) {
-		ui.setProduction(production);
+		ui.setProduction("production: "+production);
 	}
 	
 	public void setFood(String food) {
-		ui.setFood(food);
+		ui.setFood("food: "+food);
 	}
 	
 	public void setNextTurnController(NextTurnController controller) {
@@ -249,7 +249,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 	}
 
 	public void setInfo(String info_text) {
-		ui.setInfo(info_text);
+		ui.setInfo("cell info: \n"+info_text);
 	}
 
 	public void createSubMenu(int pos_x, int pos_y,String[] items,IActor actor,IActor[] menu_item_actors) {

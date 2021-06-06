@@ -6,7 +6,7 @@ public class City extends ConstructableComponent {
 	public City () {
 		this.rank = 3;
 		this.cost = ConstructCostEnum.CITY.getCost();
-		this.setModifier(0, 5,1);
+		this.setModifier(-2, 5,1);
 	}
 	
 	
