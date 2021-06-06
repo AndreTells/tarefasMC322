@@ -1,4 +1,4 @@
-package jogo.view.glelements;
+package jogo.view;
 
 import java.awt.event.MouseEvent;
 

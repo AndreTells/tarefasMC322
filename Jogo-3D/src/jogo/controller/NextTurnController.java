@@ -3,8 +3,8 @@ package jogo.controller;
 import java.awt.event.MouseEvent;
 
 import jogo.model.board.IBoardModelBuilder;
+import jogo.view.IActor;
 import jogo.view.IViewBuilder;
-import jogo.view.glelements.IActor;
 
 public class NextTurnController implements IActor{
 	IBoardModelBuilder model;

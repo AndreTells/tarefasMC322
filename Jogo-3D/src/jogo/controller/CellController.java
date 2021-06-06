@@ -3,7 +3,7 @@ package jogo.controller;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import jogo.view.glelements.IActor;
+import jogo.view.IActor;
 
 public class CellController implements IActor{
 	private int map_x;

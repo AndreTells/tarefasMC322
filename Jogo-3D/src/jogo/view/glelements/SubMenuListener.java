@@ -3,6 +3,8 @@ package jogo.view.glelements;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import jogo.view.IActor;
+
 public class SubMenuListener implements MouseListener{
 	private IContainer ui;
 	private SubMenu menu;

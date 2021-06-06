@@ -8,8 +8,6 @@ import java.util.List;
 import com.jogamp.opengl.math.Matrix4;
 import com.jogamp.opengl.math.VectorUtil;
 
-import jogo.view.glelements.IActor;
-
 public class RayPicker implements MouseListener{
 	private float[][][] aabb_mins;
 	private float[][][] aabb_maxs;

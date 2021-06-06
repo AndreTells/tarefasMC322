@@ -2,7 +2,6 @@ package jogo.view;
 
 import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
-import jogo.view.glelements.IActor;
 
 public interface IViewBuilder { 
 	public void setPopulation(String population_text);

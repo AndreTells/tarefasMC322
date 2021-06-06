@@ -19,7 +19,6 @@ import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
 import jogo.view.glelements.Button;
 import jogo.view.glelements.ButtonListener;
-import jogo.view.glelements.IActor;
 import jogo.view.glelements.SubMenu;
 import jogo.view.glelements.SubMenuListener;
 

@@ -2,8 +2,8 @@ package jogo.controller;
 
 import java.awt.event.MouseEvent;
 
+import jogo.view.IActor;
 import jogo.view.IViewBuilder;
-import jogo.view.glelements.IActor;
 
 public class SubMenuController implements IActor{
 	private IViewBuilder view;

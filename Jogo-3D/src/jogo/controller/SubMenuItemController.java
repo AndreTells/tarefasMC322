@@ -2,7 +2,7 @@ package jogo.controller;
 
 import java.awt.event.MouseEvent;
 
-import jogo.view.glelements.IActor;
+import jogo.view.IActor;
 
 public class SubMenuItemController implements IActor{
 	private NextTurnController controller;

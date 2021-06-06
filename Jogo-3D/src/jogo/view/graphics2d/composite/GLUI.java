@@ -1,28 +1,35 @@
-package jogo.view.graphics2d;
+package jogo.view.graphics2d.composite;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class UI implements IComposite2DGraphics{
+import jogo.view.graphics2d.GLElement;
+import jogo.view.graphics2d.IComponent2DGraphics;
+import jogo.view.graphics2d.IComposite2DGraphics;
+import jogo.view.graphics2d.ILeaf2DGraphics;
+
+public class GLUI extends GLElement implements IComposite2DGraphics{
 	private float pos_x;
 	private float pos_y;
+		
+	private List<ILeaf2DGraphics> children_leaf;
+	private List<IComposite2DGraphics> children_composite;
+
+	private String id;
+	private IComposite2DGraphics parent;
 	
 	private float width;
 	private float height;
 	
-	private List<ILeaf2DGraphics> children_leaf;
-	private List<IComposite2DGraphics> children_composite;
-	private String id;
-
-	private IComposite2DGraphics parent;
-	
-	public UI(float height,float width,String id) {
+	public GLUI(String id,float height,float width) {
 		this.setPosition(0,0);
 		this.setDims(height, width);
 		this.id = id;
 		this.parent = null;
 		this.children_leaf = new LinkedList<ILeaf2DGraphics>();
 		this.children_composite = new LinkedList<IComposite2DGraphics>();
+		
+		
 	}
 
 	public void setPosition(float pos_x, float pos_y) {

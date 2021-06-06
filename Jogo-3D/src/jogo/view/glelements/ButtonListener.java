@@ -2,6 +2,8 @@ package jogo.view.glelements;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import jogo.view.IActor;
+
 public class ButtonListener implements MouseListener{
 	private Button btn;
 	private IContainer ui;
