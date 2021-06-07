@@ -2,7 +2,7 @@ package jogo.view;
 
 import com.jogamp.opengl.GL2;
 
-import jogo.view.customobject.Obj3D;
+import jogo.view.glelements.graphics3d.customobject.Obj3D;
 
 public class CellView implements ICellViewController{
 	private float pos[];

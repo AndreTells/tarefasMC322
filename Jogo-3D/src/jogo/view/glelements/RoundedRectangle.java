@@ -1,4 +1,4 @@
-package jogo.view.glelements;
+ package jogo.view.glelements;
 
 import com.jogamp.opengl.GL2;
 

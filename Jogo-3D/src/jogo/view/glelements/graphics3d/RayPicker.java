@@ -1,4 +1,4 @@
-package jogo.view;
+package jogo.view.glelements.graphics3d;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.jogamp.opengl.math.Matrix4;
 import com.jogamp.opengl.math.VectorUtil;
+
+import jogo.view.IActor;
 
 public class RayPicker implements MouseListener{
 	private float[][][] aabb_mins;
@@ -18,7 +20,7 @@ public class RayPicker implements MouseListener{
 	private float[] eye;
 	//camera
 	
-	RayPicker(int map_size){
+	public RayPicker(int map_size){
 		this.eye = new float[]{0,0,0};
 		aabb_mins = new float[map_size][map_size][3];
 		aabb_maxs = new float[map_size][map_size][3];

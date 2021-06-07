@@ -1,4 +1,4 @@
-package jogo.view;
+package jogo.view.glelements.graphics3d;
 
 import com.jogamp.opengl.math.VectorUtil;
 

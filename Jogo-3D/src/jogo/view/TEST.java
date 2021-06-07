@@ -14,19 +14,20 @@ import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.math.Matrix4;
 import com.jogamp.opengl.math.VectorUtil;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.gl2.GLUT;
 
 import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
-import jogo.view.glelements.Button;
-import jogo.view.glelements.ButtonListener;
-import jogo.view.glelements.SubMenu;
-import jogo.view.glelements.SubMenuListener;
+import jogo.view.glelements.GLMouse;
+import jogo.view.glelements.graphics2d.GLElement;
+import jogo.view.glelements.graphics2d.composite.GLUI;
+import jogo.view.glelements.graphics2d.leaf.GLLabel;
+import jogo.view.glelements.graphics2d.leaf.GLRectangle;
 import jogo.view.glelements.graphics3d.Camera;
 import jogo.view.glelements.graphics3d.CameraMover;
 import jogo.view.glelements.graphics3d.RayPicker;
 
-
-public class GameView implements GLEventListener,IViewBuilder {  
+public class TEST implements GLEventListener,IViewBuilder{
 	private GLU glu = new GLU();
 	private GLCanvas gc;
 	
@@ -35,9 +36,9 @@ public class GameView implements GLEventListener,IViewBuilder {
 	
 	private CellView[][] cells;
 	private final int map_size = 10;
-	private UI ui;
+	private GLUI ui;
 	
-	public GameView(JFrame frame){
+	public TEST(JFrame frame){
 		GameModels.loadModels();
 		
 		this.setUpCanvas(frame.getWidth(), frame.getHeight());
@@ -46,21 +47,29 @@ public class GameView implements GLEventListener,IViewBuilder {
 		
 	   setUpCellMatrix();
 	   
-	   this.ui = new UI(14,0.2f,0.01f,0.95f);
-	   	
-	   ui.setDims(gc.getWidth(), gc.getHeight());
-	   	
+	   GLMouse mouse = new GLMouse(gc);
+	   GLElement.setMouse(mouse);
+	   
+	   this.ui = new GLUI("ui",frame.getHeight(),frame.getWidth());
+	      
+	   GLLabel l = new GLLabel("l",this.ui,0.99f,0,"yay",new float[] {1,1,1,1});
+	   GLLabel b = new GLLabel("b",this.ui,-1f,0,"yay1\nbbbb",new float[] {0,0,0,1});
+	   b.setActionObserver(new TestActor());
+
+	   GLRectangle rect = new GLRectangle("rect",ui,
+			   								0,0,
+			   								0.1f,0.1f,
+			   								0.02f,new float[] {1,1,1,1});
+	   
 	   gc.addGLEventListener( this );  
 	   	
 	   CameraMover mover = new CameraMover(camera);
 	   gc.addMouseMotionListener(mover);
 		
-	   gc.addKeyListener(ui);
 	   
 	   this.setUpPicker();
 	   
 	   gc.addMouseListener(picker);
-	   
 	   
 	   frame.add(gc);
 	   frame.setVisible(true);
@@ -155,6 +164,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 	   //draw 2d objects
 	   
 	   ui.draw(gl);
+	  
 
 	   // Making sure we can render 3d again
 	   gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -221,19 +231,19 @@ public class GameView implements GLEventListener,IViewBuilder {
 	//----------- setter methods
 	
 	public void setPopulation(String population) {
-		ui.setPopulation("population: "+population);
+		//ui.setPopulation("population: "+population);
 	}
 	
 	public void setProduction(String production) {
-		ui.setProduction("production: "+production);
+		//ui.setProduction("production: "+production);
 	}
 	
 	public void setFood(String food) {
-		ui.setFood("food: "+food);
+		//ui.setFood("food: "+food);
 	}
 	
 	public void setNextTurnController(NextTurnController controller) {
-		ui.setNextTurnListener(gc,controller);
+		//ui.setNextTurnListener(gc,controller);
 	}
 	
 	public ICellViewController getCell(int i,int j) {
@@ -251,20 +261,21 @@ public class GameView implements GLEventListener,IViewBuilder {
 	}
 
 	public void setInfo(String info_text) {
-		ui.setInfo("cell info: \n"+info_text);
+		//ui.setInfo("cell info: \n"+info_text);
 	}
 
 	public void createSubMenu(int pos_x, int pos_y,String[] items,IActor actor,IActor[] menu_item_actors) {
+		/*
 		SubMenu menu = ui.createSubMenu( (((float)pos_x*2.0f)/gc.getWidth()) -1.0f, (((float)pos_y*2.0f)/gc.getHeight()) -1.0f, items);
 		SubMenuListener menu_listener = new SubMenuListener(actor,menu,ui);
 		Button[] menu_item = menu.getMenuItems();
 		for(int i=0;i<menu_item.length;i++) {
 			gc.addMouseListener(new ButtonListener(menu_item[i],ui,menu_item_actors[i]));
 		}
-		gc.addMouseListener(menu_listener);
+		gc.addMouseListener(menu_listener);*/
 	}
 
 	public void closeSubMenu() {
-		ui.closeSubMenu();
+		//ui.closeSubMenu();
 	}
 }

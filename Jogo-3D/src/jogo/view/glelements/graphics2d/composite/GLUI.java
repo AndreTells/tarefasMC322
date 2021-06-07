@@ -1,12 +1,12 @@
-package jogo.view.graphics2d.composite;
+package jogo.view.glelements.graphics2d.composite;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import jogo.view.graphics2d.GLElement;
-import jogo.view.graphics2d.IComponent2DGraphics;
-import jogo.view.graphics2d.IComposite2DGraphics;
-import jogo.view.graphics2d.ILeaf2DGraphics;
+import jogo.view.glelements.graphics2d.GLElement;
+import jogo.view.glelements.graphics2d.IComponent2DGraphics;
+import jogo.view.glelements.graphics2d.IComposite2DGraphics;
+import jogo.view.glelements.graphics2d.ILeaf2DGraphics;
 
 public class GLUI extends GLElement implements IComposite2DGraphics{
 	private float pos_x;
@@ -37,7 +37,7 @@ public class GLUI extends GLElement implements IComposite2DGraphics{
 		this.pos_y = pos_y;
 	}
 
-	public void setDims(float height, float width) {
+	public void setDims(float width,float height) {
 		this.height = height;
 		this.width = width;
 	}
@@ -116,7 +116,7 @@ public class GLUI extends GLElement implements IComposite2DGraphics{
 	}
 	
 	public float[] getDims() {
-		return new float[] {height,width};
+		return new float[] {width,height};
 	}
 
 	public IComposite2DGraphics getParent() {

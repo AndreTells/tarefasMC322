@@ -1,4 +1,4 @@
-package jogo.view.customobject;
+package jogo.view.glelements.graphics3d.customobject;
 
 import java.awt.Color;
 import java.nio.FloatBuffer;

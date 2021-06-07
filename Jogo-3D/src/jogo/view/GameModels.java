@@ -3,7 +3,7 @@ package jogo.view;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import jogo.view.customobject.Obj3D;
+import jogo.view.glelements.graphics3d.customobject.Obj3D;
 
 public class GameModels {
 	private static Dictionary<String,Obj3D> models;

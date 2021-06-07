@@ -1,4 +1,4 @@
-package jogo.view.graphics2d;
+package jogo.view.glelements.graphics2d;
 
 import jogo.view.IActor;
 
