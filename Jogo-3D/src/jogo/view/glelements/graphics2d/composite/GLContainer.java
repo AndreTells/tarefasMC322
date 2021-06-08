@@ -8,7 +8,7 @@ import jogo.view.glelements.graphics2d.IComponent2DGraphics;
 import jogo.view.glelements.graphics2d.IComposite2DGraphics;
 import jogo.view.glelements.graphics2d.ILeaf2DGraphics;
 
-public class GLUI extends GLElement implements IComposite2DGraphics{
+public class GLContainer extends GLElement implements IComposite2DGraphics{
 	private float pos_x;
 	private float pos_y;
 		
@@ -21,7 +21,7 @@ public class GLUI extends GLElement implements IComposite2DGraphics{
 	private float width;
 	private float height;
 	
-	public GLUI(String id,float height,float width) {
+	public GLContainer(String id,float height,float width) {
 		this.setPosition(0,0);
 		this.setDims(height, width);
 		this.id = id;

@@ -58,7 +58,10 @@ public class BoardModel implements IBoardModelBuilder{
 	
 	public void addComponent(Component comp,int x,int y) {
 		map[y][x].addComponent(comp);
-		
+	}
+	
+	public void removeComponente(Class cls,int x,int y) {
+		map[y][x].removeComponent(cls);
 	}
 	
 	public  void constructComponent(String comp_name,int x, int y) {

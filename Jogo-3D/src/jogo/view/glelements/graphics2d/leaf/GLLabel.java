@@ -26,9 +26,10 @@ public class GLLabel extends GLElement implements ILeaf2DGraphics{
 	private final int font = GLUT.BITMAP_HELVETICA_12;
 	private GLUT glut;
 	
+	private float z_index;
 	
-	
-	public GLLabel(String id,IComposite2DGraphics parent,float pos_x,float pos_y,String text,float[] color) {
+	public GLLabel(String id,IComposite2DGraphics parent,float pos_x,float pos_y,
+			String text,float[] color) {
 		this.setPosition(pos_x, pos_y);
 		
 		this.id = id;
@@ -39,6 +40,23 @@ public class GLLabel extends GLElement implements ILeaf2DGraphics{
 		this.text =text.split("\n");
 		
 		this.glut = new GLUT();
+	
+		this.z_index = 1;
+	}
+	
+	public GLLabel(String id,IComposite2DGraphics parent,float pos_x,float pos_y,String text,float[] color,float z_index) {
+		this.setPosition(pos_x, pos_y);
+		
+		this.id = id;
+		this.parent = parent;
+		parent.addChild(this);
+		
+		this.setColor(color);
+		this.text =text.split("\n");
+		
+		this.glut = new GLUT();
+		
+		this.z_index = z_index;
 	}
 	
 	public void draw(GL2 gl) {

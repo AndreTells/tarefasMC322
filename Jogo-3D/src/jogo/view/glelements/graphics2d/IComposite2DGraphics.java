@@ -11,6 +11,7 @@ public interface IComposite2DGraphics extends IComponent2DGraphics{
 	//return the child if it is found and null otherwise
 	public IComponent2DGraphics getChild(String child_id);
 	
+	//trhow exception if there is a child with the same name
 	public void addChild(IComposite2DGraphics child);
 	
 	public void addChild(ILeaf2DGraphics child);

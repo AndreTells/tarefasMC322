@@ -21,6 +21,8 @@ public class GLRectangle extends GLElement implements ILeaf2DGraphics{
 	private float[] color;
 	private float border_radius;
 	
+	private float z_index;
+	
 	//trhow exception in case radius is bigger than width or height
 	public GLRectangle(String id,IComposite2DGraphics parent,float pos_x,float pos_y,float width,float height,float border_radius,float[] color) {
 		this.id = id;
@@ -33,12 +35,28 @@ public class GLRectangle extends GLElement implements ILeaf2DGraphics{
 		this.border_radius = border_radius;
 		this.setColor(color);
 		
+		this.z_index = 1;
+	}
+	
+	public GLRectangle(String id,IComposite2DGraphics parent,float pos_x,float pos_y,
+			float width,float height,float border_radius,float[] color,float z_index) {
+		this.id = id;
+		this.parent = parent;
+		parent.addChild(this);
+		
+		this.setPosition(pos_x, pos_y);
+		this.setDims(height, width);
+		
+		this.border_radius = border_radius;
+		this.setColor(color);
+		
+		this.z_index = z_index;
 	}
 	
 	@Override
 	public void draw(GL2 gl) {
 		gl.glPushMatrix();
-		gl.glTranslatef(pos_x, pos_y, 0);
+		gl.glTranslatef(pos_x, pos_y, z_index);
 		gl.glColor4f(color[0], color[1], color[2], color[3]);
 		
 		gl.glBegin(GL2.GL_TRIANGLE_FAN);

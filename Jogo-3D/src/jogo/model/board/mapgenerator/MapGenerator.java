@@ -53,6 +53,9 @@ public class MapGenerator {
 			}
 			if(!board.hasComponent(Mountain.class, i, j)) {
 				board.addComponent(new Water(), i, j);
+				if(board.hasComponent(Grass.class, i, j)) {
+					board.removeComponente(Grass.class, i, j);
+				}
 			}
 			
 			

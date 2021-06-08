@@ -20,7 +20,8 @@ import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
 import jogo.view.glelements.GLMouse;
 import jogo.view.glelements.graphics2d.GLElement;
-import jogo.view.glelements.graphics2d.composite.GLUI;
+import jogo.view.glelements.graphics2d.composite.GLButton;
+import jogo.view.glelements.graphics2d.composite.GLContainer;
 import jogo.view.glelements.graphics2d.leaf.GLLabel;
 import jogo.view.glelements.graphics2d.leaf.GLRectangle;
 import jogo.view.glelements.graphics3d.Camera;
@@ -36,7 +37,7 @@ public class TEST implements GLEventListener,IViewBuilder{
 	
 	private CellView[][] cells;
 	private final int map_size = 10;
-	private GLUI ui;
+	private GLContainer ui;
 	
 	public TEST(JFrame frame){
 		GameModels.loadModels();
@@ -50,16 +51,11 @@ public class TEST implements GLEventListener,IViewBuilder{
 	   GLMouse mouse = new GLMouse(gc);
 	   GLElement.setMouse(mouse);
 	   
-	   this.ui = new GLUI("ui",frame.getHeight(),frame.getWidth());
-	      
-	   GLLabel l = new GLLabel("l",this.ui,0.99f,0,"yay",new float[] {1,1,1,1});
-	   GLLabel b = new GLLabel("b",this.ui,-1f,0,"yay1\nbbbb",new float[] {0,0,0,1});
-	   b.setActionObserver(new TestActor());
-
-	   GLRectangle rect = new GLRectangle("rect",ui,
-			   								0,0,
-			   								0.1f,0.1f,
-			   								0.02f,new float[] {1,1,1,1});
+	   this.ui = new GLContainer("ui",frame.getHeight(),frame.getWidth());
+	   
+	   GLButton btn = new GLButton("aaa",ui,-1,0,
+			   "aaaa",new float[] {1,1,1,1},0.2f,0.2f,0.02f,
+			   new float[] {0.09f, 0.1f, 0.1f,0.95f},1);
 	   
 	   gc.addGLEventListener( this );  
 	   	
