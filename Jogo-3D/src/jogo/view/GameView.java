@@ -62,18 +62,11 @@ public class GameView implements GLEventListener,IViewBuilder {
 	   	
 	   	this.ui = new UI(container_2d);
 	   	
-	   	//------will be delted
-	   	gc.addGLEventListener( this );
-	   	
-	   	gc.addKeyListener(ui);
-	   	
 	   	this.setUpPicker();
-	   	
-	   	gc.addMouseListener(picker);
-	   
-	   //making things visible 
-	   frame.add(gc);
-	   frame.setVisible(true);
+	   	//necessary for JOGL
+	   	gc.addGLEventListener( this );
+	   	frame.add(gc);
+	   	frame.setVisible(true);
 	}
 	
 	private void setUpCamera() {
@@ -102,6 +95,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 	
 	private void setUpPicker() {
 		this.picker = new RayPicker(map_size);
+		mouse.addActionObservers("ray_picker", picker);
 	}
 	
 	public void setCellListener(int i,int j,CellController controller) {
@@ -257,8 +251,6 @@ public class GameView implements GLEventListener,IViewBuilder {
 		float[] min = this.cells[i][j].getAabbMin();
 		float[] max = this.cells[i][j].getAabbMax();
 		this.picker.setBoundsBox(i, j, min, max);
-	
-	
 	}
 
 	public void setInfo(String info_text) {

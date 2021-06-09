@@ -9,8 +9,9 @@ import com.jogamp.opengl.math.Matrix4;
 import com.jogamp.opengl.math.VectorUtil;
 
 import jogo.view.IActor;
+import jogo.view.IMouseObserver;
 
-public class RayPicker implements MouseListener{
+public class RayPicker implements IMouseObserver{
 	private float[][][] aabb_mins;
 	private float[][][] aabb_maxs;
 	private IActor[][] actors;
@@ -18,15 +19,16 @@ public class RayPicker implements MouseListener{
 	private Matrix4 inverse_projection_matrix;
 	private Matrix4 inverse_view_matrix;
 	private float[] eye;
-	//camera
+	
+	private int[] clicked_object;
 	
 	public RayPicker(int map_size){
 		this.eye = new float[]{0,0,0};
 		aabb_mins = new float[map_size][map_size][3];
 		aabb_maxs = new float[map_size][map_size][3];
 		actors = new IActor[map_size][map_size];
-		
 	}
+	
 	public void addClickableObject(int i,int j,float[] aabb_min, float[] aabb_max, IActor actor) {
 		if(aabb_max[1] - aabb_min[1] <0.5f) {
 			aabb_max[1] += 0.5f;
@@ -41,11 +43,10 @@ public class RayPicker implements MouseListener{
 	public void setInverseViewMatrix(Matrix4 inverse_view_matrix) {this.inverse_view_matrix = inverse_view_matrix;}
 	public void setEye(float[] eye) {this.eye = eye;}
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {		
+	public float[] getRay(float mouse_x,float mouse_y) {		
 		//System.out.println(e.getY());
-		float x = ((2.0f*e.getX())/e.getComponent().getWidth()) - 1.0f;
-		float y = 1.0f - (2.0f * e.getY())/e.getComponent().getHeight();
+		float x = mouse_x;
+		float y = mouse_y;
 		float z = 1.0f;
 		float[] ray_nds = new float[] {x,y,z};
 		
@@ -66,11 +67,11 @@ public class RayPicker implements MouseListener{
 			ray_wor[i] = ray_wor_4d[i];
 		}
 		ray_wor = VectorUtil.normalizeVec3(ray_wor);
-		//System.out.println(ray_wor[0]+" | "+ray_wor[1]+" | "+ray_wor[2]);
-		rayCast(ray_wor,e);
+		
+		return ray_wor;
 	}
 	
-	private void rayCast(float[] ray_dir,MouseEvent e) {
+	private boolean rayCast(float[] ray_dir) {
 		float[] current = new float[3];
 		for(int i =0;i<3;i++) {
 			current[i] = eye[i];
@@ -87,10 +88,9 @@ public class RayPicker implements MouseListener{
 					float[] aabb_max = this.aabb_maxs[j][k];
 					
 					if((aabb_min[0] < current[0]  && current[0]< aabb_max[0]) && (aabb_min[1] < current[1]  && current[1] < aabb_max[1]) && (aabb_min[2] < current[2]  && current[2] < aabb_max[2])) {
-						System.out.println(current[0]+" | "+current[1]+" | "+current[2]);
-						IActor actor = this.actors[j][k];
-						actor.act(e);
-						return ;
+						//System.out.println(current[0]+" | "+current[1]+" | "+current[2]);
+						clicked_object = new int[] {j,k};
+						return true;
 					}
 				}
 				
@@ -99,35 +99,28 @@ public class RayPicker implements MouseListener{
 			i+=step_size;
 			VectorUtil.addVec3(current, current, step);
 		}
-	}
-	
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		return false;
 	}
 	
 	public void setBoundsBox(int i,int j,float[] min,float[] max) {
 		this.aabb_mins[i][j] = min;
 		this.aabb_maxs[i][j] = max;
+	}
+	
+	@Override
+	public boolean conditonIsMet(float pos_x, float pos_y) {
+		float[] ray = getRay(pos_x,pos_y);
+		return rayCast(ray);
+	}
+	@Override
+	public void performAction(MouseEvent e, boolean missed) {
+		if(!missed) {
+			this.actors[clicked_object[0]][clicked_object[1]].act(e);
+		}
+	}
+	@Override
+	public int getRank() {
+		return 0;
 	}
 
 }

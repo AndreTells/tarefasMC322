@@ -5,11 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.awt.GLCanvas;
-
 import jogo.controller.NextTurnController;
-import jogo.view.glelements.IContainer;
 import jogo.view.glelements.graphics2d.IComponent2DGraphics;
 import jogo.view.glelements.graphics2d.IComposite2DGraphics;
 import jogo.view.glelements.graphics2d.ILeaf2DGraphics;
@@ -17,7 +13,7 @@ import jogo.view.glelements.graphics2d.composite.GLButton;
 import jogo.view.glelements.graphics2d.leaf.GLLabel;
 import jogo.view.glelements.graphics2d.leaf.GLRectangle;
 
-public class UI implements KeyListener, IComposite2DGraphics{
+public class UI implements IComposite2DGraphics{
 	
 //	private int width;
 //	private int height;
@@ -101,7 +97,7 @@ public class UI implements KeyListener, IComposite2DGraphics{
 	public float[] getDims() {
 		return backdrop.getDims();
 	}
-	
+	/*
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -122,7 +118,8 @@ public class UI implements KeyListener, IComposite2DGraphics{
 		// TODO Auto-generated method stub
 		
 	}
-
+	 */
+	
 	//----------- setter methods 
 	
 	public void setPopulation(String population_text) {

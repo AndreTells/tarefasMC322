@@ -76,7 +76,7 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 		
 		Enumeration<IMouseObserver> observers = dic_observers.elements();
 		IMouseObserver selected_observer = null;
-		int selected_observer_rank = 0;
+		int selected_observer_rank = -1;
 		
 		while(observers.hasMoreElements()) {
 			IMouseObserver observer = observers.nextElement();
