@@ -21,9 +21,9 @@ public class GLContainer extends GLElement implements IComposite2DGraphics{
 	private float width;
 	private float height;
 	
-	public GLContainer(String id,float height,float width) {
+	public GLContainer(String id) {
 		this.setPosition(0,0);
-		this.setDims(height, width);
+		this.setDims(1, 1);
 		this.id = id;
 		this.parent = null;
 		this.children_leaf = new LinkedList<ILeaf2DGraphics>();

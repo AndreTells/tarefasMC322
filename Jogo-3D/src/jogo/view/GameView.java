@@ -17,51 +17,61 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
-import jogo.view.glelements.Button;
-import jogo.view.glelements.ButtonListener;
-import jogo.view.glelements.SubMenu;
-import jogo.view.glelements.SubMenuListener;
-import jogo.view.glelements.graphics3d.Camera;
-import jogo.view.glelements.graphics3d.CameraMover;
+import jogo.view.glelements.GLMouse;
+import jogo.view.glelements.graphics2d.GLElement;
+import jogo.view.glelements.graphics2d.composite.GLContainer;
 import jogo.view.glelements.graphics3d.RayPicker;
+import jogo.view.glelements.graphics3d.camera.GLCamera;
+import jogo.view.glelements.graphics3d.camera.CameraDraggObserver;
 
 
 public class GameView implements GLEventListener,IViewBuilder {  
 	private GLU glu = new GLU();
 	private GLCanvas gc;
 	
-	private Camera camera;
+	private GLCamera camera;
 	private RayPicker picker;
 	
 	private CellView[][] cells;
 	private final int map_size = 10;
+	private GLContainer container_2d;
 	private UI ui;
+	
+	private GLMouse mouse;
+	
+	
 	
 	public GameView(JFrame frame){
 		GameModels.loadModels();
 		
 		this.setUpCanvas(frame.getWidth(), frame.getHeight());
 		
+		this.mouse = new GLMouse(gc);
+		
 	   	this.setUpCamera();
-		
-	   setUpCellMatrix();
-	   
-	   this.ui = new UI(14,0.2f,0.01f,0.95f);
 	   	
-	   ui.setDims(gc.getWidth(), gc.getHeight());
+	   	//3d space
+	   	setUpCellMatrix();
 	   	
-	   gc.addGLEventListener( this );  
+	   	//2d space
+	   	GLElement.setMouse(mouse);
 	   	
-	   CameraMover mover = new CameraMover(camera);
-	   gc.addMouseMotionListener(mover);
-		
-	   gc.addKeyListener(ui);
+	   	this.container_2d = new GLContainer("container");
+	   	
+	   	container_2d.setDims(frame.getWidth(), frame.getHeight());
+	   	
+	   	this.ui = new UI(container_2d);
+	   	
+	   	//------will be delted
+	   	gc.addGLEventListener( this );
+	   	
+	   	gc.addKeyListener(ui);
+	   	
+	   	this.setUpPicker();
+	   	
+	   	gc.addMouseListener(picker);
 	   
-	   this.setUpPicker();
-	   
-	   gc.addMouseListener(picker);
-	   
-	   
+	   //making things visible 
 	   frame.add(gc);
 	   frame.setVisible(true);
 	}
@@ -75,7 +85,9 @@ public class GameView implements GLEventListener,IViewBuilder {
 		VectorUtil.scaleVec3(aux, eye, -1);
 		VectorUtil.addVec2(aux, aux, target);
 		VectorUtil.crossVec3(up, right, aux);
-		this.camera = new Camera(eye,target,up);
+		this.camera = new GLCamera(eye,target,up);
+		this.camera.setCameraMover(mouse);
+		
 	}
 	
 	private void setUpCanvas(int width, int height) {
@@ -154,7 +166,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 
 	   //draw 2d objects
 	   
-	   ui.draw(gl);
+	   container_2d.draw(gl);
 
 	   // Making sure we can render 3d again
 	   gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -215,7 +227,6 @@ public class GameView implements GLEventListener,IViewBuilder {
 		gl.glMatrixMode( GL2.GL_MODELVIEW );  
 		gl.glLoadIdentity();
 	   
-		ui.setDims(width, height);
    }
 
 	//----------- setter methods
@@ -233,7 +244,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 	}
 	
 	public void setNextTurnController(NextTurnController controller) {
-		ui.setNextTurnListener(gc,controller);
+		ui.setNextTurnListener(controller);
 	}
 	
 	public ICellViewController getCell(int i,int j) {
@@ -254,17 +265,15 @@ public class GameView implements GLEventListener,IViewBuilder {
 		ui.setInfo("cell info: \n"+info_text);
 	}
 
-	public void createSubMenu(int pos_x, int pos_y,String[] items,IActor actor,IActor[] menu_item_actors) {
-		SubMenu menu = ui.createSubMenu( (((float)pos_x*2.0f)/gc.getWidth()) -1.0f, (((float)pos_y*2.0f)/gc.getHeight()) -1.0f, items);
-		SubMenuListener menu_listener = new SubMenuListener(actor,menu,ui);
-		Button[] menu_item = menu.getMenuItems();
-		for(int i=0;i<menu_item.length;i++) {
-			gc.addMouseListener(new ButtonListener(menu_item[i],ui,menu_item_actors[i]));
-		}
-		gc.addMouseListener(menu_listener);
+	@Override
+	public void createSubMenu(int pos_x, int pos_y, String[] items, IActor actor, IActor[] menu_item_actors) {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
 	public void closeSubMenu() {
-		ui.closeSubMenu();
+		// TODO Auto-generated method stub
+		
 	}
 }

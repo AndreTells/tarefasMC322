@@ -10,6 +10,8 @@ public interface IViewBuilder {
 	
 	public void setFood(String food_text);
 	
+	public void setInfo(String info_text);
+	
 	public void setCellListener(int i,int j,CellController controller); 
 	
 	public ICellViewController getCell(int i,int j);
@@ -18,7 +20,6 @@ public interface IViewBuilder {
 	
 	public void updateDetectionBox(int i,int j);
 	
-	public void setInfo(String info_text);
 	
 	public void createSubMenu(int pos_x, int pos_y,String[] items,IActor actor,IActor[] menu_item_actors);
 

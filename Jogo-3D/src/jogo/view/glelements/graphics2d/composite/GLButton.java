@@ -3,6 +3,7 @@ package jogo.view.glelements.graphics2d.composite;
 import java.util.LinkedList;
 import java.util.List;
 
+import jogo.view.IActor;
 import jogo.view.glelements.graphics2d.GLElement;
 import jogo.view.glelements.graphics2d.IComponent2DGraphics;
 import jogo.view.glelements.graphics2d.IComposite2DGraphics;
@@ -20,12 +21,15 @@ public class GLButton extends GLElement implements IComposite2DGraphics{
 	float z_index;
 	
 	//private GLLabel text;
-	//private GLRectangle backdrop;
+	private GLRectangle backdrop;
 	
 	private List<ILeaf2DGraphics> children_leaf;
 	
-	public GLButton(String id,IComposite2DGraphics parent,float pos_x,float pos_y,
-			String text,float[] text_color,float width,float height,float border_radius,
+	public GLButton(
+			String id,IComposite2DGraphics parent,
+			float pos_x,float pos_y,
+			String text,float[] text_color,
+			float width,float height,float border_radius,
 			float[] rectangle_color,float z_index) {
 		this.id = id;
 		this.parent = parent;
@@ -34,13 +38,23 @@ public class GLButton extends GLElement implements IComposite2DGraphics{
 		this.setPosition(pos_x, pos_y);
 		this.children_leaf = new LinkedList<ILeaf2DGraphics>();
 		
+		GLLabel btn_text = new GLLabel(id+"_text",this,
+				0,0,text,text_color
+				);
 		
-		GLLabel btn_text = new GLLabel(id+"_btn_text",this,0,0,text,text_color,z_index-0.1f);
-		
-		GLRectangle btn_rectangle = new GLRectangle(id+"btn_rectangle",this,0,0,width,height,border_radius,rectangle_color,z_index);
+		backdrop = new GLRectangle(id+"_rectangle",this
+				,0,0,width,height,
+				border_radius,rectangle_color
+			);
 
-		//center text in the button
+	float[] text_dims = btn_text.getDims();
+	btn_text.setPosition(width/2 - text_dims[0],( height-text_dims[1])/2);
 		
+	}
+	
+	
+	public void setOnClickObserver(IActor actor) {
+		backdrop.setActionObserver(actor);
 	}
 	
 	@Override
@@ -63,7 +77,7 @@ public class GLButton extends GLElement implements IComposite2DGraphics{
 	public float[] getPos() {
 		return new float[] {pos_x,pos_y};
 	}
-
+	
 	@Override
 	public float[] getDims() {
 		return this.getChild(id+"btn_rectangle").getDims();
@@ -94,16 +108,15 @@ public class GLButton extends GLElement implements IComposite2DGraphics{
 		return null;
 	}
 
-	//feels off
 	@Override
 	public void addChild(IComposite2DGraphics child) {
-		return ;
+		//
 	}
 
 	
 	@Override
 	public void addChild(ILeaf2DGraphics child) {
-		this.children_leaf.add(child);
+		children_leaf.add(child);
 	}
 
 	@Override

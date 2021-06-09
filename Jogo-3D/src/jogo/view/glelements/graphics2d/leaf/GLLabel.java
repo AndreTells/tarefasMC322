@@ -27,8 +27,10 @@ public class GLLabel extends GLElement implements ILeaf2DGraphics{
 	private GLUT glut;
 	
 	private float z_index;
+	private boolean center;
 	
-	public GLLabel(String id,IComposite2DGraphics parent,float pos_x,float pos_y,
+	public GLLabel(String id,IComposite2DGraphics parent,
+			float pos_x,float pos_y,
 			String text,float[] color) {
 		this.setPosition(pos_x, pos_y);
 		
@@ -44,7 +46,13 @@ public class GLLabel extends GLElement implements ILeaf2DGraphics{
 		this.z_index = 1;
 	}
 	
-	public GLLabel(String id,IComposite2DGraphics parent,float pos_x,float pos_y,String text,float[] color,float z_index) {
+	public void center(boolean center) {
+		this.center = center;
+	}
+	
+	public GLLabel(String id,IComposite2DGraphics parent,
+			float pos_x,float pos_y,
+			String text,float[] color,float z_index) {
 		this.setPosition(pos_x, pos_y);
 		
 		this.id = id;
@@ -121,17 +129,21 @@ public class GLLabel extends GLElement implements ILeaf2DGraphics{
 
 	@Override
 	public void setActionObserver(IActor actor) {
-		this.getMouse().addActionObservers(this.id, new GL2DObserver(this,actor,2));
+		mouse.addActionObservers(this.id, new GL2DObserver(this,actor,2));
 	}
 
 	@Override
 	public void removeActionObserver() {
-		this.getMouse().removeActionObserver(this.id);
+		mouse.removeActionObserver(this.id);
 	}
 	
 	@Override
 	public void setColor(float[] color) {
 		this.color = color;
+	}
+	
+	public void setText(String text) {
+		this.text = text.split("\n");
 	}
 	
 }

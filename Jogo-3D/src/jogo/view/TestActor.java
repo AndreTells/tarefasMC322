@@ -11,7 +11,9 @@ public class TestActor implements IActor{
 
 	@Override
 	public void act(MouseEvent e, boolean missed) {
-		
+		if(!missed) {
+			act(e);
+		}
 	}
 	
 }

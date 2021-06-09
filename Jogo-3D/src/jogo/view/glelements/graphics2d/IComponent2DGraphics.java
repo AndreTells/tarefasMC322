@@ -26,6 +26,7 @@ public interface IComponent2DGraphics {
 		while(top.getParent() != null) {
 			top=top.getParent();
 		}
+		
 		return top;
 	}
 

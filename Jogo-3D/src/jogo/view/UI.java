@@ -2,148 +2,106 @@ package jogo.view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.awt.GLCanvas;
 
 import jogo.controller.NextTurnController;
-import jogo.view.glelements.Button;
-import jogo.view.glelements.ButtonListener;
 import jogo.view.glelements.IContainer;
-import jogo.view.glelements.Label;
-import jogo.view.glelements.RoundedRectangle;
-import jogo.view.glelements.SubMenu;
+import jogo.view.glelements.graphics2d.IComponent2DGraphics;
+import jogo.view.glelements.graphics2d.IComposite2DGraphics;
+import jogo.view.glelements.graphics2d.ILeaf2DGraphics;
+import jogo.view.glelements.graphics2d.composite.GLButton;
+import jogo.view.glelements.graphics2d.leaf.GLLabel;
+import jogo.view.glelements.graphics2d.leaf.GLRectangle;
 
-public class UI implements KeyListener, IContainer{
+public class UI implements KeyListener, IComposite2DGraphics{
 	
-	private int width;
-	private int height;
+//	private int width;
+//	private int height;
 	private boolean active;
 	
-	private RoundedRectangle menu_backdrop;
-	private Label population;
-	private Label production;
-	private Label food;
-	private Label info;
-	private Button next_turn;
-	private float transparency;
-
-	private SubMenu construct_menu;
+	private String id;
+	private IComposite2DGraphics parent;
+	private float pos_x;
+	private float pos_y;
 	
-	public UI(int font_size,float UI_size_x,float margin,float transparency) {
-		this.active = true;
-		this.transparency = transparency;
-		
-		this.menu_backdrop = new RoundedRectangle(1f,UI_size_x,0.02f,1-(UI_size_x),0,new float[] {0.09f, 0.1f, 0.1f,transparency});
-		
-		float[] white = new float[] {1,1,1,1};
-		
-		this.population = new Label("population: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.05f),white,false);
-		this.production = new Label("production: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.18f),white,false);
-		this.food = new Label("food: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.31f),white,false);
-		this.info = new Label("info: ---",font_size,1-(UI_size_x*2)+margin,1-(margin+0.44f),white,false);
-		
-		this.next_turn = new Button("Next Turn",font_size,1-UI_size_x,-1+0.09f+margin,0.08f,UI_size_x-(margin),0.02f,new float[] {0.26f, 0.52f, 0.96f,transparency});
+	private GLRectangle backdrop;
+	private GLLabel population;
+	private GLLabel production;
+	private GLLabel food;
+	private GLLabel info;
+	private GLButton next_turn;
 	
-		this.construct_menu = null;
+	private List<ILeaf2DGraphics> children_leaf;
+	private List<IComposite2DGraphics> children_composite;
+	
+	private final float x_size = 0.4f;
+	private final float y_size = 1.96f;
+	private final float transparency =0.95f;
+	
+	public UI(IComposite2DGraphics parent) {
+		this.id ="ui";
+		
+		this.setPosition(1-x_size, 0);
+		this.parent = parent;
+		parent.addChild(this);
+		
+		this.children_leaf = new LinkedList<ILeaf2DGraphics>();
+		this.children_composite = new LinkedList<IComposite2DGraphics>();
+		
+		this.population = new GLLabel(
+				id+"_population_text", this,
+				0, 0.9f,
+				"population: ", new float[] {1,1,1,1},0.5f);
+		
+		this.production = new GLLabel(
+				id+"_production_text", this,
+				0, 0.7f,
+				"production: ", new float[] {1,1,1,1},0.5f);
+		
+		this.food = new GLLabel(
+				id+"_food_text", this,
+				0, 0.5f,
+				"food: ", new float[] {1,1,1,1},0.5f);
+		
+		this.info = new GLLabel(
+				id+"_info_text", this,
+				0, 0.3f,
+				"info: ", new float[] {1,1,1,1},0.5f);
+		
+		this.backdrop = new GLRectangle(
+				id+"_backdrop",this,
+				0,-y_size/2,
+				x_size,y_size,
+				0.02f,new float[] {0.09f, 0.1f, 0.1f,transparency},
+				1
+				);
+		
+		this.next_turn = new GLButton(
+				id+"_btn",this,
+				0.01f,(-y_size/2)+0.02f,
+				"Next Turn", new float[] {1,1,1,1},
+				x_size-0.02f, 0.2f,
+				0.02f,new float[] {0.26f, 0.52f, 0.96f,transparency},1
+				);
+		
 	}
 	
-	public void setDims(int width,int height) {
-		this.width = width;
-		this.height = height;
-	}
-	
-	public void setNextTurnListener(GLCanvas gc,NextTurnController controller) {
-		gc.addMouseListener(new ButtonListener( next_turn,this,controller ));
+	public void setNextTurnListener(NextTurnController controller) {
+		next_turn.setOnClickObserver(controller);
 	}
 	
 	public boolean isActive() {
 		return active;
 	}
 
-	public int[] getDims() {
-		return new int[] {width,height};
+	public float[] getDims() {
+		return backdrop.getDims();
 	}
 	
-	public void draw(GL2 gl) {
-		if(!active) {
-			return;
-		}
-		
-		menu_backdrop.draw(gl);
-
-		
-		population.setScreenDims(width, height);
-		population.draw(gl);
-		
-		production.setScreenDims(width, height);
-		production.draw(gl);
-		
-		food.setScreenDims(width, height);
-		food.draw(gl);
-		
-		info.setScreenDims(width, height);
-		info.draw(gl);
-		
-		//button
-		next_turn.setScreenDims(width, height);
-		next_turn.draw(gl);
-		
-		
-		if(construct_menu != null) {
-			construct_menu.setScreenDims(width, height);
-			construct_menu.draw(gl);
-		}
-		
-		
-	}
-
-	public void drawRoundRectangle(GL2 gl,float height,float width,float radius) {
-		gl.glBegin(GL2.GL_TRIANGLE_FAN);
-
-		gl.glVertex2f(0, 0);
-		gl.glVertex2f(width, -(height-radius));
-		gl.glVertex2f(width, (height-radius));
-		
-		gl.glVertex2f((width-radius), (height-radius));
-		gl.glVertex2f((width-radius), height);
-		
-		gl.glVertex2f(-(width-radius), height);
-		gl.glVertex2f(-(width-radius), (height-radius));
-		
-		gl.glVertex2f(-width, (height-radius));
-		gl.glVertex2f(-width, -(height-radius));
-		
-		gl.glVertex2f(-(width-radius),-(height-radius));
-		gl.glVertex2f(-(width-radius), -height);
-		
-		gl.glVertex2f((width-radius), -height);
-		gl.glVertex2f((width-radius), -(height-radius));
-		
-		gl.glVertex2f(width, -(height-radius));
-		gl.glEnd();
-		
-		
-		float start_angle = 0;
-		float end_angle = (float) Math.PI/2;
-		float[] side_x = new float[] {1,-1,-1, 1};
-		float[] side_y = new float[] {1, 1,-1,-1};
-		
-		for(int i=0;i<4;i++) {
-			gl.glBegin(GL2.GL_TRIANGLE_FAN);
-			
-			gl.glVertex2f(side_x[i]*(width-radius), side_y[i]*(height-radius));
-			for(float j=start_angle;j<=end_angle;j+=Math.PI/60) {
-				gl.glVertex2f( side_x[i]*(width-radius)+(radius*((float)Math.cos(j))),side_y[i]*(height-radius)+(radius*((float)Math.sin(j))));
-			}
-			gl.glEnd();
-			
-			
-			start_angle+=Math.PI/2;
-			end_angle+=Math.PI/2;
-		}
-	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -181,16 +139,100 @@ public class UI implements KeyListener, IContainer{
 	
 	public void setInfo(String info_text) {
 		this.info.setText(info_text);
+		float height = this.info.getDims()[1];
+		int num_lines = info_text.split("\n").length;
+		this.info.setPosition(0, 0.3f-height*((float)num_lines-1)/num_lines);
+	}
+
+	@Override
+	public void setPosition(float pos_x, float pos_y) {
+		this.pos_x = pos_x;
+		this.pos_y = pos_y;
+	}
+
+	@Override
+	public void setDims(float width, float height) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getID() {
+		return id;
+	}
+
+	@Override
+	public float[] getPos() {
+		return new float[] {pos_x,pos_y};
+	}
+
+	@Override
+	public IComposite2DGraphics getParent() {
+		return parent;
+	}
+
+	public IComponent2DGraphics getChild(String child_id) {
+		for(ILeaf2DGraphics child:children_leaf) {
+			if(child.getID().equals(child_id)) {
+				return child;
+			}
+		}
+		
+		for(IComposite2DGraphics child:children_composite) {
+			if(child.getID().equals(child_id)) {
+				return child;
+			}
+			
+			IComponent2DGraphics desired_child = child.getChild(child_id);
+			if(desired_child != null) {
+				return desired_child;
+			}
+		}
+		
+		return null;
+	}
+
+	@Override
+	public void addChild(IComposite2DGraphics child) {
+		children_composite.add(child);
 	}
 	
-	public SubMenu createSubMenu(float pos_x, float pos_y,String[] items) {
-		this.construct_menu = new SubMenu(pos_x,pos_y,new float[] {0.09f, 0.1f, 0.1f,transparency},this,items,transparency);
-		return construct_menu;
+	public void addChild(ILeaf2DGraphics child) {
+		children_leaf.add(child);
+	}
+
+	@Override
+	public boolean removeChild(String child_id) {
+		for(ILeaf2DGraphics child:children_leaf) {
+			if(child.getID().equals(child_id)) {
+				children_leaf.remove(child);
+				return true;
+			}
+		}
+		
+		for(IComposite2DGraphics child:children_composite) {
+			if(child.getID().equals(child_id)) {
+				children_composite.remove(child);
+				return true;
+			}
+			
+			if(child.removeChild(child_id)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public List<IComponent2DGraphics> getAllChildren() {
+		List<IComponent2DGraphics> all_children = new LinkedList<IComponent2DGraphics>();
+		if(children_leaf !=null) {
+			all_children.addAll(children_leaf);
+		}
+		
+		if(children_composite !=null) {
+			all_children.addAll(children_composite);
+		}
+		return all_children;
 	}
 	
-	
-	public void closeSubMenu() {
-		construct_menu.close();
-		this.construct_menu = null;
-	}
 }

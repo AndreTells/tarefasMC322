@@ -24,13 +24,16 @@ public class GLRectangle extends GLElement implements ILeaf2DGraphics{
 	private float z_index;
 	
 	//trhow exception in case radius is bigger than width or height
-	public GLRectangle(String id,IComposite2DGraphics parent,float pos_x,float pos_y,float width,float height,float border_radius,float[] color) {
+	public GLRectangle(String id,IComposite2DGraphics parent,
+			float pos_x,float pos_y,
+			float width,float height,
+			float border_radius,float[] color) {
 		this.id = id;
 		this.parent = parent;
 		parent.addChild(this);
 		
 		this.setPosition(pos_x, pos_y);
-		this.setDims(height, width);
+		this.setDims(width,height );
 		
 		this.border_radius = border_radius;
 		this.setColor(color);
@@ -45,7 +48,7 @@ public class GLRectangle extends GLElement implements ILeaf2DGraphics{
 		parent.addChild(this);
 		
 		this.setPosition(pos_x, pos_y);
-		this.setDims(height, width);
+		this.setDims(width, height);
 		
 		this.border_radius = border_radius;
 		this.setColor(color);
@@ -117,8 +120,8 @@ public class GLRectangle extends GLElement implements ILeaf2DGraphics{
 
 	@Override
 	public void setPosition(float pos_x, float pos_y) {
-		// TODO Auto-generated method stub
-		
+		this.pos_x = pos_x;
+		this.pos_y = pos_y;
 	}
 
 	@Override
@@ -157,12 +160,12 @@ public class GLRectangle extends GLElement implements ILeaf2DGraphics{
 
 	@Override
 	public void setActionObserver(IActor actor) {
-		this.getMouse().addActionObservers(this.id, new GL2DObserver(this,actor,2));
+		mouse.addActionObservers(this.id, new GL2DObserver(this,actor,2));
 	}
 
 	@Override
 	public void removeActionObserver() {
-		this.getMouse().removeActionObserver(this.id);
+		mouse.removeActionObserver(this.id);
 	}
 
 	@Override

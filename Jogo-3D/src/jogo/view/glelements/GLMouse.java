@@ -15,11 +15,15 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 
 	private Dictionary<String,IMouseObserver> dic_action_observers;
 	private Dictionary<String,IMouseObserver> dic_motion_observers;
+	private Dictionary<String,IMouseObserver> dic_dragg_observers;
 	
 	//implement try catch for this
 	public GLMouse(GLCanvas gc) {
 		this.dic_action_observers = new Hashtable<String,IMouseObserver>();
 		this.dic_motion_observers = new Hashtable<String,IMouseObserver>();
+
+		this.dic_dragg_observers = new Hashtable<String,IMouseObserver>();
+		
 		gc.addMouseListener(this);
 		gc.addMouseMotionListener(this);
 	}
@@ -58,8 +62,7 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		checkObservers(e,dic_dragg_observers);
 	}
 
 	@Override
@@ -74,13 +77,16 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 		Enumeration<IMouseObserver> observers = dic_observers.elements();
 		IMouseObserver selected_observer = null;
 		int selected_observer_rank = 0;
+		
 		while(observers.hasMoreElements()) {
 			IMouseObserver observer = observers.nextElement();
 			if(observer.conditonIsMet(formated_x,formated_y)) {
 				int rank = observer.getRank();
 				
 				if(rank>selected_observer_rank) {
-					selected_observer.performAction(e,true);
+					if(selected_observer!=null) {
+						selected_observer.performAction(e,true);
+					}
 					
 					selected_observer = observer;
 					selected_observer_rank = observer.getRank();
@@ -114,5 +120,13 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 	
 	public void removeMotionObserver(String id) {
 		dic_motion_observers.remove(id);
+	}
+	
+	public void addDraggObservers(String id ,IMouseObserver observer) {
+		dic_dragg_observers.put(id, observer);
+	}
+	
+	public void removeDraggObserver(String id) {
+		dic_dragg_observers.remove(id);
 	}
 }
