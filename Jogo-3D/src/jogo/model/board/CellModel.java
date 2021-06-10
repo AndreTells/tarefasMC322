@@ -1,14 +1,11 @@
 package jogo.model.board;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
 import jogo.model.board.components.City;
 import jogo.model.board.components.Component;
-import jogo.model.board.components.ConstructableComponent;
 import jogo.model.board.components.Farm;
-import jogo.model.board.components.Grass;
 import jogo.model.board.components.LumberMill;
 import jogo.model.board.components.Water;
 

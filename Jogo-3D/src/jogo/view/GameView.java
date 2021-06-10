@@ -40,8 +40,6 @@ public class GameView implements GLEventListener,IViewBuilder {
 	
 	private GLMouse mouse;
 	
-	
-	
 	public GameView(JFrame frame){
 		GameModels.loadModels();
 		
@@ -269,4 +267,5 @@ public class GameView implements GLEventListener,IViewBuilder {
 	public void closeSubMenu() {
 		container_2d.getChild("pop_up").dispose();	
 	}
+
 }

@@ -85,7 +85,6 @@ public class BoardModel implements IBoardModelBuilder{
 			addComponent(comp,x,y);
 		}
 	}
-	
 
 	public void addModifier(int external_modifier[]) {
 		for(int i=0;i<modifier.length;i++) {

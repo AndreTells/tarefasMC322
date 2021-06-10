@@ -37,10 +37,10 @@ public class GLPopMenu extends GLElementComposite{
 		
 		for(int i=0;i<actors.length;i++) {
 			float pos[] = items[i].getAbsolutePos();
-			System.out.println(pos[0]+" "+pos[1]);
+			//System.out.println(pos[0]+" "+pos[1]);
 			float dims[] = items[i].getDims();
-			System.out.println(dims[0]+" "+dims[1]);
-			System.out.println("-----------");
+			//System.out.println(dims[0]+" "+dims[1]);
+			//System.out.println("-----------");
 			this.items[i].setOnClickObserver(actors[i],3);
 		}
 	}
