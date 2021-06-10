@@ -246,7 +246,6 @@ public class GameView implements GLEventListener,IViewBuilder {
 		return this.cells[i][j];
 	}
 
-	@Override
 	public void updateDetectionBox(int i, int j) {
 		float[] min = this.cells[i][j].getAabbMin();
 		float[] max = this.cells[i][j].getAabbMax();
@@ -257,19 +256,17 @@ public class GameView implements GLEventListener,IViewBuilder {
 		ui.setInfo("cell info: \n"+info_text);
 	}
 
-	@Override
 	public void createSubMenu(float pos_x, float pos_y, String[] items, IActor[] menu_item_actors) {
+		IComponent2DGraphics old_pop_up = container_2d.getChild("pop_up");
+		if(old_pop_up != null) {
+			old_pop_up.dispose();
+		}
 		GLPopMenu popup_menu = new GLPopMenu("pop_up",container_2d,pos_x,pos_y,0.2f,items);
 		popup_menu.setActionObservers(menu_item_actors);
 		
-		for(IComponent2DGraphics comp: popup_menu.getAllChildren()) {
-			System.out.println(comp.getID());
-		}
-		
 	}
 
-	@Override
 	public void closeSubMenu() {
-		container_2d.getChild("pop_up").dispose();;
+		container_2d.getChild("pop_up").dispose();	
 	}
 }

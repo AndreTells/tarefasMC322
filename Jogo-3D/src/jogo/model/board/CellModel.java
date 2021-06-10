@@ -147,14 +147,18 @@ public class CellModel {
 	public List<String> getPossibleActions(){
 		List<String> result = new LinkedList<String>();
 		
-		if(City.isConstructalbe(this)) {
+		if(City.isConstructalbe(this) && !this.hasComponent(City.class)) {
 			result.add(City.class.getSimpleName());
 		}
-		if(LumberMill.isConstructalbe(this)) {
+		if(LumberMill.isConstructalbe(this) && !this.hasComponent(LumberMill.class)) {
 			result.add(LumberMill.class.getSimpleName());
 		}
-		if(Farm.isConstructalbe(this)) {
+		if(Farm.isConstructalbe(this) && !this.hasComponent(Farm.class)) {
 			result.add(Farm.class.getSimpleName());
+		}
+		
+		if(result.isEmpty()) {
+			result.add("None");
 		}
 		
 		return result;

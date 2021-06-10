@@ -73,7 +73,7 @@ public class GLUI extends GLElementComposite{
 	}
 	
 	public void setNextTurnListener(NextTurnController controller) {
-		next_turn.setOnClickObserver(controller);
+		next_turn.setOnClickObserver(controller,2);
 	}
 	
 	public boolean isActive() {

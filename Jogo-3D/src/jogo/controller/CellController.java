@@ -19,6 +19,7 @@ public class CellController implements IActor{
 	public void act(MouseEvent e) {
 		// TODO Auto-generated method stub
 		controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
+		
 		if(e.getButton() == MouseEvent.BUTTON3) {
 			float formated_x = ((2.0f*e.getX())/e.getComponent().getWidth()) - 1.0f;
 			float formated_y = 1.0f - (2.0f * e.getY())/e.getComponent().getHeight();
@@ -27,14 +28,14 @@ public class CellController implements IActor{
 				controller.view.createSubMenu(formated_x,
 						formated_y,
 						new String[] {"Claim"},
-						new SubMenuItemController[] {new SubMenuItemController(controller,map_x,map_y,"Claim")});
+						new PopUpItemController[] {new PopUpItemController(controller,map_x,map_y,"Claim")});
 				return;
 			}
 			
 			List<String> possible = controller.model.getPossibleActions(map_x, map_y);
-			SubMenuItemController[] menu_item_controllers = new SubMenuItemController[possible.size()]; 
+			PopUpItemController[] menu_item_controllers = new PopUpItemController[possible.size()]; 
 			for(int i=0;i<possible.size();i++) {
-				menu_item_controllers[i] = new SubMenuItemController(controller,map_x,map_y,possible.get(i));
+				menu_item_controllers[i] = new PopUpItemController(controller,map_x,map_y,possible.get(i));
 			}
 			String[] possible_arr = new String[possible.size()];
 			possible.toArray(possible_arr);

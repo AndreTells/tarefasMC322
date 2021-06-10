@@ -8,6 +8,7 @@ import jogo.view.glelements.graphics2d.leaf.GLRectangle;
 public class GLPopMenu extends GLElementComposite{
 	private static float item_height = 0.1f;
 	private GLButton[] items;
+	private int item_checked;
 	
 	public GLPopMenu(String id, IComposite2DGraphics parent,
 			float pos_x, float pos_y, float width,
@@ -15,7 +16,7 @@ public class GLPopMenu extends GLElementComposite{
 			) {
 		super(id, parent, pos_x, pos_y-(item_height*(button_text.length)+(button_text.length+1)*0.01f), width, item_height*(button_text.length)+(button_text.length+1)*0.01f);
 		
-		System.out.println(pos_x+" "+pos_y);
+		//System.out.println(pos_x+" "+pos_y);
 		
 		GLRectangle backdrop = new GLRectangle(id+"_backdrop",this,0,0,width, item_height*button_text.length+(button_text.length+1)*0.01f,0.02f,new float[] {0.09f, 0.1f, 0.1f,0.95f});
 		
@@ -35,7 +36,22 @@ public class GLPopMenu extends GLElementComposite{
 	public void setActionObservers(IActor actors[]) {
 		
 		for(int i=0;i<actors.length;i++) {
-			this.items[i].setOnClickObserver(actors[i]);
+			float pos[] = items[i].getAbsolutePos();
+			System.out.println(pos[0]+" "+pos[1]);
+			float dims[] = items[i].getDims();
+			System.out.println(dims[0]+" "+dims[1]);
+			System.out.println("-----------");
+			this.items[i].setOnClickObserver(actors[i],3);
 		}
 	}
+
+	public void checkItem() {
+		item_checked+=1;
+	}
+	
+	public boolean allChecked() {
+		return item_checked == items.length;
+	}
+
+
 }

@@ -17,8 +17,8 @@ public abstract class GLElementLeaf extends GLElementComponent implements ILeaf2
 		this.z_index = z_index;
 	}
 	
-	public void setActionObserver(IActor actor) {
-		mouse.addActionObservers(this.id, new GL2DObserver(this,actor,2));
+	public void setActionObserver(IActor actor,int rank) {
+		mouse.addActionObservers(this.id, new GL2DObserver(this,actor,rank));
 	}
 
 	public void removeActionObserver() {
@@ -34,6 +34,7 @@ public abstract class GLElementLeaf extends GLElementComponent implements ILeaf2
 		if(parent!=null) {
 			parent.removeChild(this.getID());
 		}
+		
 	}
 
 }

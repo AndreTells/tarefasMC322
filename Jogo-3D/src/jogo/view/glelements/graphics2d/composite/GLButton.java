@@ -10,6 +10,7 @@ public class GLButton extends GLElementComposite {
 	
 	//private GLLabel text;
 	private GLRectangle backdrop;
+	private String text;
 	
 	public GLButton(
 			String id,IComposite2DGraphics parent,
@@ -20,6 +21,7 @@ public class GLButton extends GLElementComposite {
 		
 		super(id,parent,pos_x,pos_y,width,height);
 		
+		this.text = text;
 		
 		GLLabel btn_text = new GLLabel(id+"_text",this,
 				0,0,text,text_color
@@ -36,8 +38,8 @@ public class GLButton extends GLElementComposite {
 	}
 	
 	
-	public void setOnClickObserver(IActor actor) {
-		backdrop.setActionObserver(actor);
+	public void setOnClickObserver(IActor actor,int rank) {
+		backdrop.setActionObserver(actor,rank);
 	}
 	
 }

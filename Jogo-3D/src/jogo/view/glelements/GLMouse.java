@@ -34,6 +34,7 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		checkObservers(e,dic_action_observers);
+	
 	}
 
 	@Override
@@ -81,6 +82,7 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 		while(observers.hasMoreElements()) {
 			IMouseObserver observer = observers.nextElement();
 			if(observer.conditonIsMet(formated_x,formated_y)) {
+				
 				int rank = observer.getRank();
 				
 				if(rank>selected_observer_rank) {
@@ -96,9 +98,10 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 				}
 			}
 			
-			else {
+			else{
 				observer.performAction(e, true);
 			}
+		
 		}
 		
 		if(selected_observer!= null) {
@@ -124,6 +127,7 @@ public class GLMouse implements MouseListener,MouseMotionListener{
 	
 	public void addDraggObservers(String id ,IMouseObserver observer) {
 		dic_dragg_observers.put(id, observer);
+		
 	}
 	
 	public void removeDraggObserver(String id) {
