@@ -19,28 +19,9 @@ public interface IComposite2DGraphics extends IComponent2DGraphics{
 	//return true if child is found and removed and false otherwise
 	public boolean removeChild(String child_id);
 	
-	default public void draw(GL2 gl) {
-		gl.glPushMatrix();
-		float[] pos = this.getPos();
-		gl.glTranslatef(pos[0], pos[1],0);
-		
-		for(IComponent2DGraphics element: this.getAllChildren()) {
-			element.draw(gl);
-		}
-		
-		gl.glPopMatrix();
-	}
+	public void draw(GL2 gl);
 
 	//deletes this element and all below it
-	default public void dispose() {
-		for(IComponent2DGraphics element: this.getAllChildren()) {
-			element.dispose();
-		}
-		
-		IComposite2DGraphics parent = this.getParent();
-		if(parent!=null) {
-			parent.removeChild(this.getID());
-		}
-	}
+	public void dispose();
 
 }

@@ -4,59 +4,33 @@ import com.jogamp.opengl.GL2;
 
 import jogo.view.IActor;
 import jogo.view.glelements.graphics2d.GL2DObserver;
-import jogo.view.glelements.graphics2d.GLElement;
+import jogo.view.glelements.graphics2d.GLElementComponent;
+import jogo.view.glelements.graphics2d.GLElementLeaf;
 import jogo.view.glelements.graphics2d.IComposite2DGraphics;
 import jogo.view.glelements.graphics2d.ILeaf2DGraphics;
 
-public class GLRectangle extends GLElement implements ILeaf2DGraphics{
-	private float pos_x;
-	private float pos_y;
+public class GLRectangle extends GLElementLeaf{
 
-	private String id;
-	private IComposite2DGraphics parent;
-	
-	private float width;
-	private float height;
-	
-	private float[] color;
 	private float border_radius;
-	
-	private float z_index;
 	
 	//trhow exception in case radius is bigger than width or height
 	public GLRectangle(String id,IComposite2DGraphics parent,
 			float pos_x,float pos_y,
 			float width,float height,
 			float border_radius,float[] color) {
-		this.id = id;
-		this.parent = parent;
-		parent.addChild(this);
-		
-		this.setPosition(pos_x, pos_y);
-		this.setDims(width,height );
+		super(id,parent,pos_x,pos_y,width,height,color,1f);
 		
 		this.border_radius = border_radius;
-		this.setColor(color);
-		
-		this.z_index = 1;
 	}
 	
 	public GLRectangle(String id,IComposite2DGraphics parent,float pos_x,float pos_y,
 			float width,float height,float border_radius,float[] color,float z_index) {
-		this.id = id;
-		this.parent = parent;
-		parent.addChild(this);
 		
-		this.setPosition(pos_x, pos_y);
-		this.setDims(width, height);
+		super(id,parent,pos_x,pos_y,width,height,color,z_index);
 		
 		this.border_radius = border_radius;
-		this.setColor(color);
-		
-		this.z_index = z_index;
 	}
 	
-	@Override
 	public void draw(GL2 gl) {
 		gl.glPushMatrix();
 		gl.glTranslatef(pos_x, pos_y, z_index);
@@ -116,61 +90,6 @@ public class GLRectangle extends GLElement implements ILeaf2DGraphics{
 		}
 		
 		gl.glPopMatrix();
-	}
-
-	@Override
-	public void setPosition(float pos_x, float pos_y) {
-		this.pos_x = pos_x;
-		this.pos_y = pos_y;
-	}
-
-	@Override
-	public void setDims(float width,float height) {
-		this.width = width;
-		this.height = height;
-	}
-
-	@Override
-	public String getID() {
-		return this.id;
-	}
-
-	@Override
-	public void dispose() {
-		this.removeActionObserver();
-		if(parent!=null) {
-			parent.removeChild(this.getID());
-		}
-	}
-
-	@Override
-	public float[] getPos() {
-		return new float[] {pos_x,pos_y};
-	}
-
-	@Override
-	public float[] getDims() {
-		return new float[] {width,height};
-	}
-
-	@Override
-	public IComposite2DGraphics getParent() {
-		return this.parent;
-	}
-
-	@Override
-	public void setActionObserver(IActor actor) {
-		mouse.addActionObservers(this.id, new GL2DObserver(this,actor,2));
-	}
-
-	@Override
-	public void removeActionObserver() {
-		mouse.removeActionObserver(this.id);
-	}
-
-	@Override
-	public void setColor(float[] color) {
-		this.color = color;
 	}
 
 }

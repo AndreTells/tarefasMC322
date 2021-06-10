@@ -3,6 +3,7 @@ package jogo.view.glelements.graphics2d;
 import com.jogamp.opengl.GL2;
 
 public interface IComponent2DGraphics {
+	
 	public void draw(GL2 gl);
 	
 	public void setPosition(float pos_x,float pos_y);

@@ -20,11 +20,13 @@ public class CellController implements IActor{
 		// TODO Auto-generated method stub
 		controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
 		if(e.getButton() == MouseEvent.BUTTON3) {
+			float formated_x = ((2.0f*e.getX())/e.getComponent().getWidth()) - 1.0f;
+			float formated_y = 1.0f - (2.0f * e.getY())/e.getComponent().getHeight();
+			
 			if(!controller.model.isClaimed(map_x, map_y)) {
-				controller.view.createSubMenu(e.getX()+40,
-						e.getComponent().getHeight() -  e.getY()-20,
+				controller.view.createSubMenu(formated_x,
+						formated_y,
 						new String[] {"Claim"},
-						new SubMenuController(controller.view),
 						new SubMenuItemController[] {new SubMenuItemController(controller,map_x,map_y,"Claim")});
 				return;
 			}
@@ -36,10 +38,14 @@ public class CellController implements IActor{
 			}
 			String[] possible_arr = new String[possible.size()];
 			possible.toArray(possible_arr);
-			controller.view.createSubMenu(e.getX()+40,
-					e.getComponent().getHeight() -  e.getY()-20,
+			
+
+			
+
+			
+			controller.view.createSubMenu(formated_x,
+					formated_y,
 					possible_arr,
-					new SubMenuController(controller.view),
 					menu_item_controllers);
 		}
 	}

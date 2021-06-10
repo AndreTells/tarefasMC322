@@ -20,8 +20,7 @@ public interface IViewBuilder {
 	
 	public void updateDetectionBox(int i,int j);
 	
-	
-	public void createSubMenu(int pos_x, int pos_y,String[] items,IActor actor,IActor[] menu_item_actors);
+	public void createSubMenu(float pos_x, float pos_y,String[] items,IActor[] menu_item_actors);
 
 	public void closeSubMenu();
 }

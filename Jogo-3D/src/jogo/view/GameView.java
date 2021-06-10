@@ -18,12 +18,13 @@ import com.jogamp.opengl.util.FPSAnimator;
 import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
 import jogo.view.glelements.GLMouse;
-import jogo.view.glelements.graphics2d.GLElement;
+import jogo.view.glelements.graphics2d.GLElementComponent;
+import jogo.view.glelements.graphics2d.IComponent2DGraphics;
 import jogo.view.glelements.graphics2d.composite.GLContainer;
+import jogo.view.glelements.graphics2d.composite.GLPopMenu;
+import jogo.view.glelements.graphics2d.composite.GLUI;
 import jogo.view.glelements.graphics3d.RayPicker;
 import jogo.view.glelements.graphics3d.camera.GLCamera;
-import jogo.view.glelements.graphics3d.camera.CameraDraggObserver;
-
 
 public class GameView implements GLEventListener,IViewBuilder {  
 	private GLU glu = new GLU();
@@ -35,7 +36,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 	private CellView[][] cells;
 	private final int map_size = 10;
 	private GLContainer container_2d;
-	private UI ui;
+	private GLUI ui;
 	
 	private GLMouse mouse;
 	
@@ -54,14 +55,12 @@ public class GameView implements GLEventListener,IViewBuilder {
 	   	setUpCellMatrix();
 	   	
 	   	//2d space
-	   	GLElement.setMouse(mouse);
+	   	GLElementComponent.setMouse(mouse);
 	   	
-	   	this.container_2d = new GLContainer("container");
+	   	this.container_2d = new GLContainer("container",frame.getWidth(),frame.getHeight());
 	   	
-	   	container_2d.setDims(frame.getWidth(), frame.getHeight());
-	   	
-	   	this.ui = new UI(container_2d);
-	   	
+	   	this.ui = new GLUI(container_2d);
+	   		   	
 	   	this.setUpPicker();
 	   	//necessary for JOGL
 	   	gc.addGLEventListener( this );
@@ -162,6 +161,7 @@ public class GameView implements GLEventListener,IViewBuilder {
 	   
 	   container_2d.draw(gl);
 
+	   
 	   // Making sure we can render 3d again
 	   gl.glMatrixMode(GL2.GL_PROJECTION);
 	   gl.glPopMatrix();
@@ -258,14 +258,18 @@ public class GameView implements GLEventListener,IViewBuilder {
 	}
 
 	@Override
-	public void createSubMenu(int pos_x, int pos_y, String[] items, IActor actor, IActor[] menu_item_actors) {
-		// TODO Auto-generated method stub
+	public void createSubMenu(float pos_x, float pos_y, String[] items, IActor[] menu_item_actors) {
+		GLPopMenu popup_menu = new GLPopMenu("pop_up",container_2d,pos_x,pos_y,0.2f,items);
+		popup_menu.setActionObservers(menu_item_actors);
+		
+		for(IComponent2DGraphics comp: popup_menu.getAllChildren()) {
+			System.out.println(comp.getID());
+		}
 		
 	}
 
 	@Override
 	public void closeSubMenu() {
-		// TODO Auto-generated method stub
-		
+		container_2d.getChild("pop_up").dispose();;
 	}
 }

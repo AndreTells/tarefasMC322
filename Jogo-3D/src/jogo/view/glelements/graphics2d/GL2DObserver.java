@@ -5,11 +5,11 @@ import jogo.view.IActor;
 import java.awt.event.MouseEvent;
 
 public class GL2DObserver implements IMouseObserver{
-	private GLElement element;
+	private GLElementComponent element;
 	private IActor actor;
 	private int rank;
 	
-	public GL2DObserver(GLElement element, IActor actor,int rank) {
+	public GL2DObserver(GLElementComponent element, IActor actor,int rank) {
 		this.element = element;
 		this.actor = actor;
 		this.rank = rank;

@@ -24,9 +24,11 @@ public class SubMenuItemController implements IActor{
 
 			controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
 			controller.updateStats();
+			controller.view.closeSubMenu();
 			return;
 		}
 		else if(command.equals("None")) {
+			controller.view.closeSubMenu();
 			return;
 		}
 		controller.model.constructComponent(command, map_x, map_y);
@@ -37,8 +39,10 @@ public class SubMenuItemController implements IActor{
 
 	@Override
 	public void act(MouseEvent e, boolean missed) {
-		// TODO Auto-generated method stub
-		
+		if(!missed) {
+			act(e);
+		}
+		controller.view.closeSubMenu();
 	}
 
 }
