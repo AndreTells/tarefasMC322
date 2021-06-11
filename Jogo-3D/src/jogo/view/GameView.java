@@ -21,7 +21,7 @@ import jogo.view.glelements.GLMouse;
 import jogo.view.glelements.graphics2d.GLElementComponent;
 import jogo.view.glelements.graphics2d.IComponent2DGraphics;
 import jogo.view.glelements.graphics2d.composite.GLContainer;
-import jogo.view.glelements.graphics2d.composite.GLPopMenu;
+import jogo.view.glelements.graphics2d.composite.GLPopUpMenu;
 import jogo.view.glelements.graphics2d.composite.GLUI;
 import jogo.view.glelements.graphics3d.RayPicker;
 import jogo.view.glelements.graphics3d.camera.GLCamera;
@@ -254,18 +254,23 @@ public class GameView implements GLEventListener,IViewBuilder {
 		ui.setInfo("cell info: \n"+info_text);
 	}
 
-	public void createSubMenu(float pos_x, float pos_y, String[] items, IActor[] menu_item_actors) {
-		IComponent2DGraphics old_pop_up = container_2d.getChild("pop_up");
-		if(old_pop_up != null) {
-			old_pop_up.dispose();
-		}
-		GLPopMenu popup_menu = new GLPopMenu("pop_up",container_2d,pos_x,pos_y,0.2f,items);
-		popup_menu.setActionObservers(menu_item_actors);
-		
+	public IPopUpMenu createSubMenu(float pos_x, float pos_y, String[] items) {
+		GLPopUpMenu popup_menu = new GLPopUpMenu("pop_up",container_2d,pos_x,pos_y,0.2f,items);
+
+		return popup_menu;
 	}
 
 	public void closeSubMenu() {
 		container_2d.getChild("pop_up").dispose();	
 	}
 
+	public IPopUpMenu createEventPopUp(String text, String[] items) {
+		GLPopUpMenu popup_menu = new GLPopUpMenu("event_pop_up",container_2d,0,0,text,items);
+
+		return popup_menu;
+	}
+	
+	public void closeEventMenu() {
+		container_2d.getChild("event_pop_up").dispose();
+	}
 }

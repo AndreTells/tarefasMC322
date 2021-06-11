@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 import jogo.model.board.IBoardModelBuilder;
 import jogo.view.IActor;
+import jogo.view.IPopUpMenu;
 import jogo.view.IViewBuilder;
 
 public class NextTurnController implements IActor{
@@ -17,11 +18,16 @@ public class NextTurnController implements IActor{
 	
 	public void act(MouseEvent e) {
 		if(!model.gameOver()) {
+
 			model.calculateStats();
 			updateStats();
 			if(model.checkLoseConditions()) {
 				view.setInfo("GAME OVER");
 			}
+			
+			 IPopUpMenu menu = view.createEventPopUp("yay", new String[]{"ok"});
+			 EventPopUpController pop_up_controller = new EventPopUpController(this);
+			 menu.setActionObservers(new IActor[] {pop_up_controller});
 		}
 	}
 	
@@ -48,7 +54,6 @@ public class NextTurnController implements IActor{
 		if(!missed) {
 			act(e);
 		}
-		
 	}
 	
 }

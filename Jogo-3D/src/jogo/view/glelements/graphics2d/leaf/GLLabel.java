@@ -32,17 +32,19 @@ public class GLLabel extends GLElementLeaf{
 		float width = glut.glutBitmapLength(font,"");
 		for(String sentence: this.text) {
 			float sentence_width = glut.glutBitmapLength(font,sentence);
+			System.out.println(sentence.length());
 			if(width < sentence_width) {
 				width = sentence_width;
 			}
 		}
 		float[] top_dims = this.getTop().getDims();
-		this.setDims(width/top_dims[0], line_spacing*this.text.length);
+		this.setDims(width*2/top_dims[0], line_spacing*this.text.length);
 	}
 	
 	public GLLabel(String id,IComposite2DGraphics parent,
 			float pos_x,float pos_y,
 			String text,float[] color,float z_index) {
+		
 		super(id,parent,pos_x,pos_y,0,0,color,z_index);
 		
 		this.text =text.split("\n");
@@ -50,14 +52,16 @@ public class GLLabel extends GLElementLeaf{
 		this.glut = new GLUT();
 		
 		float width = glut.glutBitmapLength(font,"");
+		
 		for(String sentence: this.text) {
 			float sentence_width = glut.glutBitmapLength(font,sentence);
 			if(width < sentence_width) {
 				width = sentence_width;
 			}
 		}
+		
 		float[] top_dims = this.getTop().getDims();
-		this.setDims(width/top_dims[0], line_spacing*this.text.length);
+		this.setDims(width*2/top_dims[0], line_spacing*this.text.length);
 	}
 	
 	public void draw(GL2 gl) {

@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import jogo.view.IActor;
+import jogo.view.IPopUpMenu;
 
 public class CellController implements IActor{
 	private int map_x;
@@ -25,29 +26,30 @@ public class CellController implements IActor{
 			float formated_y = 1.0f - (2.0f * e.getY())/e.getComponent().getHeight();
 			
 			if(!controller.model.isClaimed(map_x, map_y)) {
-				controller.view.createSubMenu(formated_x,
+				IPopUpMenu menu = controller.view.createSubMenu(formated_x,
 						formated_y,
-						new String[] {"Claim"},
-						new PopUpItemController[] {new PopUpItemController(controller,map_x,map_y,"Claim")});
+						new String[] {"Claim"});
+				PopUpItemController item_controller = new PopUpItemController(controller,map_x,map_y,"Claim");
+				menu.setActionObservers(new PopUpItemController[] {item_controller});
+				item_controller.setPopUpMenu(menu);
 				return;
 			}
 			
 			List<String> possible = controller.model.getPossibleActions(map_x, map_y);
-			PopUpItemController[] menu_item_controllers = new PopUpItemController[possible.size()]; 
-			for(int i=0;i<possible.size();i++) {
-				menu_item_controllers[i] = new PopUpItemController(controller,map_x,map_y,possible.get(i));
-			}
+
 			String[] possible_arr = new String[possible.size()];
 			possible.toArray(possible_arr);
 			
-
-			
-
-			
-			controller.view.createSubMenu(formated_x,
+			IPopUpMenu menu = controller.view.createSubMenu(formated_x,
 					formated_y,
-					possible_arr,
-					menu_item_controllers);
+					possible_arr);
+			
+			PopUpItemController[] menu_item_controllers = new PopUpItemController[possible.size()]; 
+			for(int i=0;i<possible.size();i++) {
+				menu_item_controllers[i] = new PopUpItemController(controller,map_x,map_y,possible.get(i));
+				menu_item_controllers[i].setPopUpMenu(menu);
+			}
+			menu.setActionObservers(menu_item_controllers);
 		}
 	}
 	@Override

@@ -3,6 +3,7 @@ package jogo.controller;
 import java.awt.event.MouseEvent;
 
 import jogo.view.IActor;
+import jogo.view.IPopUpMenu;
 
 public class PopUpItemController implements IActor{
 	private NextTurnController controller;
@@ -10,6 +11,7 @@ public class PopUpItemController implements IActor{
 	private int map_y;
 	private String command;
 	private String btn_id;
+	private IPopUpMenu menu;
 	
 	public PopUpItemController(NextTurnController controller,int map_x,int map_y,String  command) {
 		this.controller = controller;
@@ -35,13 +37,24 @@ public class PopUpItemController implements IActor{
 		controller.updateStats();
 		controller.updataMap();
 	}
+	
+	public void setPopUpMenu(IPopUpMenu menu) {
+		this.menu = menu;
+	}
 
+	//throws exception if no popup menu was set
 	@Override
 	public void act(MouseEvent e, boolean missed) {
 		if(!missed) {
 			act(e);
 			controller.view.closeSubMenu();
 		}
+		
+		menu.checkItem();
+		if(menu.allChecked()) {
+			controller.view.closeSubMenu();
+		}
+		
 	}
 
 }

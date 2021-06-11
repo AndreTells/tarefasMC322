@@ -16,6 +16,8 @@ public class GameModels {
 		models.put("Water",  new Obj3D("Water_1"));
 		models.put("Grass",  new Obj3D("Grass_1"));
 		models.put("LumberMill", new Obj3D("LumberMill_1"));
+		models.put("Farm", new Obj3D("Farm_1"));
+		
 	}
 	
 	public static Obj3D getModel(String model) {

@@ -33,7 +33,7 @@ public class GLButton extends GLElementComposite {
 			);
 
 	float[] text_dims = btn_text.getDims();
-	btn_text.setPosition(width/2 - text_dims[0],( height-text_dims[1])/2);
+	btn_text.setPosition((width - text_dims[0])/2,( height-text_dims[1])/2);
 		
 	}
 	
