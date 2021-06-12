@@ -1,4 +1,4 @@
-package jogo.view;
+package jogo.view.screen;
 
 import javax.swing.JFrame;
 

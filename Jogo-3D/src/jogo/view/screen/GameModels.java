@@ -1,4 +1,4 @@
-package jogo.view;
+package jogo.view.screen;
 
 import java.util.Dictionary;
 import java.util.Hashtable;

@@ -1,7 +1,8 @@
-package jogo.view;
+package jogo.view.screen;
 
 import com.jogamp.opengl.GL2;
 
+import jogo.view.ICellViewController;
 import jogo.view.glelements.graphics3d.customobject.Obj3D;
 
 public class CellView implements ICellViewController{

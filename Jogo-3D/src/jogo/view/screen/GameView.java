@@ -1,4 +1,4 @@
-package jogo.view;
+package jogo.view.screen;
 
 import java.nio.FloatBuffer;
 
@@ -17,6 +17,9 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import jogo.controller.CellController;
 import jogo.controller.NextTurnController;
+import jogo.view.ICellViewController;
+import jogo.view.IPopUpMenu;
+import jogo.view.IViewBuilder;
 import jogo.view.glelements.GLMouse;
 import jogo.view.glelements.graphics2d.GLElementComponent;
 import jogo.view.glelements.graphics2d.IComponent2DGraphics;
