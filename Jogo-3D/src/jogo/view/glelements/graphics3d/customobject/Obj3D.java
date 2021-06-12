@@ -25,7 +25,7 @@ public class Obj3D {
 	public Obj3D(String name) {
 		this.faces = new LinkedList<Face3D>();
 		this.name = name;
-		this.path =  System.getProperty("user.dir") + "\\assets\\";
+		this.path =  System.getProperty("user.dir") + "\\assets\\models\\";
 		getObj();
 	}
 	

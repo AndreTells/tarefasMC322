@@ -261,11 +261,15 @@ public class GameView implements GLEventListener,IViewBuilder {
 	}
 
 	public void closeSubMenu() {
-		container_2d.getChild("pop_up").dispose();	
+		IComponent2DGraphics pop_up = container_2d.getChild("pop_up");
+		if(pop_up!=null) {
+			pop_up.dispose();	
+		}
+		
 	}
 
 	public IPopUpMenu createEventPopUp(String text, String[] items) {
-		GLPopUpMenu popup_menu = new GLPopUpMenu("event_pop_up",container_2d,0,0,text,items);
+		GLPopUpMenu popup_menu = new GLPopUpMenu("event_pop_up",container_2d,-0.99f,0.8f,text,items);
 
 		return popup_menu;
 	}

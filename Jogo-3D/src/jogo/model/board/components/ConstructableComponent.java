@@ -13,5 +13,6 @@ public abstract class ConstructableComponent extends Component{
 		board.useProduction(cost);
 		return true;
 	}
+	
 }
 

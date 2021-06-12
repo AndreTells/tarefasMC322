@@ -1,17 +1,19 @@
 package jogo.model.board;
 
-import java.awt.Color;
 import java.util.List;
 
+import jogo.model.board.components.Castle;
 import jogo.model.board.components.City;
 import jogo.model.board.components.Component;
 import jogo.model.board.components.ConstructCostEnum;
 import jogo.model.board.components.ConstructableComponent;
 import jogo.model.board.components.Farm;
 import jogo.model.board.components.LumberMill;
+import jogo.model.board.components.PreserveForest;
 import jogo.model.board.mapgenerator.MapGenerator;
+import jogo.model.events.EventManager;
 
-public class BoardModel implements IBoardModelBuilder{
+public class BoardModel implements IBoardModelBuilder, IBoardEvent{
 	private CellModel map[][];
 	private int population;
 	private int population_limit;
@@ -33,6 +35,8 @@ public class BoardModel implements IBoardModelBuilder{
 		turn = 0;
 		MapGenerator map_generator = new MapGenerator(this);
 		map_generator.generateRandomMap();
+		
+		EventManager.init();
 	}
 	
 	private void create(int map_height,int map_length) {
@@ -77,6 +81,13 @@ public class BoardModel implements IBoardModelBuilder{
 		else if(comp_name.equals("LumberMill")) {
 			comp = new LumberMill();
 		}
+		else if(comp_name.equals("Castle")) {
+			comp = new Castle();
+		}
+		else if(comp_name.equals("PreserveForest")) {
+			comp = new PreserveForest();
+		}
+		
 		else{
 			return;
 		}
@@ -117,7 +128,12 @@ public class BoardModel implements IBoardModelBuilder{
 			modifier[0] -=1;
 			food_target = (population*2) +3;
 		}
+		
 		turn+=1;
+	}
+	
+	public String runRandomEvent() {
+		return EventManager.ExecuteRandomEvent(this);
 	}
 	
 	public boolean checkLoseConditions() {

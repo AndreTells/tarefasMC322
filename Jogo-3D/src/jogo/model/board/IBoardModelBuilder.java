@@ -3,6 +3,7 @@ package jogo.model.board;
 import java.util.List;
 
 import jogo.model.board.components.ConstructableComponent;
+import jogo.model.events.EventManager;
 
 public interface IBoardModelBuilder {
 	public String getPopulation();
@@ -34,4 +35,6 @@ public interface IBoardModelBuilder {
 	public String getCellInfo(int x, int y);
 	
 	public  void constructComponent(String comp_name,int x, int y);
+
+	public String runRandomEvent();
 }

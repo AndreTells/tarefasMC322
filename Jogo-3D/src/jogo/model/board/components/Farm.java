@@ -14,7 +14,7 @@ public class Farm extends ConstructableComponent{
 		if(cell.hasComponent(Forest.class) || cell.hasComponent(Water.class)) {
 			return false;
 		}
-		else if(cell.hasComponent(Grass.class)&& cell.isIrigated()) {
+		else if(cell.hasComponent(Grass.class)&& cell.adjacentHas(Water.class)) {
 			return true;
 		}
 		

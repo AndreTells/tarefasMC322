@@ -17,6 +17,8 @@ public class GameModels {
 		models.put("Grass",  new Obj3D("Grass_1"));
 		models.put("LumberMill", new Obj3D("LumberMill_1"));
 		models.put("Farm", new Obj3D("Farm_1"));
+		models.put("Castle", new Obj3D("Castle_1"));
+		models.put("PreserveForest", new Obj3D("PreserveForest_1"));
 		
 	}
 	

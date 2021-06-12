@@ -3,10 +3,12 @@ package jogo.model.board;
 import java.util.LinkedList;
 import java.util.List;
 
+import jogo.model.board.components.Castle;
 import jogo.model.board.components.City;
 import jogo.model.board.components.Component;
 import jogo.model.board.components.Farm;
 import jogo.model.board.components.LumberMill;
+import jogo.model.board.components.PreserveForest;
 import jogo.model.board.components.Water;
 
 public class CellModel {
@@ -153,6 +155,12 @@ public class CellModel {
 		if(Farm.isConstructalbe(this) && !this.hasComponent(Farm.class)) {
 			result.add(Farm.class.getSimpleName());
 		}
+		if(Castle.isConstructalbe(this) && !this.hasComponent(Castle.class)) {
+			result.add(Castle.class.getSimpleName());
+		}
+		if(PreserveForest.isConstructalbe(this) && !this.hasComponent(PreserveForest.class)) {
+			result.add(PreserveForest.class.getSimpleName());
+		}
 		
 		if(result.isEmpty()) {
 			result.add("None");
@@ -170,17 +178,17 @@ public class CellModel {
 		board.addModifier(modifier);
 	}
 	
-	public boolean isIrigated() {
-		if(up!=null && up.hasComponent(Water.class)) {
+	public boolean adjacentHas(Class cls) {
+		if(up!=null && up.hasComponent(cls)) {
 			return true;
 		}
-		if(down!=null && down.hasComponent(Water.class)) {
+		if(down!=null && down.hasComponent(cls)) {
 			return true;
 		}
-		if(left!=null && left.hasComponent(Water.class)) {
+		if(left!=null && left.hasComponent(cls)) {
 			return true;
 		}
-		if(right!=null && right.hasComponent(Water.class)) {
+		if(right!=null && right.hasComponent(cls)) {
 			return true;
 		}
 		return false;

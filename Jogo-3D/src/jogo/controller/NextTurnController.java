@@ -20,14 +20,17 @@ public class NextTurnController implements IActor{
 		if(!model.gameOver()) {
 
 			model.calculateStats();
-			updateStats();
+			
 			if(model.checkLoseConditions()) {
 				view.setInfo("GAME OVER");
 			}
 			
-			 IPopUpMenu menu = view.createEventPopUp("yay", new String[]{"ok"});
-			 EventPopUpController pop_up_controller = new EventPopUpController(this);
-			 menu.setActionObservers(new IActor[] {pop_up_controller});
+			String description = model.runRandomEvent();
+			IPopUpMenu menu = view.createEventPopUp(description, new String[]{"ok"});
+			EventPopUpController pop_up_controller = new EventPopUpController(this);
+			menu.setActionObservers(new IActor[] {pop_up_controller});
+			
+			updateStats();
 		}
 	}
 	

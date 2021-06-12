@@ -2,18 +2,18 @@
 
 import jogo.model.board.IBoardEvent;
 
-public abstract class Event implements IRBoardEvent{
-	protected float probability;
+public abstract class Event{
 	protected String text;
 	
-	protected Event(String text,float probability) {
-		this.probability = probability;
+	protected Event(String text) {
 		this.text = text;
 	}
 	
 	public String toString() {
-		return ""+text+":"+probability;
+		return ""+text+".\n"+this.getDescription();
 	}
 	
-	public abstract void executeEvent(IBoardEvent board);
+	public abstract String executeEvent(IBoardEvent board);
+	
+	public abstract String getDescription();
 }
