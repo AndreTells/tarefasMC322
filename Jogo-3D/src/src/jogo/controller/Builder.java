@@ -1,5 +1,7 @@
 package jogo.controller;
 
+import jogo.controller.gamecontroller.CellController;
+import jogo.controller.gamecontroller.NextTurnController;
 import jogo.model.board.IBoardModelBuilder;
 import jogo.view.ICellViewController;
 import jogo.view.IViewBuilder;

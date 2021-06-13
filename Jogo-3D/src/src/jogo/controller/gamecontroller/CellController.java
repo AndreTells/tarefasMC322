@@ -1,4 +1,4 @@
-package jogo.controller;
+package jogo.controller.gamecontroller;
 
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -29,8 +29,8 @@ public class CellController implements IActor{
 				IPopUpMenu menu = controller.view.createSubMenu(formated_x,
 						formated_y,
 						new String[] {"Claim"});
-				PopUpItemController item_controller = new PopUpItemController(controller,map_x,map_y,"Claim");
-				menu.setActionObservers(new PopUpItemController[] {item_controller});
+				ConstructPopUpController item_controller = new ConstructPopUpController(controller,map_x,map_y,"Claim");
+				menu.setActionObservers(new ConstructPopUpController[] {item_controller});
 				item_controller.setPopUpMenu(menu);
 				return;
 			}
@@ -44,9 +44,9 @@ public class CellController implements IActor{
 					formated_y,
 					possible_arr);
 			
-			PopUpItemController[] menu_item_controllers = new PopUpItemController[possible.size()]; 
+			ConstructPopUpController[] menu_item_controllers = new ConstructPopUpController[possible.size()]; 
 			for(int i=0;i<possible.size();i++) {
-				menu_item_controllers[i] = new PopUpItemController(controller,map_x,map_y,possible.get(i));
+				menu_item_controllers[i] = new ConstructPopUpController(controller,map_x,map_y,possible.get(i));
 				menu_item_controllers[i].setPopUpMenu(menu);
 			}
 			menu.setActionObservers(menu_item_controllers);

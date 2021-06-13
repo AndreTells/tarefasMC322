@@ -15,8 +15,8 @@ import com.jogamp.opengl.math.Matrix4;
 import com.jogamp.opengl.math.VectorUtil;
 import com.jogamp.opengl.util.FPSAnimator;
 
-import jogo.controller.CellController;
-import jogo.controller.NextTurnController;
+import jogo.controller.gamecontroller.CellController;
+import jogo.controller.gamecontroller.NextTurnController;
 import jogo.view.ICellViewController;
 import jogo.view.IPopUpMenu;
 import jogo.view.IViewBuilder;

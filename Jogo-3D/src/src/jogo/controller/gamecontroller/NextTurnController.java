@@ -1,4 +1,4 @@
-package jogo.controller;
+package jogo.controller.gamecontroller;
 
 import java.awt.event.MouseEvent;
 
@@ -34,7 +34,7 @@ public class NextTurnController implements IActor{
 		}
 	}
 	
-	protected void updataMap() {
+	public void updataMap() {
 		int map_length = model.getMapLength();
 		int map_height = model.getMapHeight();
 		
@@ -46,7 +46,7 @@ public class NextTurnController implements IActor{
 		}
 	}
 	
-	protected void updateStats() {
+	public void updateStats() {
 		view.setPopulation(model.getPopulation());
 		view.setProduction(model.getProduction());
 		view.setFood(model.getFood());

@@ -1,4 +1,4 @@
-package jogo.controller;
+package jogo.controller.gamecontroller;
 
 import java.awt.event.MouseEvent;
 

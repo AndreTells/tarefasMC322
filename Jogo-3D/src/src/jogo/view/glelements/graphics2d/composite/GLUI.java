@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
-import jogo.controller.NextTurnController;
+import jogo.controller.gamecontroller.NextTurnController;
 import jogo.view.glelements.graphics2d.GLElementComposite;
 import jogo.view.glelements.graphics2d.IComponent2DGraphics;
 import jogo.view.glelements.graphics2d.IComposite2DGraphics;

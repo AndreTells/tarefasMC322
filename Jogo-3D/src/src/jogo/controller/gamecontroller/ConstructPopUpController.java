@@ -1,11 +1,11 @@
-package jogo.controller;
+package jogo.controller.gamecontroller;
 
 import java.awt.event.MouseEvent;
 
 import jogo.view.IActor;
 import jogo.view.IPopUpMenu;
 
-public class PopUpItemController implements IActor{
+public class ConstructPopUpController implements IActor{
 	private NextTurnController controller;
 	private int map_x;
 	private int map_y;
@@ -13,7 +13,7 @@ public class PopUpItemController implements IActor{
 	private String btn_id;
 	private IPopUpMenu menu;
 	
-	public PopUpItemController(NextTurnController controller,int map_x,int map_y,String  command) {
+	public ConstructPopUpController(NextTurnController controller,int map_x,int map_y,String  command) {
 		this.controller = controller;
 		this.map_x = map_x;
 		this.map_y = map_y;

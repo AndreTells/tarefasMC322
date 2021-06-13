@@ -1,7 +1,7 @@
 package jogo.view;
 
-import jogo.controller.CellController;
-import jogo.controller.NextTurnController;
+import jogo.controller.gamecontroller.CellController;
+import jogo.controller.gamecontroller.NextTurnController;
 
 public interface IViewBuilder { 
 	public void setPopulation(String population_text);
