@@ -3,11 +3,12 @@ package jogo.model.events;
 import java.util.LinkedList;
 import java.util.List;
 
-import jogo.model.board.IBoardController;
-import jogo.model.board.IBoardEvent;
+import jogo.model.boardmodel.IBoardController;
+import jogo.model.boardmodel.IBoardEvent;
 
 public class EventManager implements IEventManager{
-	static List<Event> events;
+	private static List<Event> events;
+	private IBoardEvent board;
 	
 	public EventManager() {
 		events = new LinkedList<Event>();
@@ -18,7 +19,11 @@ public class EventManager implements IEventManager{
 		//}
 	}
 	
-	public String ExecuteRandomEvent(IBoardController board) {
+	public void setBoard(IBoardEvent board) {
+		this.board = board;
+	}
+	
+	public String ExecuteRandomEvent() {
 		int index = getRandomNumber(0,events.size());
 		//System.out.println(events.get(index));
 		return events.get(index).executeEvent(board);

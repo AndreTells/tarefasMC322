@@ -1,6 +1,6 @@
 package jogo.view.screen;
 
-import jogo.view.board3d.IBoard3DManager;
+import jogo.view.boardview3d.IBoard3DManager;
 import jogo.view.mouse.IMouse;
 import jogo.view.ui.IContainer;
 

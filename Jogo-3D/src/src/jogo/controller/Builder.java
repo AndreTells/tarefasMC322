@@ -2,12 +2,12 @@ package jogo.controller;
 
 import jogo.controller.gamecontroller.CellController;
 import jogo.controller.gamecontroller.TurnController;
-import jogo.model.board.IBoardController;
-import jogo.model.board.IBoardModelBuilder;
-import jogo.model.board.IPlayerController;
+import jogo.model.boardmodel.IBoardController;
+import jogo.model.boardmodel.IBoardModelBuilder;
+import jogo.model.boardmodel.IPlayerController;
 import jogo.model.events.IEventManager;
-import jogo.view.board3d.IBoard3DManager;
-import jogo.view.board3d.ICellViewController;
+import jogo.view.boardview3d.IBoard3DManager;
+import jogo.view.boardview3d.ICellViewController;
 import jogo.view.mouse.IMouse;
 import jogo.view.screen.IScreenManager;
 import jogo.view.ui.IStats;
@@ -42,9 +42,10 @@ public class Builder{
 		
 		IStats stats_view = ui_manager.getUI();
 		
+		event_manager.setBoard(model.getBoardEvent());
+		
 		TurnController controller = new TurnController(player,board_model,stats_view,board_view_manager,event_manager);
 		stats_view.setTurnListener(controller);
-		
 		
 		int map_length = board_model.getMapLength();
 		int map_height = board_model.getMapHeight();

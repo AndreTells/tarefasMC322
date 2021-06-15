@@ -2,10 +2,10 @@ package jogo.controller.gamecontroller;
 
 import java.awt.event.MouseEvent;
 
-import jogo.model.board.IBoardController;
-import jogo.model.board.IPlayerController;
+import jogo.model.boardmodel.IBoardController;
+import jogo.model.boardmodel.IPlayerController;
 import jogo.model.events.IEventManager;
-import jogo.view.board3d.IBoard3DManager;
+import jogo.view.boardview3d.IBoard3DManager;
 import jogo.view.mouse.IActor;
 import jogo.view.ui.IPopUpMenu;
 import jogo.view.ui.IStats;
@@ -38,7 +38,7 @@ public class TurnController implements IActor{
 			}
 			else {
 				
-				String description = event_manager.ExecuteRandomEvent(board);
+				String description = event_manager.ExecuteRandomEvent();
 				IPopUpMenu menu = stats_view.createSubMenu("_event-popup",-0.99f,0.8f,description,new String[]{"ok"});
 				
 				EventPopUpController pop_up_controller = new EventPopUpController(this);

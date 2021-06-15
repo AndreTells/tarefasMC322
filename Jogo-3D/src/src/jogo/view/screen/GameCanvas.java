@@ -12,8 +12,8 @@ import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.math.Matrix4;
 import com.jogamp.opengl.util.FPSAnimator;
 
-import jogo.view.board3d.Game3DObjectManager;
-import jogo.view.board3d.IBoard3DManager;
+import jogo.view.boardview3d.Game3DObjectManager;
+import jogo.view.boardview3d.IBoard3DManager;
 import jogo.view.mouse.GLMouse;
 import jogo.view.ui.GLElementComponent;
 import jogo.view.ui.IContainer;

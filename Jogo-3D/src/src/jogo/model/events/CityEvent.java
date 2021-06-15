@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import jogo.model.board.IBoardController;
-import jogo.model.board.IBoardEvent;
+import jogo.model.boardmodel.IBoardController;
+import jogo.model.boardmodel.IBoardEvent;
 
 public class CityEvent extends Event{
 	private int modifier[];
@@ -17,7 +17,7 @@ public class CityEvent extends Event{
 	}
 
 	@Override
-	public String executeEvent(IBoardController board) {
+	public String executeEvent(IBoardEvent board) {
 		board.addModifier(modifier);
 		return this.toString();
 	}

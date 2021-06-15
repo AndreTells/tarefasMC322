@@ -1,9 +1,11 @@
 package jogo.model.events;
 
-import jogo.model.board.IBoardController;
+import jogo.model.boardmodel.IBoardEvent;
 
 public interface IEventManager {
 	
-	public String ExecuteRandomEvent(IBoardController board);
+	public String ExecuteRandomEvent();
+	
+	public void setBoard(IBoardEvent board);
 	
 }

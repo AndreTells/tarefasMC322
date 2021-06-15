@@ -1,7 +1,6 @@
  package jogo.model.events;
 
-import jogo.model.board.IBoardController;
-import jogo.model.board.IBoardEvent;
+import jogo.model.boardmodel.IBoardEvent;
 
 public abstract class Event{
 	protected String text;
@@ -14,7 +13,7 @@ public abstract class Event{
 		return ""+text+".\n"+this.getDescription();
 	}
 	
-	public abstract String executeEvent(IBoardController board);
+	public abstract String executeEvent(IBoardEvent board);
 	
 	public abstract String getDescription();
 }
