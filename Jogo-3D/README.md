@@ -49,7 +49,45 @@ public interface IGameBuilder
 
 O metodo build desta é o resposável por conectar todos os componentes do jogo
 
+## Componente Screen 
+Tem a função de apresentar o UI, parte em 2D, e o tabuleiro, parte em 3D para o usuário em um JFrame.
 
+## Componente BoardView3D
+Resposável por armazenar como cada celula é apresentada para o usuário. Controlando:
+- Os modelos 3D disponíveis ao jogo
+- Carregar os modelos 3D nos assets	
+- O estado atual de cada celula
+- como desenhar tais celulas na tela
+
+## Componente UI
+Responsável por organizar os elementos 2D que seram apresentados na tela.
+Para tal, foi empregado o design pattern _Composite_ . Este consite em ter um elemento geral, o componente, e 2 sub elementos que herdam deste, o compostos e a folha. O composto pode possuir vários componentes como filho e a maioria de seus métodos é repassado para seus filhos. Já a folha fica encarregada de executar a operação implementada. Os compostos implementados foram:
+- GLButton
+- GLContainer
+- GLPopUPMenu
+- UI
+
+e as folhas foram:
+- GLLabel
+- GLRectangle
+
+O método principal deste é o _draw(GL2 gl)_. Este expressa como desenhar os elementos na tela
+
+## Componente Mouse 
+serve como uma ponte entre o componente screen, os componentes desenhados na screen(UI e BoardView3D) e o controller. Checando se algum elemento foi ativado ou não(clicado, arrastado, movimentos, etc...) e informa sinaliza que o controller deve iniciar alguma ação
+
+## Componente GameController 
+responsável por executar as ações requisitadas pelo usuário através do mouse
+
+## Componente BoardModel
+responsável por guardar as informações do jogador e do tabuleiro, por exemplo guardar:
+- a quantidade de comida que o jogador possui
+- quais celulas foram tomadas pelo jogador
+- as informações das celulas(posição, componentes na celula, atributos da celula, etc...)
+- etc...
+
+## Componente Events 
+responsável por ler e executar eventos aleatórios no tabuleiro
 
 
 ## Detalhamento das Interfaces
