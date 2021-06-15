@@ -13,13 +13,9 @@ import jogo.model.board.components.PreserveForest;
 import jogo.model.board.mapgenerator.MapGenerator;
 import jogo.model.events.EventManager;
 
-public class BoardModel implements IBoardModelBuilder, IBoardEvent{
+public class BoardModel implements IBoardEvent, IBoardController{
+	//private Player player;
 	private CellModel map[][];
-	private int population;
-	private int population_limit;
-	private int production;
-	private int food;
-	private int food_target;
 	private int modifier[];
 	private boolean game_over;
 	private int turn;
@@ -35,8 +31,6 @@ public class BoardModel implements IBoardModelBuilder, IBoardEvent{
 		turn = 0;
 		MapGenerator map_generator = new MapGenerator(this);
 		map_generator.generateRandomMap();
-		
-		EventManager.init();
 	}
 	
 	private void create(int map_height,int map_length) {
@@ -46,12 +40,7 @@ public class BoardModel implements IBoardModelBuilder, IBoardEvent{
 				map[i][j] = new CellModel(this,j,i,j-1 < 0 ? null:map[i][j-1],i-1 < 0 ? null:map[i-1][j]);
 			}
 		}
-		population = 1;
-		population_limit = 1;
-		production = 80;
-		food = 0;
-		food_target = 6;
-		
+
 		modifier = new int [3];
 		for(int i=0;i<modifier.length;i++) {
 			modifier[i] = 0;
@@ -67,42 +56,13 @@ public class BoardModel implements IBoardModelBuilder, IBoardEvent{
 	public void removeComponente(Class cls,int x,int y) {
 		map[y][x].removeComponent(cls);
 	}
-	
-	public  void constructComponent(String comp_name,int x, int y) {
-		//trhow exeption
-		ConstructableComponent comp = null;
-		System.out.println(comp_name);
-		if(comp_name.equals("City")) {
-			comp = new City();
-		}
-		else if(comp_name.equals("Farm")) {
-			comp = new Farm();
-		}
-		else if(comp_name.equals("LumberMill")) {
-			comp = new LumberMill();
-		}
-		else if(comp_name.equals("Castle")) {
-			comp = new Castle();
-		}
-		else if(comp_name.equals("PreserveForest")) {
-			comp = new PreserveForest();
-		}
-		
-		else{
-			return;
-		}
-		
-		if(comp.construct(this)) {
-			addComponent(comp,x,y);
-		}
-	}
 
 	public void addModifier(int external_modifier[]) {
 		for(int i=0;i<modifier.length;i++) {
 			modifier[i] += external_modifier[i];
 		}
 
-		System.out.println(modifier[0]+" "+modifier[1]+" "+modifier[2]);
+		//System.out.println(modifier[0]+" "+modifier[1]+" "+modifier[2]);
 	}
 	
 	public void removeModifiers(int external_modifier[]) {
@@ -116,54 +76,19 @@ public class BoardModel implements IBoardModelBuilder, IBoardEvent{
 	public boolean hasComponent(Class<?> cls, int x, int y) {
 		return map[y][x].hasComponent(cls);
 	}
-	
-	public void calculateStats() {
-		food += modifier[0];
-		production += modifier[1];
-		population_limit += modifier[2];
-		modifier[2] = 0;
-		while(food >= food_target) {
-			food -= food_target;
-			population +=1;
-			modifier[0] -=1;
-			food_target = (population*2) +3;
-		}
 		
-		turn+=1;
-	}
-	
-	public String runRandomEvent() {
-		return EventManager.ExecuteRandomEvent(this);
-	}
-	
-	public boolean checkLoseConditions() {
-		if(population > population_limit || population == 0) {
-			game_over = true;
-			return true;
-		}
-		if(modifier[0]<=0) {
-			return true;
-		}
-		
-		return false;
-	}
+	//public String runRandomEvent() {
+	//	return EventManager.ExecuteRandomEvent(this);
+	//}
 	
 	public boolean isClaimed(int x,int y) {
 		return map[y][x].isClaimed();
 	}
 	
-	public void claim(int x,int y) {
-		if(production >=ConstructCostEnum.CLAIM.getCost()) {
-			map[y][x].claim();
-			useProduction(ConstructCostEnum.CLAIM.getCost());	
-		}
-		
+	protected void claim(int x,int y) {
+		map[y][x].claim();
 	}
 	
-	public void useProduction(int value) {
-		production -=value;
-	}
-
 	//---- get methods 
 	public boolean gameOver() {
 		return game_over;
@@ -177,22 +102,6 @@ public class BoardModel implements IBoardModelBuilder, IBoardEvent{
 		return map[y][x].getInfo();
 	}
 
-	public String getPopulation() {
-		return ""+population+"/"+population_limit+" "+(modifier[2] >= 0? "+"+modifier[2]:modifier[2]);
-	}
-	
-	public String getProduction() {
-		return ""+production+" "+(modifier[1] >= 0? "+"+modifier[1]:modifier[1]);
-	}
-
-	public int getProductionValue() {
-		return production;
-	}
-	
-	public String getFood() {
-		return ""+food+"/"+food_target +" "+(modifier[0] >= 0? "+"+modifier[0]:modifier[0]);
-	}
-
 	public int getMapHeight() {
 		return map.length;
 	}
@@ -203,6 +112,10 @@ public class BoardModel implements IBoardModelBuilder, IBoardEvent{
 
 	public List<String> getPossibleActions(int x,int y){
 		return map[y][x].getPossibleActions();
+	}
+	
+	public int[] getModifier() {
+		return modifier;
 	}
 	
 }

@@ -2,15 +2,16 @@ package jogo.model.board.components;
 
 import jogo.model.board.BoardModel;
 import jogo.model.board.CellModel;
+import jogo.model.board.Player;
 
 public abstract class ConstructableComponent extends Component{
 	
-	public boolean construct(BoardModel board) {
-		if(this.cost > board.getProductionValue()) {
-			System.out.println(this.cost+" "+  board.getProductionValue());
+	public boolean construct(Player player) {
+		if(this.cost > player.getProductionValue()) {
+			System.out.println(this.cost+" "+  player.getProductionValue());
 			return false;
 		}
-		board.useProduction(cost);
+		player.useProduction(cost);
 		return true;
 	}
 	

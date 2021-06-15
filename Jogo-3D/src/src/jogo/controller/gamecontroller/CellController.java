@@ -3,15 +3,15 @@ package jogo.controller.gamecontroller;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import jogo.view.IActor;
-import jogo.view.IPopUpMenu;
+import jogo.view.mouse.IActor;
+import jogo.view.ui.IPopUpMenu;
 
 public class CellController implements IActor{
 	private int map_x;
 	private int map_y;
-	private NextTurnController controller;
+	private TurnController controller;
 	
-	public CellController(int map_x,int map_y,NextTurnController controller) {
+	public CellController(int map_x,int map_y,TurnController controller) {
 		this.map_x = map_x;
 		this.map_y = map_y;
 		this.controller = controller;
@@ -19,15 +19,15 @@ public class CellController implements IActor{
 	@Override
 	public void act(MouseEvent e) {
 		// TODO Auto-generated method stub
-		controller.view.setInfo(controller.model.getCellInfo(map_x, map_y));
+		controller.stats_view.setInfo(controller.board.getCellInfo(map_x, map_y));
 		
 		if(e.getButton() == MouseEvent.BUTTON3) {
 			float formated_x = ((2.0f*e.getX())/e.getComponent().getWidth()) - 1.0f;
 			float formated_y = 1.0f - (2.0f * e.getY())/e.getComponent().getHeight();
 			
-			if(!controller.model.isClaimed(map_x, map_y)) {
-				IPopUpMenu menu = controller.view.createSubMenu(formated_x,
-						formated_y,
+			if(!controller.board.isClaimed(map_x, map_y)) {
+				IPopUpMenu menu = controller.stats_view.createSubMenu("_construct-popup",formated_x,
+						formated_y,0.2f,
 						new String[] {"Claim"});
 				ConstructPopUpController item_controller = new ConstructPopUpController(controller,map_x,map_y,"Claim");
 				menu.setActionObservers(new ConstructPopUpController[] {item_controller});
@@ -35,13 +35,13 @@ public class CellController implements IActor{
 				return;
 			}
 			
-			List<String> possible = controller.model.getPossibleActions(map_x, map_y);
+			List<String> possible = controller.board.getPossibleActions(map_x, map_y);
 
 			String[] possible_arr = new String[possible.size()];
 			possible.toArray(possible_arr);
 			
-			IPopUpMenu menu = controller.view.createSubMenu(formated_x,
-					formated_y,
+			IPopUpMenu menu = controller.stats_view.createSubMenu("_construct-popup",formated_x,
+					formated_y,0.2f,
 					possible_arr);
 			
 			ConstructPopUpController[] menu_item_controllers = new ConstructPopUpController[possible.size()]; 

@@ -2,12 +2,12 @@ package jogo.controller.gamecontroller;
 
 import java.awt.event.MouseEvent;
 
-import jogo.view.IActor;
+import jogo.view.mouse.IActor;
 
 public class EventPopUpController implements IActor{
-	private NextTurnController controller;
+	private TurnController controller;
 	
-	EventPopUpController(NextTurnController controller){
+	EventPopUpController(TurnController controller){
 		this.controller = controller;
 	}
 	
@@ -19,7 +19,7 @@ public class EventPopUpController implements IActor{
 
 	@Override
 	public void act(MouseEvent e, boolean missed) {
-		controller.view.closeEventMenu();
+		controller.stats_view.removeChild("_event-popup");
 	}
 	
 }
