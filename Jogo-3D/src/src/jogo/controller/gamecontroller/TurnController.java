@@ -18,7 +18,8 @@ public class TurnController implements IActor{
 	protected IBoard3DManager board_view_manager;
 	
 	
-	public TurnController(IPlayerController player,IBoardController board,IStats stats_view,IBoard3DManager board_view_manager) {
+	public TurnController(IPlayerController player,IBoardController board,IStats stats_view,IBoard3DManager board_view_manager,IEventManager event_manager) {
+		this.event_manager = event_manager;
 		this.player = player;
 		this.board = board;
 		this.stats_view = stats_view;
@@ -26,9 +27,8 @@ public class TurnController implements IActor{
 	}
 	
 	public void act(MouseEvent e) {
-		System.out.println("here");
 		
-		if(gameOver()) {
+		if(!gameOver()) {
 
 			int [] modifier = board.getModifier();
 			player.addModifier(modifier);
@@ -76,9 +76,10 @@ public class TurnController implements IActor{
 	}
 	
 	public void updateStats() {
-		stats_view.setPopulation(player.getPopulation());
-		stats_view.setProduction(player.getProduction());
-		stats_view.setFood(player.getFood());
+		int[] modifier =board.getModifier();
+		stats_view.setPopulation("population: "+player.getPopulation()+(modifier[0]>=0?"+"+modifier[0]:modifier[0]));
+		stats_view.setProduction("production: "+player.getProduction()+(modifier[1]>=0?"+"+modifier[1]:modifier[1]));
+		stats_view.setFood("food: "+player.getFood()+(modifier[2]>=0?"+"+modifier[2]:modifier[2]));
 	}
 
 	@Override

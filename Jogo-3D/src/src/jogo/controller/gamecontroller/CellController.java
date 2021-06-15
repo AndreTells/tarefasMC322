@@ -19,7 +19,7 @@ public class CellController implements IActor{
 	@Override
 	public void act(MouseEvent e) {
 		// TODO Auto-generated method stub
-		controller.stats_view.setInfo(controller.board.getCellInfo(map_x, map_y));
+		controller.stats_view.setInfo("cell info: \n"+controller.board.getCellInfo(map_x, map_y));
 		
 		if(e.getButton() == MouseEvent.BUTTON3) {
 			float formated_x = ((2.0f*e.getX())/e.getComponent().getWidth()) - 1.0f;

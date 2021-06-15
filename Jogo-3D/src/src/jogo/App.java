@@ -9,6 +9,7 @@ import jogo.view.ui.leaf.GLRectangle;
 import jogo.controller.Builder;
 import jogo.model.board.BoardManager;
 import jogo.model.board.BoardModel;
+import jogo.model.events.EventManager;
 
 public class App {
 	public static void main( String[] args ) {
@@ -19,7 +20,8 @@ public class App {
 				new ScreenManager(),
 				new UIManager(),
 				new GLMouse(),
-				new BoardViewManager());
+				new BoardViewManager(),
+				new EventManager());
 				
 				
 				

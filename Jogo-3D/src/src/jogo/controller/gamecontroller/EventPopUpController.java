@@ -19,7 +19,7 @@ public class EventPopUpController implements IActor{
 
 	@Override
 	public void act(MouseEvent e, boolean missed) {
-		controller.stats_view.removeChild("_event-popup");
+		controller.stats_view.disposeChild("_event-popup");
 	}
 	
 }

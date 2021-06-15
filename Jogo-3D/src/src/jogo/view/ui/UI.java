@@ -77,6 +77,13 @@ public class UI extends GLElementComposite implements IStats{
 		return new GLPopUpMenu(id,this,pos_x-(1-x_size-margin),pos_y,text,items);
 	}
 	
+	public void disposeChild(String id) {
+		GLElementComponent child = this.getChild(id);
+		if(child!= null) {
+			child.dispose();
+		}
+	}
+	
 	//----------- setter methods 
 	
 	public void setPopulation(String population_text) {

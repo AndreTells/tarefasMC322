@@ -5,6 +5,7 @@ import jogo.controller.gamecontroller.TurnController;
 import jogo.model.board.IBoardController;
 import jogo.model.board.IBoardModelBuilder;
 import jogo.model.board.IPlayerController;
+import jogo.model.events.IEventManager;
 import jogo.view.board3d.IBoard3DManager;
 import jogo.view.board3d.ICellViewController;
 import jogo.view.mouse.IMouse;
@@ -19,7 +20,8 @@ public class Builder{
 			IScreenManager screen,
 			IUIManager ui_manager,
 			IMouse mouse,
-			IBoard3DManager board_view_manager ) {
+			IBoard3DManager board_view_manager,
+			IEventManager event_manager) {
 		//BoardModel.init();
 		//AppView.init();
 		
@@ -40,7 +42,7 @@ public class Builder{
 		
 		IStats stats_view = ui_manager.getUI();
 		
-		TurnController controller = new TurnController(player,board_model,stats_view,board_view_manager);
+		TurnController controller = new TurnController(player,board_model,stats_view,board_view_manager,event_manager);
 		stats_view.setTurnListener(controller);
 		
 		

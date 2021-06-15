@@ -17,5 +17,5 @@ public interface IStats {
 
 	public void setTurnListener(IActor controller);
 	
-	public boolean removeChild(String child_id);
+	public void disposeChild(String id);
 }

@@ -47,12 +47,12 @@ public class ConstructPopUpController implements IActor{
 	public void act(MouseEvent e, boolean missed) {
 		if(!missed) {
 			act(e);
-			controller.stats_view.removeChild("_construct-popup");
+			controller.stats_view.disposeChild("_construct-popup");
 		}
 		
 		menu.checkItem();
 		if(menu.allChecked()) {
-			controller.stats_view.removeChild("_construct-popup");
+			controller.stats_view.disposeChild("_construct-popup");
 		}
 		
 	}
