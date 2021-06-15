@@ -20,7 +20,6 @@ public class Builder implements IGameBuilder{
 	private IBoard3DManager board_view_manager;
 	private IEventManager event_manager;
 	
-	
 	public void connect(IBoardModelBuilder model) {
 		this.model = model;
 	}
