@@ -13,12 +13,24 @@ Para evitar tal, o jogador poderá escolher o que construir em cada espaço do m
 ## Vídeos do Projeto
 <colocar vídeo de prévia do projeto>
 
-## Slides do Projeto
+# Slides do Projeto
+
+## Slides de Prévia
 <colocar slides de prévia do projeto>
 
-## Documentção dos Componentes
-## Diagramas
-### Diagrama Geral do Projeto
+# Documentção dos Componentes
+# Diagramas
+## Diagrama Geral do Projeto
 
-###Diagrama Geral de Componentes
-![Diagrama geral do Projeto](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/Diagrama%20Geral%20Do%20Projeto.jpg)
+## Diagrama Geral de Componentes
+![Diagrama geral do Projeto](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-geral-do-projeto.jpg)
+
+## Componente Builder
+Este Componente pertence ao controller e é responsável por e conectar todos os outros componentes
+![Builder](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-builder.jpg)
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | package jogo.controller.Builder
+Autores | André Silva Telles
+Interfaces | N/A
