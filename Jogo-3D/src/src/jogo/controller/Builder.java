@@ -13,7 +13,7 @@ import jogo.view.screen.IScreenManager;
 import jogo.view.ui.IStats;
 import jogo.view.ui.IUIManager;
 
-public class Builder{
+public class Builder implements IGameBuilder{
 	
 	public void buildGame(
 			IBoardModelBuilder model,
