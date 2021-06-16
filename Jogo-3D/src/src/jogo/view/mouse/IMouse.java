@@ -3,7 +3,9 @@ package jogo.view.mouse;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public interface IMouse extends MouseListener,MouseMotionListener{
+public interface IMouse
+	extends MouseListener,MouseMotionListener,
+		IRMouseObserver,IRemoveMouseObserver{
 	public void addActionObservers(String id ,IMouseObserver observer);
 	
 	public void removeActionObserver(String id);
