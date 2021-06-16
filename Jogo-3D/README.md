@@ -75,6 +75,34 @@ O método principal deste é o _draw(GL2 gl)_. Este expressa como desenhar os el
 
 ## Componente Mouse 
 serve como uma ponte entre o componente screen, os componentes desenhados na screen(UI e BoardView3D) e o controller. Checando se algum elemento foi ativado ou não(clicado, arrastado, movimentos, etc...) e informa sinaliza que o controller deve iniciar alguma ação
+![Mouse](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-mouse.jpg)
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | package jogo.controller.Builder
+Autores | André Silva Telles
+Interfaces |  IRBoardModelBuilder<br>  IRScreenManager<br>  IRUIManager<br>  IRMouse<br>  IRBoard3DManager<br>  IREventManager
+
+### Interfaces
+![Mouse-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-mouse.jpg)
+interface agregadora do componente em java:
+~~~java 
+public interface IMouse
+	extends MouseListener,MouseMotionListener,
+		IRMouseObserver,IRemoveMouseObserver{
+	public void addActionObservers(String id ,IMouseObserver observer);
+	
+	public void removeActionObserver(String id);
+	 
+	public void addMotionObservers(String id ,IMouseObserver observer);
+	
+	public void removeMotionObserver(String id);
+	
+	public void addDraggObservers(String id ,IMouseObserver observer);
+	
+	public void removeDraggObserver(String id);
+}
+~~~
 
 ## Componente GameController 
 responsável por executar as ações requisitadas pelo usuário através do mouse
@@ -173,3 +201,81 @@ public interface IGameBuilder
 Método | Objetivo
 -------| --------
 buildGame | conecta os Componentes do jogo uns com os outros
+
+### Interface IRMouseObserver
+
+~~~java 
+public interface IRMouseObserver {
+	public void addActionObservers(String id ,IMouseObserver observer);
+	
+	public void addMotionObservers(String id ,IMouseObserver observer);
+	
+	public void addDraggObservers(String id ,IMouseObserver observer);
+}
+~~~
+Método | Objetivo
+-------| --------
+addActionObservers | adiciona um observer com id ao mouse, notificando este sempre que o mouse clicar em algo
+addMotionObservers | adiciona um observer com id ao mouse, notificando este sempre que o mouse se mover
+addDraggObservers  | adiciona um observer com id ao mouse, notificando este sempre que o mouse arrastar algo
+
+### Interface IRemoveMouseObserver
+
+~~~java 
+public interface IRemoveMouseObserver {
+	public void removeActionObserver(String id);
+	
+	public void removeMotionObserver(String id);
+	
+	public void removeDraggObserver(String id);
+}
+~~~
+Método | Objetivo
+-------| --------
+removeActionObserver | remove um observer de ações com id do mouse
+removeMotionObserver | remove um observer de movimentos com id do mouse
+removeDraggObserver  | remove um observer de arrastar com id do mouse
+
+### Interface IMouseObserver
+
+~~~java 
+public interface IMouseObserver {
+	public boolean conditonIsMet(float pos_x,float pos_y );
+	
+	public void performAction(MouseEvent e,boolean missed);
+
+	public int getRank();
+}
+~~~
+Método | Objetivo
+-------| --------
+conditonIsMet | checa se a condição para o observer realizar uma ação é cumprida, sem sim, retorna true, se não, retorna false
+performAction | excuta a ação do observer
+getRank | retorna o rank do observer para que seja possível comparar observers caso duas condições sejam cumpridas simultâneamente
+
+### Interface IActor
+
+~~~java 
+public interface IActor {
+	public void act(MouseEvent e);
+	public void act(MouseEvent e,boolean missed);
+}
+~~~
+Método | Objetivo
+-------| --------
+act | realiza uma ação baseada no MouseEvent e se a condição para realizar a ação foi cumprida ou não
+
+
+# Plano de Exceções
+## Diagrama da hierarquia de exceções
+![Plano-de-Exceções](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/Diagrama%20da%20hierarquia%20de%20exce%C3%A7%C3%B5es.jpg)
+
+## Descrição das classes de exceção
+Classe | Descrição
+----- | -----
+ArquivoNaoEncontrado | Indica que o arquivo desejado nao foi encontrado na pasta de assets
+ArquivoEventosNaoEncontrado | Indica que o arquivo de eventos aleatórios nao foi encontrado na pasta de assets
+ArquivoModeloNaoEncontrado | Indica que o arquivo de um modelo 3D nao foi encontrado na pasta de assets
+MouseInvalido | Indica que GLMouse nao foi inicializado
+AtributoInvalido | Indica que algum dos valores passados na criação de um GLElementComponent é null ou esta fora do escopo do atributo(ex:  altura negativa,...)
+ComponenteInvalido | Indica que a string passada não referencia um modelo 3d que o jogo tem acesso a 
