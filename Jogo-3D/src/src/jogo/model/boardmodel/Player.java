@@ -25,11 +25,6 @@ public class Player implements IPlayerController{
 		this.board = board;
 	}
 	
-	public String getPopulation() {
-		//+" "+(modifier[2] >= 0? "+"+modifier[2]:modifier[2])
-		return population+"/"+population_limit;
-	}
-	
 	public int getPopulationValue() {
 		return population;
 	}
@@ -37,23 +32,16 @@ public class Player implements IPlayerController{
 	public int getPopulationLimitValue() {
 		return population_limit;
 	}
-	
-	public String getProduction() {
-		//+" "+(modifier[1] >= 0? "+"+modifier[1]:modifier[1])
-		return ""+production;
-	}
 
 	public int getProductionValue() {
 		return production;
 	}
-	
-	public String getFood() {
-		//+" "+(modifier[0] >= 0? "+"+modifier[0]:modifier[0])
-		return ""+food+"/"+food_target ;
-	}
 
 	public int getFoodValue() {
 		return food;
+	}
+	public int getFoodTargetValue() {
+		return food_target;
 	}
 	
 	public void claim(int x,int y) {

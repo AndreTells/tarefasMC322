@@ -59,6 +59,7 @@ public class TurnController implements IActor{
 			return true;
 		}
 		if(modifier[0]<=0) {
+			stats_view.setInfo("GAME OVER");
 			return true;
 		}
 		return false;
@@ -77,9 +78,9 @@ public class TurnController implements IActor{
 	
 	public void updateStats() {
 		int[] modifier =board.getModifier();
-		stats_view.setPopulation("population: "+player.getPopulation()+(modifier[0]>=0?"+"+modifier[0]:modifier[0]));
-		stats_view.setProduction("production: "+player.getProduction()+(modifier[1]>=0?"+"+modifier[1]:modifier[1]));
-		stats_view.setFood("food: "+player.getFood()+(modifier[2]>=0?"+"+modifier[2]:modifier[2]));
+		stats_view.setPopulation("population: "+player.getPopulationValue()+"/"+player.getPopulationLimitValue()+(modifier[2]>=0?"+"+modifier[2]:modifier[2]));
+		stats_view.setProduction("production: "+player.getProductionValue()+(modifier[1]>=0?"+"+modifier[1]:modifier[1]));
+		stats_view.setFood("food: "+player.getFoodValue()+"/"+player.getFoodTargetValue()+(modifier[0]>=0?"+"+modifier[0]:modifier[0]));
 	}
 
 	@Override

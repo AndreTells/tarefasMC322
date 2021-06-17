@@ -1,17 +1,16 @@
 package jogo.model.boardmodel;
 
 public interface IPlayerController {
-	public String getPopulation();
 	
 	public int getPopulationValue();
 	
 	public int getPopulationLimitValue();
 	
-	public String getProduction();
-	
-	public String getFood();
+	public int getProductionValue();
 	
 	public int getFoodValue();
+	
+	public int getFoodTargetValue();
 	
 	public void addModifier(int modifier[]);
 	

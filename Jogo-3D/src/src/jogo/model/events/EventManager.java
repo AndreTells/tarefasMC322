@@ -7,7 +7,7 @@ import jogo.model.boardmodel.IBoardController;
 import jogo.model.boardmodel.IBoardEvent;
 
 public class EventManager implements IEventManager{
-	private static List<Event> events;
+	private List<Event> events;
 	private IBoardEvent board;
 	
 	public EventManager() {
@@ -32,4 +32,5 @@ public class EventManager implements IEventManager{
 	private int getRandomNumber(int min, int max) {
 		return (int) ((Math.random() * (max - min)) + min);
 	}
+
 }

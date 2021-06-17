@@ -7,7 +7,7 @@ public class BoardManager implements IBoardModelBuilder{
 	public Player getPlayer() {
 		if(player ==null) {
 			if(board == null) {
-				this.getBoard();
+				this.getBoardController();
 			}
 			
 			player = new Player(board);
@@ -15,7 +15,7 @@ public class BoardManager implements IBoardModelBuilder{
 		return player;
 	}
 	
-	public IBoardController getBoard() {
+	public IBoardController getBoardController() {
 		if(board ==null) {
 			board = new BoardModel();
 		}

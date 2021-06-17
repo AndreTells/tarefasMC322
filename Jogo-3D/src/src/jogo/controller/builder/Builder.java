@@ -47,7 +47,7 @@ public class Builder implements IGameBuilder{
 	public void buildGame() {
 		
 		
-		IBoardController board_model = model.getBoard();
+		IBoardController board_model = model.getBoardController();
 		IPlayerController player = model.getPlayer();
 		
 		//setups the screen

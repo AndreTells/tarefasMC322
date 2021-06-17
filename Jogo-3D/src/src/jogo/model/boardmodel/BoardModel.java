@@ -17,7 +17,6 @@ public class BoardModel implements IBoardEvent, IBoardController{
 	//private Player player;
 	private CellModel map[][];
 	private int modifier[];
-	private boolean game_over;
 	private int turn;
 	/*
 	 *modifier
@@ -45,8 +44,6 @@ public class BoardModel implements IBoardEvent, IBoardController{
 		for(int i=0;i<modifier.length;i++) {
 			modifier[i] = 0;
 		}
-		
-		game_over = false;
 	}
 	
 	public void addComponent(Component comp,int x,int y) {
@@ -90,9 +87,6 @@ public class BoardModel implements IBoardEvent, IBoardController{
 	}
 	
 	//---- get methods 
-	public boolean gameOver() {
-		return game_over;
-	}
 	
 	public String getCellHighestComponents(int x, int y) {
 		return map[y][x].getHighestComponent();
