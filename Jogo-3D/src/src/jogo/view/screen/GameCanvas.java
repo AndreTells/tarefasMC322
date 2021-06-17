@@ -1,7 +1,5 @@
 package jogo.view.screen;
 
-import javax.swing.JFrame;
-
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
@@ -14,8 +12,6 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import jogo.view.boardview3d.Game3DObjectManager;
 import jogo.view.boardview3d.IBoard3DManager;
-import jogo.view.mouse.GLMouse;
-import jogo.view.ui.GLElementComponent;
 import jogo.view.ui.IContainer;
 import jogo.view.ui.composite.GLContainer;
 
@@ -25,8 +21,6 @@ public class GameCanvas implements GLEventListener {
 	
 	private IBoard3DManager board;
 	private IContainer container_2d; 
-	
-	private GLMouse mouse;
 	
 	public GameCanvas(int frame_width, int frame_height){
 		Game3DObjectManager.loadModels();
@@ -41,7 +35,7 @@ public class GameCanvas implements GLEventListener {
 	   //	setUpCellMatrix();
 	   	
 	   	//2d space
-	 	GLElementComponent.setMouse(mouse);
+	 	//GLElementComponent.setMouse(mouse);
 	   	
 	   	this.container_2d = new GLContainer("container",frame_width,frame_height);
 	   	
@@ -138,7 +132,7 @@ public class GameCanvas implements GLEventListener {
 		enable3D(gl);
 	}
 	
-	public Matrix4 getMatrix(int code,GL2 gl) {
+	private Matrix4 getMatrix(int code,GL2 gl) {
 		float[] f_matrix = new float[16];
 		gl.glGetFloatv( code, f_matrix,0);
 		Matrix4 matrix = new Matrix4();
@@ -172,38 +166,4 @@ public class GameCanvas implements GLEventListener {
 		this.board = board;
 	}
 	
-/*
-	public void setPopulation(String population) {
-		ui.setPopulation("population: "+population);
-	}
-	
-	public void setProduction(String production) {
-		ui.setProduction("production: "+production);
-	}
-	
-	public void setFood(String food) {
-		ui.setFood("food: "+food);
-	}
-	
-	public ICellViewController getCell(int i,int j) {
-			//String new_obj
-		return this.cells[i][j];
-	}
-
-	public void setInfo(String info_text) {
-		ui.setInfo("cell info: \n"+info_text);
-	}
-
-	public IPopUpMenu createSubMenu(float pos_x, float pos_y, String[] items) {
-		GLPopUpMenu popup_menu = new GLPopUpMenu("pop_up",container_2d,pos_x,pos_y,0.2f,items);
-
-		return popup_menu;
-	}
-
-	public IPopUpMenu createEventPopUp(String text, String[] items) {
-		GLPopUpMenu popup_menu = new GLPopUpMenu("event_pop_up",container_2d,-0.99f,0.8f,text,items);
-
-		return popup_menu;
-	}
-*/
 }
