@@ -31,7 +31,7 @@ Este Componente pertence ao controller e é responsável por e conectar todos os
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | package jogo.controller.Builder
+Classe | jogo.controller.Builder
 Autores | André Silva Telles
 Interfaces |  IRBoardModelBuilder<br>  IRScreenManager<br>  IRUIManager<br>  IRMouse<br>  IRBoard3DManager<br>  IREventManager
 
@@ -79,7 +79,7 @@ serve como uma ponte entre o componente screen, os componentes desenhados na scr
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
-Classe | package jogo.controller.Builder
+Classe | jogo.controller.Builder
 Autores | André Silva Telles
 Interfaces |  IRBoardModelBuilder<br>  IRScreenManager<br>  IRUIManager<br>  IRMouse<br>  IRBoard3DManager<br>  IREventManager
 
@@ -113,9 +113,61 @@ responsável por guardar as informações do jogador e do tabuleiro, por exemplo
 - quais celulas foram tomadas pelo jogador
 - as informações das celulas(posição, componentes na celula, atributos da celula, etc...)
 - etc...
+![BoardModel](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-BoardModel.jpg)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | jogo.model.boardmodel.BoardManager
+Autores | André Silva Telles
+Interfaces | IBoardModelBuilder
+
+
+item | detalhamento
+----- | -----
+Classe | jogo.model.boardmodel.Player
+Autores | André Silva Telles
+Interfaces | IPlayerController
+
+item | detalhamento
+----- | -----
+Classe | jogo.model.boardmodel.BoardModel
+Autores | André Silva Telles
+Interfaces | IBoardEvent<br> IBoardController
+
+
+![BoardModel-Interfaces-1](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-BoardModel(parte-1).jpg)
+![BoardModel-Interfaces-2](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-BoardModel(parte-2).jpg)
+interface que comanda ligações do componente com outros componentes
+~~~java
+public interface IBoardModelBuilder {
+	public Player getPlayer();
+	
+	public IBoardController getBoardController();
+	
+	public IBoardEvent getBoardEvent();
+}
+~~~
 
 ## Componente Events 
 responsável por ler e executar eventos aleatórios no tabuleiro
+![Events](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-events.jpg)
+
+
+item | detalhamento
+----- | -----
+Classe | jogo.model.events.EventManager
+Autores | André Silva Telles
+Interfaces | IEventManager
+
+![Events-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-Events.jpg)
+
+
+
+
+
+
+
 
 
 ## Detalhamento das Interfaces
