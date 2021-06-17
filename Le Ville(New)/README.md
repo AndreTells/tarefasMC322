@@ -23,11 +23,11 @@ Para evitar tal, o jogador poderá escolher o que construir em cada espaço do m
 ## Diagrama Geral do Projeto
 
 ## Diagrama Geral de Componentes
-![Diagrama geral do Projeto](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-geral-do-projeto.jpg)
+![Diagrama geral do Projeto](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-geral-do-projeto.jpg)
 
 ## Componente Builder
 Este Componente pertence ao controller e é responsável por e conectar todos os outros componentes
-![Builder](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-builder.jpg)
+![Builder](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-builder.jpg)
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
@@ -36,7 +36,7 @@ Autores | André Silva Telles
 Interfaces |  IRBoardModelBuilder<br>  IRScreenManager<br>  IRUIManager<br>  IRMouse<br>  IRBoard3DManager<br>  IREventManager
 
 ### Interfaces
-![Builder-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-builder.jpg)
+![Builder-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-builder.jpg)
 interface agregadora do componente em java:
 ~~~java 
 public interface IGameBuilder 
@@ -51,7 +51,7 @@ O metodo build desta é o resposável por conectar todos os componentes do jogo
 
 ## Componente Screen 
 Tem a função de apresentar o UI, parte em 2D, e o tabuleiro, parte em 3D para o usuário em um JFrame.
-![Screen](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-screen.jpg)
+![Screen](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-screen.jpg)
 
 **Ficha Técnica**
 item | detalhamento
@@ -75,7 +75,7 @@ Interfaces | JFrame
 
 
 ### Interfaces
-![Screen-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-screen.jpg)
+![Screen-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-screen.jpg)
 interface responsável por organizar conexão do componente com componentes externos 
 ~~~java 
 public interface IScreenManager {
@@ -94,7 +94,7 @@ Resposável por armazenar como cada celula é apresentada para o usuário. Contr
 - Carregar os modelos 3D nos assets	
 - O estado atual de cada celula
 - como desenhar tais celulas na tela
-![BoardView3D](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-boardview3d.jpg)
+![BoardView3D](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-boardview3d.jpg)
 
 **Ficha Técnica**
 item | detalhamento
@@ -129,7 +129,7 @@ Interfaces | IMouseObserver
 
 
 ### Interfaces
-![BoardView3D-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-boardview3d.jpg)
+![BoardView3D-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-boardview3d.jpg)
 
 
 
@@ -150,7 +150,7 @@ O método principal deste é o _draw(GL2 gl)_. Este expressa como desenhar os el
 
 ## Componente Mouse 
 serve como uma ponte entre o componente screen, os componentes desenhados na screen(UI e BoardView3D) e o controller. Checando se algum elemento foi ativado ou não(clicado, arrastado, movimentos, etc...) e informa sinaliza que o controller deve iniciar alguma ação
-![Mouse](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-mouse.jpg)
+![Mouse](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-mouse.jpg)
 **Ficha Técnica**
 item | detalhamento
 ----- | -----
@@ -159,7 +159,7 @@ Autores | André Silva Telles
 Interfaces |  IRBoardModelBuilder<br>  IRScreenManager<br>  IRUIManager<br>  IRMouse<br>  IRBoard3DManager<br>  IREventManager
 
 ### Interfaces
-![Mouse-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-mouse.jpg)
+![Mouse-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-mouse.jpg)
 interface agregadora do componente em java:
 ~~~java 
 public interface IMouse
@@ -181,7 +181,7 @@ public interface IMouse
 
 ## Componente GameController 
 responsável por executar as ações requisitadas pelo usuário através do mouse
-![GameController](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-gamecontroller.jpg)
+![GameController](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-gamecontroller.jpg)
 
 **Ficha Técnica**
 item | detalhamento
@@ -211,7 +211,7 @@ Interfaces | IActor
 
 
 ### Interfaces
-![GameController-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-gamecontroller.jpg)
+![GameController-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-gamecontroller.jpg)
 interface que permite que observers excutem tarefas que podem ser facilmente alteradas, basta trocar o IActor. As Classes deste componentes são tais tarefas
 ~~~java
 public interface IActor {
@@ -228,7 +228,7 @@ responsável por guardar as informações do jogador e do tabuleiro, por exemplo
 - quais celulas foram tomadas pelo jogador
 - as informações das celulas(posição, componentes na celula, atributos da celula, etc...)
 - etc...
-![BoardModel](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-BoardModel.jpg)
+![BoardModel](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-BoardModel.jpg)
 
 **Ficha Técnica**
 item | detalhamento
@@ -251,8 +251,8 @@ Autores | André Silva Telles
 Interfaces | IBoardEvent<br> IBoardController
 
 ### Interfaces
-![BoardModel-Interfaces-1](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-BoardModel(parte-1).jpg)
-![BoardModel-Interfaces-2](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-BoardModel(parte-2).jpg)
+![BoardModel-Interfaces-1](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-BoardModel(parte-1).jpg)
+![BoardModel-Interfaces-2](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-BoardModel(parte-2).jpg)
 interface que comanda ligações do componente com outros componentes
 ~~~java
 public interface IBoardModelBuilder {
@@ -266,7 +266,7 @@ public interface IBoardModelBuilder {
 
 ## Componente Events 
 responsável por ler e executar eventos aleatórios no tabuleiro
-![Events](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-events.jpg)
+![Events](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-events.jpg)
 
 
 item | detalhamento
@@ -275,7 +275,7 @@ Classe | jogo.model.events.EventManager
 Autores | André Silva Telles
 Interfaces | IEventManager
 
-![Events-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-Events.jpg)
+![Events-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-Events.jpg)
 
 
 
@@ -432,7 +432,7 @@ act | realiza uma ação baseada no MouseEvent e se a condição para realizar a
 
 # Plano de Exceções
 ## Diagrama da hierarquia de exceções
-![Plano-de-Exceções](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/Diagrama%20da%20hierarquia%20de%20exce%C3%A7%C3%B5es.jpg)
+![Plano-de-Exceções](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/Diagrama%20da%20hierarquia%20de%20exce%C3%A7%C3%B5es.jpg)
 
 ## Descrição das classes de exceção
 Classe | Descrição
