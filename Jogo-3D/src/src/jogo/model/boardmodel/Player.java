@@ -40,6 +40,7 @@ public class Player implements IPlayerController{
 	public int getFoodValue() {
 		return food;
 	}
+	
 	public int getFoodTargetValue() {
 		return food_target;
 	}

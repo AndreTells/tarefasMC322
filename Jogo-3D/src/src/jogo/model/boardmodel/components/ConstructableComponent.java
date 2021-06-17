@@ -1,7 +1,5 @@
 package jogo.model.boardmodel.components;
 
-import jogo.model.boardmodel.BoardModel;
-import jogo.model.boardmodel.CellModel;
 import jogo.model.boardmodel.Player;
 
 public abstract class ConstructableComponent extends Component{

@@ -1,8 +1,5 @@
 package jogo.model.boardmodel.components;
 
-import java.awt.Color;
-
-import jogo.model.boardmodel.BoardModel;
 import jogo.model.boardmodel.CellModel;
 
 public abstract class Component {
