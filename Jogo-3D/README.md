@@ -142,6 +142,46 @@ public interface IMouse
 
 ## Componente GameController 
 responsável por executar as ações requisitadas pelo usuário através do mouse
+![GameController](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-gamecontroller.jpg)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | jogo.controller.gamecontroller.CellController
+Autores | André Silva Telles
+Interfaces | IActor
+
+item | detalhamento
+----- | -----
+Classe | jogo.controller.gamecontroller.ConstructPopUpController
+Autores | André Silva Telles
+Interfaces | IActor
+
+item | detalhamento
+----- | -----
+Classe | jogo.controller.gamecontroller.EventPopUpController
+Autores | André Silva Telles
+Interfaces | IActor
+
+item | detalhamento
+----- | -----
+Classe | jogo.controller.gamecontroller.TurnController
+Autores | André Silva Telles
+Interfaces | IActor
+
+
+
+### Interfaces
+![GameController-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-gamecontroller.jpg)
+interface que permite que observers excutem tarefas que podem ser facilmente alteradas, basta trocar o IActor. As Classes deste componentes são tais tarefas
+~~~java
+public interface IActor {
+	public void act(MouseEvent e);
+	public void act(MouseEvent e,boolean missed);
+}
+~~~
+
+
 
 ## Componente BoardModel
 responsável por guardar as informações do jogador e do tabuleiro, por exemplo guardar:
