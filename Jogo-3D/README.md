@@ -94,6 +94,45 @@ Resposável por armazenar como cada celula é apresentada para o usuário. Contr
 - Carregar os modelos 3D nos assets	
 - O estado atual de cada celula
 - como desenhar tais celulas na tela
+![BoardView3D](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-boardview3d.jpg)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | jogo.view.boardview3d.BoardViewManager
+Autores | André Silva Telles
+Interfaces | IBoard3DManager
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.boardview3d.CellView
+Autores | André Silva Telles
+Interfaces | ICellViewController
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.boardview3d.RayPicker
+Autores | André Silva Telles
+Interfaces | IMouseObserver
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.boardview3d.camera.CameraDraggObserver
+Autores | André Silva Telles
+Interfaces | IMouseObserver
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.boardview3d.camera.CameraMotionObserver
+Autores | André Silva Telles
+Interfaces | IMouseObserver
+
+
+### Interfaces
+![BoardView3D-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-boardview3d.jpg)
+
+
+
 
 ## Componente UI
 Responsável por organizar os elementos 2D que seram apresentados na tela.
@@ -237,9 +276,6 @@ Autores | André Silva Telles
 Interfaces | IEventManager
 
 ![Events-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-Events.jpg)
-
-
-
 
 
 
