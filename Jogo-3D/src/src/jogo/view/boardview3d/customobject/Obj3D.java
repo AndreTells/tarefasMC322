@@ -204,4 +204,5 @@ public class Obj3D {
 	public float[] getAabbMax() {
 		return new float[] {aabb_max[0],aabb_max[1],aabb_max[2]};
 	}
+
 }

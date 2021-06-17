@@ -45,4 +45,5 @@ public class GLCamera{
 		mouse.addMotionObservers("camera", new CameraMotionObserver(this));
 		mouse.addDraggObservers("camera", new CameraDraggObserver(this));
 	}
+
 }

@@ -112,12 +112,14 @@ public class RayPicker implements IMouseObserver{
 		float[] ray = getRay(pos_x,pos_y);
 		return rayCast(ray);
 	}
+	
 	@Override
 	public void performAction(MouseEvent e, boolean missed) {
 		if(!missed) {
 			this.actors[clicked_object[0]][clicked_object[1]].act(e);
 		}
 	}
+	
 	@Override
 	public int getRank() {
 		return 0;
