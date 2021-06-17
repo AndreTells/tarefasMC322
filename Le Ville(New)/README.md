@@ -12,8 +12,9 @@ Para evitar tal, o jogador poderá escolher o que construir em cada espaço do m
 
 ## Vídeos do Projeto
 <colocar vídeo de prévia do projeto>
-
+[![vídeo de prévia](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/imagem_video.png)](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/video%20de%20apresentacao-165263-andre%20silva%20telles%20(1).mp4)
 # Slides do Projeto
+![slides de prévia do projeto](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/Trabalho%20de%20MC322-Jogo-165263-andre%20silva%20telles%20(1).pdf)
 
 ## Slides de Prévia
 <colocar slides de prévia do projeto>
@@ -21,7 +22,7 @@ Para evitar tal, o jogador poderá escolher o que construir em cada espaço do m
 # Documentção dos Componentes
 # Diagramas
 ## Diagrama Geral do Projeto
-
+<?????????>
 ## Diagrama Geral de Componentes
 ![Diagrama geral do Projeto](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-geral-do-projeto.jpg)
 
@@ -147,6 +148,36 @@ e as folhas foram:
 - GLRectangle
 
 O método principal deste é o _draw(GL2 gl)_. Este expressa como desenhar os elementos na tela
+![UI](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-ui.jpg)
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | jogo.view.ui.UIManager
+Autores | André Silva Telles
+Interfaces | IUIManager
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.ui.UI
+Autores | André Silva Telles
+Interfaces | IStats
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.ui.composite.GLContainer
+Autores | André Silva Telles
+Interfaces | IContainer 
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.ui.composite.GLPopUpMenu
+Autores | André Silva Telles
+Interfaces | IPopUpMenu 
+
+### Interfaces
+![BoardView3D-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Le%20Ville(New)/images/diagrama-interfaces-ui.jpg)
+
+
 
 ## Componente Mouse 
 serve como uma ponte entre o componente screen, os componentes desenhados na screen(UI e BoardView3D) e o controller. Checando se algum elemento foi ativado ou não(clicado, arrastado, movimentos, etc...) e informa sinaliza que o controller deve iniciar alguma ação
