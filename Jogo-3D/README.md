@@ -51,6 +51,42 @@ O metodo build desta é o resposável por conectar todos os componentes do jogo
 
 ## Componente Screen 
 Tem a função de apresentar o UI, parte em 2D, e o tabuleiro, parte em 3D para o usuário em um JFrame.
+![Screen](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-screen.jpg)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | jogo.view.screen.BoardManager
+Autores | André Silva Telles
+Interfaces | IBoardModelBuilder
+
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.screen.GameCanvas
+Autores | André Silva Telles
+Interfaces | GLEventListener
+
+item | detalhamento
+----- | -----
+Classe | jogo.view.screen.GameFrame
+Autores | André Silva Telles
+Interfaces | JFrame
+
+
+### Interfaces
+![Screen-Interfaces](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-screen.jpg)
+interface responsável por organizar conexão do componente com componentes externos 
+~~~java 
+public interface IScreenManager {
+	public void set2D(IContainer container);
+	
+	public void set3D(IBoard3DManager board);
+	
+	public void setMouse(IMouse mouse);
+}
+~~~
+
 
 ## Componente BoardView3D
 Resposável por armazenar como cada celula é apresentada para o usuário. Controlando:
@@ -135,7 +171,7 @@ Classe | jogo.model.boardmodel.BoardModel
 Autores | André Silva Telles
 Interfaces | IBoardEvent<br> IBoardController
 
-
+### Interfaces
 ![BoardModel-Interfaces-1](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-BoardModel(parte-1).jpg)
 ![BoardModel-Interfaces-2](https://github.com/AndreTells/tarefasMC322/blob/main/Jogo-3D/images/diagrama-interfaces-BoardModel(parte-2).jpg)
 interface que comanda ligações do componente com outros componentes
