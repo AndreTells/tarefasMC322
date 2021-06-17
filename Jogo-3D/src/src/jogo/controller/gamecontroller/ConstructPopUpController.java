@@ -10,7 +10,6 @@ public class ConstructPopUpController implements IActor{
 	private int map_x;
 	private int map_y;
 	private String command;
-	private String btn_id;
 	private IPopUpMenu menu;
 	
 	public ConstructPopUpController(TurnController controller,int map_x,int map_y,String  command) {
